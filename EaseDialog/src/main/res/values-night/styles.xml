@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="EaseDialog">
+        <item name="dialogBackgroundColor">@color/colorBackground</item>
+        <item name="dialogTitleTextColor">@color/colorTitleText</item>
+        <item name="dialogMainTextColor">@color/colorMainText</item>
+        <item name="dialogPositiveTextColor">@color/colorPositiveTextColor</item>
+        <item name="dialogCancelTextColor">@color/colorMainText</item>
+        <item name="dialogPressBackgroundColor">@color/colorPress</item>
+        <item name="dialogRadius">@dimen/dialog_radius</item>
+    </style>
+</resources>

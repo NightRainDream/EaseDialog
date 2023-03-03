@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginHorizontal="8dp"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/iv_item_menu"
+        android:layout_gravity="center_vertical" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        tool:text="ItemContent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

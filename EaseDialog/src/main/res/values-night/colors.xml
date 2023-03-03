@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标题颜色-->
+    <color name="colorTitleText">#cfcfcf</color>
+    <!--主文字颜色-->
+    <color name="colorMainText">#d1d1d1</color>
+    <!--辅助颜色-->
+    <color name="colorSubText">#5b5b5b</color>
+    <!--背景颜色-->
+    <color name="colorBackground">#2C2C2C</color>
+    <!--按下颜色-->
+    <color name="colorPress">#1D1D1D</color>
+    <!--确定按钮颜色-->
+    <color name="colorPositiveTextColor">#4685F7</color>
+</resources>

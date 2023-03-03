@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="dialogTitleTextColor" format="color" />
+    <attr name="dialogMainTextColor" format="color" />
+    <attr name="dialogCancelTextColor" format="color" />
+    <attr name="dialogPositiveTextColor" format="color" />
+    <attr name="dialogBackgroundColor" format="color" />
+    <attr name="dialogPressBackgroundColor" format="color" />
+    <attr name="dialogRadius" format="dimension" />
+</resources>
