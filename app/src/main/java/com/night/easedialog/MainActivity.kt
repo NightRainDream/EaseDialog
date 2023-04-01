@@ -33,27 +33,45 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         findViewById<View>(R.id.tv_pop_menu).setOnTouchListener { v, event ->
-            if(event.action == MotionEvent.ACTION_UP){
+            if (event.action == MotionEvent.ACTION_UP) {
                 DialogTools.getDialogBuilder()
-                    .setTouchCoordinate(event.x,event.y,event.rawX,event.rawY)
-                    .toPopMenu(this,v, mutableListOf("删除","编辑","复制"), object : IDialogActionCallback {
+                    .setTouchCoordinate(event.x, event.y, event.rawX, event.rawY)
+                    .toPopMenu(this, v, mutableListOf("删除", "编辑", "复制"), object : IDialogActionCallback {
                         override fun onPositive(content: String, index: MutableList<Int>) {
                             DialogTools.getToastBuilder().toToast(content)
                         }
 
                     })
             }
-            true }
+            true
+        }
     }
 
     fun onTipDialog(view: View) {
         DialogTools.getDialogBuilder()
-            .toTipsDialog(this, "允许日历联网", "下载或更新节假日、班休、历法、订阅等信息。")
+            .setTitleText("允许日历联网")
+            .setMainText("下载或更新节假日、班休、历法、订阅等信息。")
+            .toTipsDialog(this, object : IDialogActionCallback {
+                override fun onPositive(content: String, index: MutableList<Int>) {
+                    DialogTools.getToastBuilder().toToast("确认")
+                }
+
+                override fun onCancel() {
+                    DialogTools.getToastBuilder().toToast("取消")
+                }
+            })
     }
 
     fun onTipWarnDialog(view: View) {
         DialogTools.getDialogBuilder()
-            .toWarnDialog(this, "确定删除当前联系人?")
+            .setMainText("确定删除当前联系人?")
+            .setPositiveTextColor(Color.RED)
+            .setPositiveText("删除")
+            .toWarnDialog(this, object : IDialogActionCallback {
+                override fun onPositive(content: String, index: MutableList<Int>) {
+                    DialogTools.getToastBuilder().toToast("删除")
+                }
+            })
     }
 
     fun onMenuDialog(view: View) {
@@ -64,9 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     fun onTipSingleDialog(view: View) {
         DialogTools.getDialogBuilder()
+            .setTitleText("重复")
             .toSingleMenu(
                 this,
-                "重复",
                 mSingleList,
                 mSelectSingleIndex,
                 object : IDialogActionCallback {
@@ -79,7 +97,8 @@ class MainActivity : AppCompatActivity() {
 
     fun onMultipleDialog(view: View) {
         DialogTools.getDialogBuilder()
-            .toMultipleMenu(this, "重复", mMultipleList, mSelectMultipleIndex,
+            .setTitleText("重复")
+            .toMultipleMenu(this, mMultipleList, mSelectMultipleIndex,
                 object : IDialogActionCallback {
                     override fun onPositive(content: String, index: MutableList<Int>) {
                         mSelectMultipleIndex.clear()
@@ -88,13 +107,10 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
-    fun closeDialog(view: View) {
-        DialogTools.dismissDialog()
-    }
-
     fun onDatePicker(view: View) {
         DialogTools.getPickerBuilder()
-            .toDatePicker(this, "请选择日期", object : IDateTimeSelectCallback {
+            .setTitleText("请选择日期")
+            .toDatePicker(this, object : IDateTimeSelectCallback {
                 override fun onSelectDate(result: DateTimeEntity) {
                     Toast.makeText(this@MainActivity, result.getDate(), Toast.LENGTH_SHORT).show()
                 }
@@ -103,7 +119,8 @@ class MainActivity : AppCompatActivity() {
 
     fun onTimePicker(view: View) {
         DialogTools.getPickerBuilder()
-            .toTimePicker(this, "请选择时间", object : IDateTimeSelectCallback {
+            .setTitleText("请选择时间")
+            .toTimePicker(this, object : IDateTimeSelectCallback {
                 override fun onSelectDate(result: DateTimeEntity) {
                     Toast.makeText(this@MainActivity, result.getTime(), Toast.LENGTH_SHORT).show()
                 }

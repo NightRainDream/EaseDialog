@@ -13,6 +13,7 @@ import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.callback.IWheelChangedListener
 import com.night.dialog.entity.DateEntity
 import com.night.dialog.entity.DateTimeEntity
+import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.entity.TimeEntity
 import com.night.dialog.tools.DatePickerHelp
 import com.night.dialog.tools.DialogHelp
@@ -26,7 +27,104 @@ class PickerBuilder : BaseDialogBuilder() {
         TimePickerHelp()
     }
 
+    /**
+     * 设置标题TextView属性
+     *
+     * @param title TextView属性[TextInfoEntity]
+     * @return DialogBuilder
+     */
+    fun setTitleTextInfo(title: TextInfoEntity): PickerBuilder {
+        this.mTitleTextInfo = title
+        return this
+    }
 
+    /**
+     * 设置标题内容
+     *
+     * @param title 标题内容
+     */
+    fun setTitleText(title: String?): PickerBuilder {
+        if (title != null) {
+            this.mTitleText = title
+        }
+        return this
+    }
+
+    /**
+     * 设置标题内容颜色
+     *
+     * @param title 标题内容颜色
+     */
+    fun setTitleTextColor(@ColorInt title: Int): PickerBuilder {
+        this.mTitleTextColor = title
+        return this
+    }
+
+    /**
+     * 设置取消按钮TextView属性
+     *
+     * @param cancel TextView属性[TextInfoEntity]
+     * @return DialogBuilder
+     */
+    fun setCancelTextInfo(cancel: TextInfoEntity): PickerBuilder {
+        this.mCancelTextInfo = cancel
+        return this
+    }
+
+    /**
+     * 设置取消按钮文本
+     *
+     * @param cancel 取消按钮文本
+     */
+    fun setCancelText(cancel: String?): PickerBuilder {
+        if (cancel != null) {
+            this.mCancelText = cancel
+        }
+        return this
+    }
+
+    /**
+     * 设置取消按钮文本颜色
+     *
+     * @param cancel 取消按钮文本颜色
+     */
+    fun setCancelTextColor(@ColorInt cancel: Int): PickerBuilder {
+        this.mCancelTextColor = cancel
+        return this
+    }
+
+    /**
+     * 设置确定按钮TextView属性
+     *
+     * @param positive TextView属性[TextInfoEntity]
+     * @return DialogBuilder
+     */
+    fun setPositiveTextInfo(positive: TextInfoEntity): PickerBuilder {
+        this.mPositiveTextInfo = positive
+        return this
+    }
+
+    /**
+     * 设置确认按钮文本
+     *
+     * @param positive 确认按钮文本
+     */
+    fun setPositiveText(positive: String?): PickerBuilder {
+        if (null != positive) {
+            this.mPositionText = positive
+        }
+        return this
+    }
+
+    /**
+     * 设置确认按钮文本颜色
+     *
+     * @param positive 确认按钮文本颜色
+     */
+    fun setPositiveTextColor(positive: Int): PickerBuilder {
+        this.mPositionTextColor = positive
+        return this
+    }
 
     /**
      * 设置最大日期
@@ -101,10 +199,9 @@ class PickerBuilder : BaseDialogBuilder() {
      * 日期选择器
      *
      * @param activity Activity
-     * @param title 标题
      * @param callback 状态回调[IDateTimeSelectCallback]
      */
-    fun toDatePicker(activity: Activity, title: String, callback: IDateTimeSelectCallback) {
+    fun toDatePicker(activity: Activity, callback: IDateTimeSelectCallback) {
         mDatePickerHelp.initDefaultIndex()
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_date_picker) {
             override fun onBind(dialog: BaseDialog) {
@@ -114,16 +211,19 @@ class PickerBuilder : BaseDialogBuilder() {
                 val idMonth = dialog.findViewById<WheelView>(R.id.id_month)
                 val idDay = dialog.findViewById<WheelView>(R.id.id_day)
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_title)
-                val mOkButton = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_positive)
-                val mCancelButton = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_cancel)
-                if(DialogHelp.isLandscape()){
+                val mPositiveView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_positive)
+                val mCancelView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_cancel)
+                if (DialogHelp.isLandscape()) {
                     val mLayoutParams = mViewGroup.layoutParams
                     mLayoutParams.height = DialogHelp.getMaxMenuHeight().toInt()
                     mViewGroup.layoutParams = mLayoutParams
                 }
-                initTextInfo(mTitleView,mTitleTextInfo,title)
-                initTextInfo(mOkButton,mPositiveTextInfo)
-                initTextInfo(mCancelButton,mCancelTextInfo)
+                //设置标题参数
+                setTitleParameter(mTitleView)
+                //设置取消按钮参数
+                setCancelParameter(mCancelView)
+                //设置确认按钮参数
+                setPositiveParameter(mPositiveView)
 
                 idYear?.addChangingListener(object : IWheelChangedListener {
                     override fun onChanged(wheel: WheelView?, oldValue: Int, newValue: Int) {
@@ -150,7 +250,7 @@ class PickerBuilder : BaseDialogBuilder() {
                     mDatePickerHelp.initMonthLabel(activity, idMonth)
                     mDatePickerHelp.initDayLabel(activity, idDay)
                 }
-                mOkButton.setOnClickListener {
+                mPositiveView.setOnClickListener {
                     dialog.dismiss()
                     val result = DateTimeEntity(
                         mDatePickerHelp.getSelectYear(),
@@ -162,22 +262,21 @@ class PickerBuilder : BaseDialogBuilder() {
                     )
                     callback.onSelectDate(result)
                 }
-                mCancelButton.setOnClickListener {
+                mCancelView.setOnClickListener {
                     dialog.dismiss()
                     callback.onCancel()
                 }
             }
-        }, mStyle,mGravity,isCancel)
+        }, mStyle, mGravity, isCancel)
     }
 
     /**
      * 时间选择器
      *
      * @param activity Activity
-     * @param title 标题
      * @param callback 状态回调[IDateTimeSelectCallback]
      */
-    fun toTimePicker(activity: Activity, title: String, callback: IDateTimeSelectCallback) {
+    fun toTimePicker(activity: Activity, callback: IDateTimeSelectCallback) {
         mTimePickerHelp.initDefaultIndex()
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_time_picker) {
             override fun onBind(dialog: BaseDialog) {
@@ -187,16 +286,19 @@ class PickerBuilder : BaseDialogBuilder() {
                 val idMinute = dialog.findViewById<WheelView>(R.id.id_minute)
                 val idSecond = dialog.findViewById<WheelView>(R.id.id_second)
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_title)
-                val mOkButton = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_positive)
-                val mCancelButton = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_cancel)
-                if(DialogHelp.isLandscape()){
+                val mPositiveView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_positive)
+                val mCancelView = dialog.findViewById<AppCompatTextView>(R.id.tv_picker_cancel)
+                if (DialogHelp.isLandscape()) {
                     val mLayoutParams = mViewGroup.layoutParams
                     mLayoutParams.height = DialogHelp.getMaxMenuHeight().toInt()
                     mViewGroup.layoutParams = mLayoutParams
                 }
-                initTextInfo(mTitleView,mTitleTextInfo,title)
-                initTextInfo(mOkButton,mPositiveTextInfo)
-                initTextInfo(mCancelButton,mCancelTextInfo)
+                //设置标题参数
+                setTitleParameter(mTitleView)
+                //设置取消按钮参数
+                setCancelParameter(mCancelView)
+                //设置确认按钮参数
+                setPositiveParameter(mPositiveView)
 
                 idHour?.addChangingListener(object : IWheelChangedListener {
                     override fun onChanged(wheel: WheelView?, oldValue: Int, newValue: Int) {
@@ -223,7 +325,7 @@ class PickerBuilder : BaseDialogBuilder() {
                     mTimePickerHelp.initMinuteLabel(activity, idMinute)
                     mTimePickerHelp.initSecondLabel(activity, idSecond)
                 }
-                mOkButton.setOnClickListener {
+                mPositiveView.setOnClickListener {
                     dialog.dismiss()
                     val result = DateTimeEntity(
                         "1970", "01", "01",
@@ -234,11 +336,11 @@ class PickerBuilder : BaseDialogBuilder() {
                     )
                     callback.onSelectDate(result)
                 }
-                mCancelButton.setOnClickListener {
+                mCancelView.setOnClickListener {
                     dialog.dismiss()
                     callback.onCancel()
                 }
             }
-        }, mStyle,mGravity,isCancel)
+        }, mStyle, mGravity, isCancel)
     }
 }

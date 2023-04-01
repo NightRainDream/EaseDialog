@@ -1,6 +1,5 @@
 package com.night.dialog.tools
 
-import android.app.Dialog
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.text.TextUtils
@@ -15,26 +14,6 @@ import com.night.dialog.R
 import com.night.dialog.entity.TextInfoEntity
 
 internal object DialogHelp {
-    /**
-     * 默认标题文字详情
-     */
-    val sDefaultTitleTextInfo = TextInfoEntity(20, getColor(R.color.colorTitleText), isBold =  true)
-
-    /**
-     * 默认主文字详情
-     */
-    val sDefaultMainTextInfo = TextInfoEntity(15, getColor(R.color.colorMainText), isBold = true)
-
-    /**
-     * 默认取消按钮文字详情
-     */
-    val sDefaultCancelTextInfo = TextInfoEntity(16, getColor(R.color.colorButtonTextColor), getString(R.string.cancel))
-
-    /**
-     * 默认确定按钮文字详情
-     */
-    val sDefaultPositiveTextInfo = TextInfoEntity(16, getColor(R.color.colorButtonTextColor), getString(R.string.define))
-
 
     fun setTextViewInfo(view: TextView?,info: TextInfoEntity?){
         if(view == null || info == null){
