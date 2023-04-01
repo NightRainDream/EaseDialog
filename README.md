@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/NightRainDream/EaseDialog.svg)](https://jitpack.io/#NightRainDream/EaseDialog)
+
 # EaseDialog
 
 ## 1.介绍
@@ -21,7 +23,7 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-	implementation 'com.github.NightRainDream:EaseDialog:v1.0.1'
+	implementation 'com.github.NightRainDream:EaseDialog:Tag'
 }
 ```
 ## 3.使用说明
