@@ -25,5 +25,4 @@ object EaseDialog {
         }
         return mApplication.applicationContext
     }
-
 }

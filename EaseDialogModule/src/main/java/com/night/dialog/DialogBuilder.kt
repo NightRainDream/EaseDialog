@@ -153,7 +153,7 @@ class DialogBuilder : BaseDialogBuilder() {
      *
      * @param positive 确认按钮文本颜色
      */
-    fun setPositiveTextColor(positive: Int): DialogBuilder {
+    fun setPositiveTextColor(@ColorInt positive: Int): DialogBuilder {
         this.mPositionTextColor = positive
         return this
     }
@@ -166,6 +166,14 @@ class DialogBuilder : BaseDialogBuilder() {
         return this
     }
 
+    /**
+     * 设置PopMenu弹出坐标
+     *
+     * @param x 相对父容器X轴坐标
+     * @param y 相对父容器Y轴坐标
+     * @param rawX 相对屏幕X轴坐标
+     * @param rawY 相对屏幕Y轴坐标
+     */
     fun setTouchCoordinate(x: Float, y: Float, rawX: Float, rawY: Float): DialogBuilder {
         mPopMenuHelp.setTouchCoordinate(x, y, rawX, rawY)
         return this
@@ -249,17 +257,11 @@ class DialogBuilder : BaseDialogBuilder() {
      * 构建单选菜单
      *
      * @param activity Activity
-     * @param title 对话框标题
      * @param menu 菜单内容
      * @param defIndex 默认选中位置
      * @param callback 状态回调[IDialogActionCallback]
      */
-    fun toSingleMenu(
-        activity: Activity,
-        menu: MutableList<String>,
-        defIndex: Int = -1,
-        callback: IDialogActionCallback?
-    ) {
+    fun toSingleMenu(activity: Activity, menu: MutableList<String>, defIndex: Int = -1, callback: IDialogActionCallback?) {
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_single_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
@@ -305,17 +307,11 @@ class DialogBuilder : BaseDialogBuilder() {
      * 构建多选菜单
      *
      * @param activity Activity
-     * @param title 对话框标题
      * @param menu 菜单内容
      * @param defIndex 默认选中位置
      * @param callback 状态回调[IDialogActionCallback]
      */
-    fun toMultipleMenu(
-        activity: Activity,
-        menu: MutableList<String>,
-        defIndex: MutableList<Int>? = null,
-        callback: IDialogActionCallback?
-    ) {
+    fun toMultipleMenu(activity: Activity, menu: MutableList<String>, defIndex: MutableList<Int>? = null, callback: IDialogActionCallback?) {
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_multiple_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
