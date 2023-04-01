@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标题颜色-->
+    <color name="colorTitleText">#E0E0E0</color>
+    <!--主文字颜色-->
+    <color name="colorMainText">#E0E0E0</color>
+    <!--背景颜色-->
+    <color name="colorBackground">#212224</color>
+    <!--按下颜色-->
+    <color name="colorPress">#414244</color>
+    <!--确定按钮颜色-->
+    <color name="colorButtonTextColor">#628EDE</color>
+    <!--分割线颜色-->
+    <color name="colorDivider">#4D4E50</color>
+    <!--警告色-->
+    <color name="colorWarn">#D34B3D</color>
+    <!--加载框开始颜色-->
+    <color name="colorProgressStart">#00FFFFFF</color>
+    <!--加载框结束颜色-->
+    <color name="colorProgressEnd">#99FFFFFF</color>
+    <!--Toast背景色-->
+    <color name="colorToastBackground">#B3FFFFFF</color>
+    <!--Toast文字颜色-->
+    <color name="colorToastTextColor">#000000</color>
+</resources>

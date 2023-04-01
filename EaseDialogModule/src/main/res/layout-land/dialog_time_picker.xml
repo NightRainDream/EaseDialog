@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dialog_width_land"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_picker_title"
+        style="@style/StyleTitle"
+        tools:text="Title" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:id="@+id/ll_picker"
+        android:layout_height="@dimen/dp_180"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:orientation="horizontal">
+
+        <com.night.dialog.base.WheelView
+            android:id="@+id/id_hour"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2" />
+
+        <com.night.dialog.base.WheelView
+            android:id="@+id/id_minute"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.night.dialog.base.WheelView
+            android:id="@+id/id_second"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_16"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_picker_cancel"
+            style="@style/StyleButton"
+            tools:text="CANCEL" />
+
+        <View style="@style/StyleButtonDivider" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_picker_positive"
+            style="@style/StyleButton"
+            tools:text="DEFINE" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

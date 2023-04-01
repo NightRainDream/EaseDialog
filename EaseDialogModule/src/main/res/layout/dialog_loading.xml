@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/dp_34"
+    android:paddingVertical="@dimen/dp_16"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/bg_loading_dialog"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ProgressBar
+        android:layout_width="@dimen/dp_28"
+        android:layout_height="@dimen/dp_28"
+        android:indeterminateDrawable="@drawable/anim_loading" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginStart="16dp"
+        android:id="@+id/tv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/colorMainText"
+        tool:text="加载中..." />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

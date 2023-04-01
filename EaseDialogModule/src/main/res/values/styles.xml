@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <!--Dialog的windowFrame框为无-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--是否显示title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--设置dialog的背景-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--显示区域背景是否透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--就是用来控制灰度的值，当为1时，界面除了我们的dialog内容是高亮显示的，dialog以外的区域是黑色的，完全看不到其他内容，系统的默认值是0.5-->
+        <item name="android:backgroundDimAmount">0.3</item>
+        <!--显示区域以外是否使用黑色半透明背景-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="CustomBottomDialog" parent="BaseDialog">
+        <!--弹出动画-->
+        <item name="android:windowAnimationStyle">
+            @style/Animation.MaterialComponents.BottomSheetDialog
+        </item>
+    </style>
+
+    <style name="CustomDialog" parent="BaseDialog">
+        <!--弹出动画-->
+        <item name="android:windowAnimationStyle">
+            @style/Animation.AppCompat.Dialog
+        </item>
+    </style>
+
+    <!--底部按钮分割线-->
+    <style name="StyleButtonDivider">
+        <item name="android:layout_width">@dimen/dp_1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">@dimen/dp_10</item>
+        <item name="android:layout_marginEnd">@dimen/dp_10</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginBottom">@dimen/dp_10</item>
+        <item name="android:background">@color/colorDivider</item>
+    </style>
+
+    <!--底部按钮样式-->
+    <style name="StyleButton">
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorButtonTextColor</item>
+        <item name="android:textSize">@dimen/text_sizeButton</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+    </style>
+
+    <style name="StyleTitle">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_24</item>
+        <item name="android:layout_marginEnd">@dimen/dp_24</item>
+        <item name="android:paddingTop">@dimen/dp_16</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorTitleText</item>
+        <item name="android:textSize">@dimen/text_sizeTitle</item>
+    </style>
+</resources>
