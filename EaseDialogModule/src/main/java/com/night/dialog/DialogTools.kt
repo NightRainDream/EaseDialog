@@ -15,8 +15,6 @@ import java.lang.ref.WeakReference
 
 object DialogTools {
     private var mShowDialog: WeakReference<BaseDialog>? = null
-
-
     /**
      * 弹出Dialog
      *
