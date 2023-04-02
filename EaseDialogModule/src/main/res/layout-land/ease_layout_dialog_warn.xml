@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/dialog_width_land"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dialog_marginHorizontal"
-    android:layout_marginBottom="@dimen/dialog_marginBottom"
-    android:background="@drawable/bg_dialog"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/ease_dialog"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView

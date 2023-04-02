@@ -14,7 +14,7 @@ class PopupMenuAdapter(context: Context, data: MutableList<String>) :RecyclerVie
     private var mOnItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val mItemView = mLayoutInflater.inflate(R.layout.item_popup, parent, false)
+        val mItemView = mLayoutInflater.inflate(R.layout.ease_layout_item_popup, parent, false)
         return MenuViewHolder(mItemView)
     }
 

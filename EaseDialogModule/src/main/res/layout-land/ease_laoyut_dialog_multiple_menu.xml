@@ -4,24 +4,20 @@
     android:layout_width="@dimen/dialog_width_land"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/ease_dialog"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tip_title"
-        tools:text="Title"
-        style="@style/StyleTitle" />
+        android:id="@+id/tv_menu_title"
+       style="@style/StyleTitle"
+        tools:text="Title" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tip_content"
-        android:includeFontPadding="false"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_menu_title"
+        android:overScrollMode="never"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_24"
-        android:lineSpacingExtra="@dimen/dp_4"
-        android:textColor="@color/colorMainText"
-        android:textSize="@dimen/sp_16"
-        tools:text="Content" />
+        android:layout_height="wrap_content" />
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -32,14 +28,14 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_cancel"
+            android:id="@+id/tv_multiple_cancel"
             style="@style/StyleButton"
             tools:text="CANCEL" />
 
         <View style="@style/StyleButtonDivider" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_positive"
+            android:id="@+id/tv_multiple_positive"
             style="@style/StyleButton"
             tools:text="DEFINE" />
     </androidx.appcompat.widget.LinearLayoutCompat>

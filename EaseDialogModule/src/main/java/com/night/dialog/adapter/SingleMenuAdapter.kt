@@ -25,7 +25,7 @@ class SingleMenuAdapter(menu: MutableList<String>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleMenuHolder {
-        val mItemView = mLayoutInflater.inflate(R.layout.item_single_menu, parent, false)
+        val mItemView = mLayoutInflater.inflate(R.layout.ease_layout_item_single_menu, parent, false)
         mItemView.setOnClickListener {
             val touchIndex = mRoomView.getChildAdapterPosition(it)
             setSelectPosition(touchIndex)

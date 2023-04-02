@@ -187,7 +187,7 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param callback 状态回调[IDialogActionCallback]
      */
     fun toTipsDialog(activity: Activity, callback: IDialogActionCallback? = null) {
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_tip) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_tip) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_tip_title)
                 val mContentView = dialog.findViewById<AppCompatTextView>(R.id.tv_tip_content)
@@ -226,7 +226,7 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param callback 状态回调[IDialogActionCallback]
      */
     fun toWarnDialog(activity: Activity, callback: IDialogActionCallback? = null) {
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_warn) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_warn) {
             override fun onBind(dialog: BaseDialog) {
                 val mContentView = dialog.findViewById<AppCompatTextView>(R.id.tv_warn_content)
                 val mCancelView = dialog.findViewById<AppCompatTextView>(R.id.tv_warn_cancel)
@@ -268,7 +268,7 @@ class DialogBuilder : BaseDialogBuilder() {
         defIndex: Int = -1,
         callback: IDialogActionCallback?
     ) {
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_single_menu) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_single_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
                 val mContentView = dialog.findViewById<RecyclerView>(R.id.rv_menu_title)
@@ -328,7 +328,7 @@ class DialogBuilder : BaseDialogBuilder() {
         defIndex: MutableList<Int>? = null,
         callback: IDialogActionCallback?
     ) {
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_multiple_menu) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_laoyut_dialog_multiple_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
                 val mContentView = dialog.findViewById<RecyclerView>(R.id.rv_menu_title)
@@ -379,7 +379,7 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param msg 提示内容
      */
     fun toLoadingDialog(activity: Activity, msg: String = DialogHelp.getString(R.string.loading)) {
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_loading) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_loading) {
             override fun onBind(dialog: BaseDialog) {
                 if (isCancel) {
                     dialog.setCanceledOnTouchOutside(false)
@@ -395,7 +395,7 @@ class DialogBuilder : BaseDialogBuilder() {
     fun toPopMenu(activity: Activity, anchor: View, menuList: MutableList<String>, callback: IDialogActionCallback) {
         val mPopMenu = BasePopupWindow(activity)
         mPopMenu.setBackgroundDrawable(ColorDrawable(DialogHelp.getColor(R.color.colorBackground)))
-        val contentView = LayoutInflater.from(activity).inflate(R.layout.custom_popup_menu, null)
+        val contentView = LayoutInflater.from(activity).inflate(R.layout.ease_layout_custom_popup_menu, null)
         val mRecyclerView = contentView.findViewById<RecyclerView>(R.id.rv_popup)
         val mPopupMenuAdapter = PopupMenuAdapter(activity, menuList)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)

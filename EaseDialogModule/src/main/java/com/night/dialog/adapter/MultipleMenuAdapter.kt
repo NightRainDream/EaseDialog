@@ -8,7 +8,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.util.forEach
 import androidx.core.util.set
-import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 
@@ -35,7 +34,7 @@ class MultipleMenuAdapter(menu: MutableList<String>, defaultSelect: MutableList<
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleMenuHolder {
-        val mItemView = mLayoutInflater.inflate(R.layout.item_mulltiple_menu, parent, false)
+        val mItemView = mLayoutInflater.inflate(R.layout.ease_layout_item_mulltiple_menu, parent, false)
         mItemView.setOnClickListener {
             val touchIndex = mRoomView.getChildAdapterPosition(it)
             setTouchIndex(touchIndex)

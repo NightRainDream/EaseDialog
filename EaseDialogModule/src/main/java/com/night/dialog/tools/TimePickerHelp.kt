@@ -129,7 +129,6 @@ internal class TimePickerHelp {
      * 初始化小时分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idHour WheelView
      */
     fun initHourLabel(activity: Activity, idHour: WheelView?) {
@@ -147,7 +146,6 @@ internal class TimePickerHelp {
      * 初始化分钟分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idMinute WheelView
      */
     fun initMinuteLabel(activity: Activity, idMinute: WheelView?) {
@@ -165,7 +163,6 @@ internal class TimePickerHelp {
      * 初始化秒分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idSecond WheelView
      */
     fun initSecondLabel(activity: Activity, idSecond: WheelView?) {
@@ -186,14 +183,6 @@ internal class TimePickerHelp {
         val minHour = minTime.hour
         val maxHour = maxTime.hour
         return initLabelData(minHour, maxHour, title)
-//        return if (selectYearIndex == 0 && selectMonthIndex == 0 && selectDayIndex == 0) {
-//            //如果选中了最小年，最小月,最小天
-//            initLabelData(minHour, 23, title)
-//        } else if (selectYearIndex == yearList.lastIndex && selectMonthIndex == monthList.lastIndex && selectDayIndex == dayList.lastIndex) {
-//            initLabelData(0, maxHour, title)
-//        } else {
-//            initLabelData(0, 23, title)
-//        }
     }
 
     /**
@@ -202,12 +191,16 @@ internal class TimePickerHelp {
     private fun getMinuteData(title: String = ""): MutableList<String> {
         val minMinute = minTime.minute
         val maxMinute = maxTime.minute
-        return if (selectHourIndex == 0) {
-            initLabelData(minMinute, 59, title)
-        } else if (selectHourIndex == hourList.lastIndex) {
-            initLabelData(0, maxMinute, title)
-        } else {
-            initLabelData(0, 59, title)
+        return when (selectHourIndex) {
+            0 -> {
+                initLabelData(minMinute, 59, title)
+            }
+            hourList.lastIndex -> {
+                initLabelData(0, maxMinute, title)
+            }
+            else -> {
+                initLabelData(0, 59, title)
+            }
         }
     }
 
@@ -276,7 +269,6 @@ internal class TimePickerHelp {
      * 获取Label适配器
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param data 适配器数据
      */
     private fun getLabelAdapter(
@@ -284,7 +276,7 @@ internal class TimePickerHelp {
         data: MutableList<String>
     ): ArrayWheelAdapter<String> {
         val mLabelAdapter = ArrayWheelAdapter(activity, data)
-        mLabelAdapter.setItemResource(R.layout.default_item_date)
+        mLabelAdapter.setItemResource(R.layout.ease_layout_default_item_date)
         mLabelAdapter.setItemTextResource(R.id.default_item_date_name_tv)
         return mLabelAdapter
     }

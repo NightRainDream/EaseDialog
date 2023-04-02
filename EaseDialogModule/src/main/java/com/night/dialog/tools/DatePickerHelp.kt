@@ -49,15 +49,15 @@ internal class DatePickerHelp {
     private var mSelectDay = defaultDate.day
 
 
-    fun setMaxDate(entity: DateEntity){
+    fun setMaxDate(entity: DateEntity) {
         this.maxDate = entity
     }
 
-    fun setMinDate(entity: DateEntity){
+    fun setMinDate(entity: DateEntity) {
         this.minDate = entity
     }
 
-    fun setDefault(entity: DateEntity){
+    fun setDefault(entity: DateEntity) {
         this.defaultDate = entity
     }
 
@@ -201,7 +201,6 @@ internal class DatePickerHelp {
      * 初始化年分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idYear WheelView
      */
     fun initYearLabel(activity: Activity, idYear: WheelView?) {
@@ -223,7 +222,6 @@ internal class DatePickerHelp {
      * 初始化月分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idMonth WheelView
      */
     fun initMonthLabel(activity: Activity, idMonth: WheelView?) {
@@ -245,7 +243,6 @@ internal class DatePickerHelp {
      * 初始化日分组数据
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param idDay WheelView
      */
     fun initDayLabel(activity: Activity, idDay: WheelView?) {
@@ -286,7 +283,7 @@ internal class DatePickerHelp {
      */
     private fun getLastDayOfMonth(year: Int, month: Int): Int {
         val cal = Calendar.getInstance()
-        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.YEAR, year)
         cal.set(Calendar.MONTH, month - 1)
         cal.set(Calendar.DAY_OF_MONTH, 1)
         cal.add(Calendar.MONTH, 1)
@@ -298,7 +295,6 @@ internal class DatePickerHelp {
      * 获取Label适配器
      *
      * @param activity Activity
-     * @param dialog BottomDialog
      * @param data 适配器数据
      */
     private fun getLabelAdapter(
@@ -306,7 +302,7 @@ internal class DatePickerHelp {
         data: MutableList<String>
     ): ArrayWheelAdapter<String> {
         val mLabelAdapter = ArrayWheelAdapter(activity, data)
-        mLabelAdapter.setItemResource(R.layout.default_item_date)
+        mLabelAdapter.setItemResource(R.layout.ease_layout_default_item_date)
         mLabelAdapter.setItemTextResource(R.id.default_item_date_name_tv)
         return mLabelAdapter
     }

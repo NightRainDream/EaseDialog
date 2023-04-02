@@ -203,7 +203,7 @@ class PickerBuilder : BaseDialogBuilder() {
      */
     fun toDatePicker(activity: Activity, callback: IDateTimeSelectCallback) {
         mDatePickerHelp.initDefaultIndex()
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_date_picker) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_date_picker) {
             override fun onBind(dialog: BaseDialog) {
                 dialog.setGravity(if (DialogHelp.isLandscape()) Gravity.CENTER else Gravity.BOTTOM)
                 val mViewGroup = dialog.findViewById<ViewGroup>(R.id.ll_picker)
@@ -278,7 +278,7 @@ class PickerBuilder : BaseDialogBuilder() {
      */
     fun toTimePicker(activity: Activity, callback: IDateTimeSelectCallback) {
         mTimePickerHelp.initDefaultIndex()
-        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_time_picker) {
+        DialogTools.showDialog(activity, object : IBindDialogView(R.layout.ease_layout_dialog_time_picker) {
             override fun onBind(dialog: BaseDialog) {
                 dialog.setGravity(if (DialogHelp.isLandscape()) Gravity.CENTER else Gravity.BOTTOM)
                 val mViewGroup = dialog.findViewById<ViewGroup>(R.id.ll_picker)

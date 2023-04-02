@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/dialog_marginHorizontal"
     android:layout_marginBottom="@dimen/dialog_marginBottom"
-    android:background="@drawable/bg_dialog"
+    android:background="@drawable/ease_dialog"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView

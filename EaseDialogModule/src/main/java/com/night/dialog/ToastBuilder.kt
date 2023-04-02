@@ -71,7 +71,7 @@ class ToastBuilder {
         if (msg == null || msg == "") {
             return
         }
-        DialogTools.showToast(msg, object : IBindView(R.layout.toast) {
+        DialogTools.showToast(msg, object : IBindView(R.layout.ease_layout_toast) {
             override fun onBind(bindView: View) {
 
             }

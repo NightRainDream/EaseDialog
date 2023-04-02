@@ -3,7 +3,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_item"
+    android:background="@drawable/ease_item"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/dp_24">
 
@@ -26,5 +26,5 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/src_box" />
+        android:src="@drawable/ease_box" />
 </androidx.appcompat.widget.LinearLayoutCompat>
