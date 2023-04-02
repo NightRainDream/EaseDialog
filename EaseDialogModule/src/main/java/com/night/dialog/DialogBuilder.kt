@@ -282,7 +282,7 @@ class DialogBuilder : BaseDialogBuilder() {
                 mContentView.adapter = adapter
                 mContentView.addItemDecoration(
                     SmallDividerItem(
-                        DialogHelp.dpToPx(1F),
+                        DialogHelp.dpToPx(0.5F),
                         DialogHelp.getColor(R.color.colorDivider)
                     )
                 )
@@ -345,7 +345,7 @@ class DialogBuilder : BaseDialogBuilder() {
                 mContentView.adapter = adapter
                 mContentView.addItemDecoration(
                     SmallDividerItem(
-                        DialogHelp.dpToPx(1F),
+                        DialogHelp.dpToPx(0.5F),
                         DialogHelp.getColor(R.color.colorDivider)
                     )
                 )

@@ -16,7 +16,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:lines="1"
-        android:paddingVertical="@dimen/dp_12"
+        android:paddingVertical="@dimen/dp_14"
         android:textColor="@color/colorMainText"
         android:textSize="@dimen/text_sizeMain"
         tool:text="Item Content" />

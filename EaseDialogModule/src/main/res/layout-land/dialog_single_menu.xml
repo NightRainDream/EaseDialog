@@ -21,7 +21,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/dp_10"
+        android:paddingVertical="@dimen/dp_12"
         android:id="@+id/rv_menu_cancel"
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginHorizontal="@dimen/dp_16"

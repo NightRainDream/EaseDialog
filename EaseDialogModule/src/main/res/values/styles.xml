@@ -23,7 +23,7 @@
     <style name="CustomBottomDialog" parent="BaseDialog">
         <!--弹出动画-->
         <item name="android:windowAnimationStyle">
-            @style/Animation.MaterialComponents.BottomSheetDialog
+            @style/BottomAnimation
         </item>
     </style>
 
@@ -32,6 +32,11 @@
         <item name="android:windowAnimationStyle">
             @style/Animation.AppCompat.Dialog
         </item>
+    </style>
+
+    <style name="BottomAnimation">
+        <item name="android:windowEnterAnimation">@anim/bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_exit</item>
     </style>
 
     <!--底部按钮分割线-->
@@ -55,8 +60,8 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorButtonTextColor</item>
         <item name="android:textSize">@dimen/text_sizeButton</item>
-        <item name="android:paddingTop">@dimen/dp_10</item>
-        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:paddingTop">@dimen/dp_12</item>
+        <item name="android:paddingBottom">@dimen/dp_12</item>
     </style>
 
     <style name="StyleTitle">

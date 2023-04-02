@@ -20,7 +20,7 @@ open class BaseDialogBuilder {
     /**
      * 默认主文字详情
      */
-    protected var mMainTextInfo = TextInfoEntity(15, DialogHelp.getColor(R.color.colorMainText), isBold = true)
+    protected var mMainTextInfo = TextInfoEntity(15, DialogHelp.getColor(R.color.colorMainText))
 
     /**
      * 默认取消按钮文字详情
