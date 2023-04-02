@@ -20,6 +20,7 @@ import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.PopMenuHelp
+import com.night.dialog.tools.SmallDividerItem
 
 class DialogBuilder : BaseDialogBuilder() {
     private val mPopMenuHelp by lazy {
@@ -261,7 +262,12 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param defIndex 默认选中位置
      * @param callback 状态回调[IDialogActionCallback]
      */
-    fun toSingleMenu(activity: Activity, menu: MutableList<String>, defIndex: Int = -1, callback: IDialogActionCallback?) {
+    fun toSingleMenu(
+        activity: Activity,
+        menu: MutableList<String>,
+        defIndex: Int = -1,
+        callback: IDialogActionCallback?
+    ) {
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_single_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
@@ -274,8 +280,13 @@ class DialogBuilder : BaseDialogBuilder() {
                 val adapter = SingleMenuAdapter(menu)
                 mContentView.layoutManager = LinearLayoutManager(activity)
                 mContentView.adapter = adapter
+                mContentView.addItemDecoration(
+                    SmallDividerItem(
+                        DialogHelp.dpToPx(1F),
+                        DialogHelp.getColor(R.color.colorDivider)
+                    )
+                )
                 adapter.setSelectPosition(defIndex)
-
                 val mMenuHeight = DialogHelp.getMaxMenuHeight()
                 val mMaxDisplayMenuSize = getMaxMenuSize(mMenuHeight)
                 if (menu.size > mMaxDisplayMenuSize) {
@@ -311,7 +322,12 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param defIndex 默认选中位置
      * @param callback 状态回调[IDialogActionCallback]
      */
-    fun toMultipleMenu(activity: Activity, menu: MutableList<String>, defIndex: MutableList<Int>? = null, callback: IDialogActionCallback?) {
+    fun toMultipleMenu(
+        activity: Activity,
+        menu: MutableList<String>,
+        defIndex: MutableList<Int>? = null,
+        callback: IDialogActionCallback?
+    ) {
         DialogTools.showDialog(activity, object : IBindDialogView(R.layout.dialog_multiple_menu) {
             override fun onBind(dialog: BaseDialog) {
                 val mTitleView = dialog.findViewById<AppCompatTextView>(R.id.tv_menu_title)
@@ -327,6 +343,12 @@ class DialogBuilder : BaseDialogBuilder() {
                 val adapter = MultipleMenuAdapter(menu, defIndex)
                 mContentView.layoutManager = LinearLayoutManager(activity)
                 mContentView.adapter = adapter
+                mContentView.addItemDecoration(
+                    SmallDividerItem(
+                        DialogHelp.dpToPx(1F),
+                        DialogHelp.getColor(R.color.colorDivider)
+                    )
+                )
                 val mMenuHeight = DialogHelp.getMaxMenuHeight()
                 val mMaxDisplayMenuSize = getMaxMenuSize(mMenuHeight)
                 if (menu.size > mMaxDisplayMenuSize) {

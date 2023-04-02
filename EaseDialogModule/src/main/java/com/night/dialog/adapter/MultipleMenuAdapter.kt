@@ -32,7 +32,6 @@ class MultipleMenuAdapter(menu: MutableList<String>, defaultSelect: MutableList<
     class SingleMenuHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mTitleView = itemView.findViewById<AppCompatTextView>(R.id.tv_item_multiple_menu)
         val mIconView = itemView.findViewById<AppCompatImageView>(R.id.iv_item_multiple_menu)
-        val mDivider = itemView.findViewById<View>(R.id.v_divider)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleMenuHolder {
@@ -52,7 +51,6 @@ class MultipleMenuAdapter(menu: MutableList<String>, defaultSelect: MutableList<
         holder.mTitleView.text = mMenuList[position]
         holder.mTitleView.textSize = 16F
         holder.mIconView.isSelected = mState.get(position)
-        holder.mDivider.isGone = itemCount == (position + 1)
     }
 
     override fun onBindViewHolder(
