@@ -11,9 +11,36 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.night.dialog.EaseDialog
 import com.night.dialog.R
+import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
+import java.util.*
+import kotlin.collections.HashMap
 
 internal object DialogHelp {
+    private val mFragmentTag = mutableListOf<String>()
+    private val mFragmentListener = HashMap<String, IDialogActionCallback>()
+
+    fun onCreateDialog(tag: String, iDialogActionCallback: IDialogActionCallback) {
+        mFragmentTag.add(tag)
+        mFragmentListener[tag] = iDialogActionCallback
+    }
+
+    fun getListener(tag: String?): IDialogActionCallback? {
+        if (tag == null) {
+            return null
+        }
+        return mFragmentListener[tag]
+    }
+
+    fun onDestroyDialog(tag: String) {
+        mFragmentTag.remove(tag)
+        mFragmentListener.remove(tag)
+    }
+
+    fun isContainTag(tag: String): Boolean {
+        return mFragmentTag.indexOf(tag) != -1
+    }
+
 
     /**
      * 设置View属性
@@ -100,5 +127,46 @@ internal object DialogHelp {
         }
         val mDecorate = EaseDialog.getContext().resources.getDimension(R.dimen.dp_120)
         return mMaxHeight - mDecorate
+    }
+
+    private val mStrList = listOf(
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P",
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L",
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+        "N",
+        "M"
+    )
+
+    fun getRandomStr(): String {
+        val mShuffled = mStrList.shuffled()
+        val mRandomStr = mShuffled[0].plus(mShuffled[1]).plus(mShuffled[2]).plus(mShuffled[3]).plus(mShuffled[4])
+        val isContain = isContainTag(mRandomStr)
+        if (isContain) {
+            return getRandomStr()
+        } else {
+            return mRandomStr
+        }
+
     }
 }

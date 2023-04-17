@@ -39,6 +39,11 @@
         <item name="android:windowExitAnimation">@anim/bottom_exit</item>
     </style>
 
+    <style name="CenterAnimation">
+        <item name="android:windowEnterAnimation">@anim/abc_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/abc_popup_exit</item>
+    </style>
+
     <!--底部按钮分割线-->
     <style name="StyleButtonDivider">
         <item name="android:layout_width">@dimen/dp_1</item>

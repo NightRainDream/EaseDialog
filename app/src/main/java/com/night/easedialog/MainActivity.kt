@@ -32,32 +32,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<View>(R.id.tv_pop_menu).setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                DialogTools.getDialogBuilder()
-                    .setTouchCoordinate(event.x, event.y, event.rawX, event.rawY)
-                    .toPopMenu(this, v, mutableListOf("删除", "编辑", "复制"), object : IDialogActionCallback {
-                        override fun onPositive(content: String, index: MutableList<Int>) {
-                            DialogTools.getToastBuilder().toToast(content)
-                        }
-
-                    })
-            }
-            true
-        }
+//        findViewById<View>(R.id.tv_pop_menu).setOnTouchListener { v, event ->
+//            if (event.action == MotionEvent.ACTION_UP) {
+//                DialogTools.getDialogBuilder()
+//                    .setTouchCoordinate(event.x, event.y, event.rawX, event.rawY)
+//                    .toPopMenu(this, v, mutableListOf("删除", "编辑", "复制"), object : IDialogActionCallback {
+//                        override fun onPositive(content: String, index: MutableList<Int>) {
+//                            DialogTools.getToastBuilder().toToast(content)
+//                        }
+//
+//                    })
+//            }
+//            true
+//        }
     }
 
     fun onTipDialog(view: View) {
         DialogTools.getDialogBuilder()
             .setTitleText("允许日历联网")
             .setMainText("下载或更新节假日、班休、历法、订阅等信息。")
+            .setPositiveTextColor(Color.RED)
             .toTipsDialog(this, object : IDialogActionCallback {
                 override fun onPositive(content: String, index: MutableList<Int>) {
-                    DialogTools.getToastBuilder().toToast("确认")
+                    Toast.makeText(this@MainActivity, "确定", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancel() {
-                    DialogTools.getToastBuilder().toToast("取消")
+                    Toast.makeText(this@MainActivity, "取消", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onDismiss() {
+                    //Toast.makeText(this@MainActivity, "onDismiss", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -69,15 +74,23 @@ class MainActivity : AppCompatActivity() {
             .setPositiveText("删除")
             .toWarnDialog(this, object : IDialogActionCallback {
                 override fun onPositive(content: String, index: MutableList<Int>) {
-                    DialogTools.getToastBuilder().toToast("删除")
+                    Toast.makeText(this@MainActivity, "确定", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCancel() {
+                    Toast.makeText(this@MainActivity, "取消", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onDismiss() {
+                    //Toast.makeText(this@MainActivity, "onDismiss", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
     fun onMenuDialog(view: View) {
-        DialogTools.getDialogBuilder()
-            .setCancelable(true)
-            .toLoadingDialog(this)
+//        DialogTools.getDialogBuilder()
+//            .setCancelable(true)
+//            .toLoadingDialog(this)
     }
 
     fun onTipSingleDialog(view: View) {
@@ -96,39 +109,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onMultipleDialog(view: View) {
-        DialogTools.getDialogBuilder()
-            .setTitleText("重复")
-            .toMultipleMenu(this, mMultipleList, mSelectMultipleIndex,
-                object : IDialogActionCallback {
-                    override fun onPositive(content: String, index: MutableList<Int>) {
-                        mSelectMultipleIndex.clear()
-                        mSelectMultipleIndex.addAll(index)
-                    }
-                })
+//        DialogTools.getDialogBuilder()
+//            .setTitleText("重复")
+//            .toMultipleMenu(this, mMultipleList, mSelectMultipleIndex,
+//                object : IDialogActionCallback {
+//                    override fun onPositive(content: String, index: MutableList<Int>) {
+//                        mSelectMultipleIndex.clear()
+//                        mSelectMultipleIndex.addAll(index)
+//                    }
+//                })
     }
 
-    fun onDatePicker(view: View) {
-        DialogTools.getPickerBuilder()
-            .setTitleText("请选择日期")
-            .toDatePicker(this, object : IDateTimeSelectCallback {
-                override fun onSelectDate(result: DateTimeEntity) {
-                    Toast.makeText(this@MainActivity, result.getDate(), Toast.LENGTH_SHORT).show()
-                }
-            })
-    }
-
-    fun onTimePicker(view: View) {
-        DialogTools.getPickerBuilder()
-            .setTitleText("请选择时间")
-            .toTimePicker(this, object : IDateTimeSelectCallback {
-                override fun onSelectDate(result: DateTimeEntity) {
-                    Toast.makeText(this@MainActivity, result.getTime(), Toast.LENGTH_SHORT).show()
-                }
-            })
-    }
-
-    fun onToast(view: View) {
-        DialogTools.getToastBuilder()
-            .toToast("文件删除成功~")
-    }
+//    fun onDatePicker(view: View) {
+//        DialogTools.getPickerBuilder()
+//            .setTitleText("请选择日期")
+//            .toDatePicker(this, object : IDateTimeSelectCallback {
+//                override fun onSelectDate(result: DateTimeEntity) {
+//                    Toast.makeText(this@MainActivity, result.getDate(), Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//    }
+//
+//    fun onTimePicker(view: View) {
+//        DialogTools.getPickerBuilder()
+//            .setTitleText("请选择时间")
+//            .toTimePicker(this, object : IDateTimeSelectCallback {
+//                override fun onSelectDate(result: DateTimeEntity) {
+//                    Toast.makeText(this@MainActivity, result.getTime(), Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//    }
+//
+//    fun onToast(view: View) {
+//        DialogTools.getToastBuilder()
+//            .toToast("文件删除成功~")
+//    }
 }

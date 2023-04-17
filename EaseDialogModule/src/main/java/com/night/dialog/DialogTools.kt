@@ -39,7 +39,10 @@ object DialogTools {
         mShowDialog = WeakReference(mBaseDialog)
         bindView.onBind(mBaseDialog)
         mBaseDialog.show()
+
     }
+
+
 
     /**
      * 弹出自定义Toast
