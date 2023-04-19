@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.util.set
+import androidx.core.util.size
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
+import com.night.dialog.entity.MenuEntity
+import com.night.dialog.tools.LogcatToos
 
-class SingleMenuAdapter(menu: MutableList<String>) :
+class SingleMenuAdapter(menu: MutableList<MenuEntity>) :
     RecyclerView.Adapter<SingleMenuAdapter.SingleMenuHolder>() {
     private val mMenuList = menu
     private lateinit var mLayoutInflater: LayoutInflater
     private lateinit var mRoomView: RecyclerView
-    private val mState = SparseBooleanArray(mMenuList.size)
-    private var mNowSelectPosition = -1
     private var mOnItemClickListener: OnItemClickListener? = null
 
     class SingleMenuHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,8 +29,7 @@ class SingleMenuAdapter(menu: MutableList<String>) :
         val mItemView = mLayoutInflater.inflate(R.layout.ease_layout_item_single_menu, parent, false)
         mItemView.setOnClickListener {
             val touchIndex = mRoomView.getChildAdapterPosition(it)
-            setSelectPosition(touchIndex)
-            mOnItemClickListener?.onItemClick(mMenuList[touchIndex], touchIndex)
+            mOnItemClickListener?.onItemClick(mMenuList[touchIndex].title, touchIndex)
         }
         return SingleMenuHolder(mItemView)
     }
@@ -39,9 +39,10 @@ class SingleMenuAdapter(menu: MutableList<String>) :
     }
 
     override fun onBindViewHolder(holder: SingleMenuHolder, position: Int) {
-        holder.mTitleView.text = mMenuList[position]
+        holder.mTitleView.text = mMenuList[position].title
         holder.mTitleView.textSize = 16F
-        holder.mIconView.isSelected = mState.get(position)
+
+        holder.mIconView.isSelected = mMenuList[position].isSelect
     }
 
     override fun onBindViewHolder(
@@ -51,8 +52,8 @@ class SingleMenuAdapter(menu: MutableList<String>) :
     ) {
         super.onBindViewHolder(holder, position, payloads)
         for (key in payloads) {
-            if ("select" == key) {
-                holder.mIconView.isSelected = mState.get(position)
+            if ("single_state" == key) {
+                holder.mIconView.isSelected = mMenuList[position].isSelect
             }
         }
     }
@@ -61,23 +62,6 @@ class SingleMenuAdapter(menu: MutableList<String>) :
         super.onAttachedToRecyclerView(recyclerView)
         mLayoutInflater = LayoutInflater.from(recyclerView.context)
         mRoomView = recyclerView
-    }
-
-    /**
-     * 设置选中位置
-     */
-    fun setSelectPosition(index: Int) {
-        if (index == mNowSelectPosition) {
-            return
-        }
-        if (index >= mMenuList.size) {
-            return
-        }
-        mState[mNowSelectPosition] = false
-        notifyItemChanged(mNowSelectPosition)
-        mState[index] = true
-        notifyItemChanged(mNowSelectPosition)
-        this.mNowSelectPosition = index
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {

@@ -1,6 +1,8 @@
-package com.night.dialog.ui.sing
+package com.night.dialog.ui.multiple
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,35 +12,45 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.adapter.MultipleMenuAdapter
-import com.night.dialog.adapter.SingleMenuAdapter
+import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
+import com.night.dialog.tools.LogcatToos
 import com.night.dialog.tools.SmallDividerItem
 import com.night.dialog.widget.EaseFragmentDialog
 
-class SingleMenuDialog : EaseFragmentDialog<SingleMenuViewModel>() {
+/**
+ * ---------------------------------------------------
+ * 说    明: 多选对话框
+ * 作    者: Night
+ * 时    间: 2023/4/19
+ * ---------------------------------------------------
+ */
+class MultipleMenuDialog : EaseFragmentDialog<MultipleMenuViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
-    private lateinit var mContentView: RecyclerView
     private lateinit var mCancelView: AppCompatTextView
-    private lateinit var mSingleMenuAdapter: SingleMenuAdapter
+    private lateinit var mPositiveView: AppCompatTextView
+    private lateinit var mContentView: RecyclerView
+    private lateinit var mMultipleMenuAdapter: MultipleMenuAdapter
 
     override fun initLayoutView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.ease_layout_dialog_single_menu, container, false)
+        return inflater.inflate(R.layout.ease_laoyut_dialog_multiple_menu, container, false)
     }
 
-    override fun initViewModel(): Class<SingleMenuViewModel> {
-        return SingleMenuViewModel::class.java
+    override fun initViewModel(): Class<MultipleMenuViewModel> {
+        return MultipleMenuViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
         mTitleView = view.findViewById(R.id.tv_menu_title)
         mContentView = view.findViewById(R.id.rv_menu_title)
-        mCancelView = view.findViewById(R.id.rv_menu_cancel)
+        mCancelView = view.findViewById(R.id.tv_multiple_cancel)
+        mPositiveView = view.findViewById(R.id.tv_multiple_positive)
     }
 
     override fun initAdapter(savedInstanceState: Bundle?) {
-        mSingleMenuAdapter = SingleMenuAdapter(mViewModel.getMenuList())
+        mMultipleMenuAdapter = MultipleMenuAdapter(requireContext(), mViewModel.getMenuList())
         mContentView.layoutManager = LinearLayoutManager(activity)
-        mContentView.adapter = mSingleMenuAdapter
+        mContentView.adapter = mMultipleMenuAdapter
         mContentView.addItemDecoration(
             SmallDividerItem(
                 DialogHelp.dpToPx(0.5F),
@@ -49,40 +61,52 @@ class SingleMenuDialog : EaseFragmentDialog<SingleMenuViewModel>() {
     }
 
     override fun initListener(savedInstanceState: Bundle?) {
+        mPositiveView.setOnClickListener {
+            dismiss()
+            LogcatToos.e(mViewModel.getSelectPositions().size.toString())
+            mViewModel.onPositiveEvent("", mViewModel.getSelectPositions())
+        }
         mCancelView.setOnClickListener {
             dismiss()
             mViewModel.onCancelEvent()
         }
-        mSingleMenuAdapter.setOnItemClickListener(object : SingleMenuAdapter.OnItemClickListener {
+        mMultipleMenuAdapter.setOnItemClickListener(object : MultipleMenuAdapter.OnItemClickListener {
             override fun onItemClick(text: String, menuIndex: Int) {
-                dismiss()
-                mViewModel.onPositiveEvent(text, mutableListOf(menuIndex))
+                if (mViewModel.setItemState(menuIndex)) {
+                    mMultipleMenuAdapter.notifyItemChanged(menuIndex, "multiple_state")
+                }
             }
         })
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mViewModel.mCancelTextInfo.observe(this) {
-            setViewParameter(mCancelView, it)
-        }
         mViewModel.mTitleTextInfo.observe(this) {
             setViewParameter(mTitleView, it)
         }
-
-        mViewModel.mNotifyPosition.observe(this) {
-            mSingleMenuAdapter.notifyItemChanged(it, "single_state")
+        mViewModel.mCancelTextInfo.observe(this) {
+            setViewParameter(mCancelView, it)
+        }
+        mViewModel.mPositiveTextInfo.observe(this) {
+            setViewParameter(mPositiveView, it)
         }
     }
 
 
     fun setMenuList(menu: MutableList<String>) {
         mViewModel.setMenuList(menu)
-        mSingleMenuAdapter.notifyItemRangeInserted(0, menu.size)
+        mMultipleMenuAdapter.notifyItemRangeInserted(0, menu.size)
         DialogHelp.setDialogMaxSize(view)
     }
 
-    fun setSelectIndex(index: Int) {
-        mViewModel.setItemState(index)
+    fun setSelectIndex(index: MutableList<Int>?) {
+        if (index == null) {
+            return
+        }
+        for (position in index) {
+            if (mViewModel.setItemState(position)) {
+                mMultipleMenuAdapter.notifyItemChanged(position, "multiple_state")
+            }
+        }
     }
 
     override fun initGravity(): Int {

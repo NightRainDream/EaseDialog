@@ -1,16 +1,13 @@
-package com.night.dialog.ui.sing
+package com.night.dialog.ui.multiple
 
-import androidx.lifecycle.MutableLiveData
 import com.night.dialog.base.EaseBaseViewModel
 import com.night.dialog.entity.MenuEntity
 
-class SingleMenuViewModel : EaseBaseViewModel() {
+class MultipleMenuViewModel : EaseBaseViewModel() {
     /**
-     * 单选菜单数据
+     * 多选菜单数据
      */
     private val mMenuList = mutableListOf<MenuEntity>()
-
-    val mNotifyPosition = MutableLiveData<Int>()
 
     /**
      * 设置菜单数据
@@ -25,7 +22,7 @@ class SingleMenuViewModel : EaseBaseViewModel() {
     }
 
     /**
-     * 获取单选菜单数据
+     * 获取多选菜单数据
      */
     fun getMenuList(): MutableList<MenuEntity> {
         return mMenuList
@@ -35,34 +32,24 @@ class SingleMenuViewModel : EaseBaseViewModel() {
      * 设置Item状态
      */
     fun setItemState(position: Int): Boolean {
-        if (position >= mMenuList.size || position < 0) {
+        if (position >= mMenuList.size) {
             return false
         }
-        //全部置位
-        for ((index, item) in mMenuList.withIndex()) {
-            if (item.isSelect) {
-                item.isSelect = false
-                //通知刷新Adapter
-                mNotifyPosition.value = index
-                break
-            }
-        }
-        //选中点击
-        mMenuList[position].isSelect = true
-        //通知刷新Adapter
-        mNotifyPosition.value = position
+        val mState = mMenuList[position].isSelect
+        mMenuList[position].isSelect = !mState
         return true
     }
 
     /**
      * 获取已选中下标
      */
-    fun getSelectPositions(): Int {
+    fun getSelectPositions(): MutableList<Int> {
+        val mList = mutableListOf<Int>()
         for ((index, item) in mMenuList.withIndex()) {
             if (item.isSelect) {
-                return index
+                mList.add(index)
             }
         }
-        return -1
+        return mList
     }
 }

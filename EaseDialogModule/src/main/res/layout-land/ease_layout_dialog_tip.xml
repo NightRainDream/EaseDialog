@@ -1,51 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tip_title"
+        style="@style/StyleTitle"
+        android:layout_width="@dimen/dp_400"
+        tools:text="Title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tip_content"
+        android:layout_width="@dimen/dp_400"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:background="@color/colorBackground"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="@dimen/dp_4"
+        android:paddingHorizontal="@dimen/dp_24"
+        android:textColor="@color/colorMainText"
+        android:textSize="@dimen/sp_16"
+        tools:text="Content" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="@dimen/dialog_width_land"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/ease_dialog"
-        android:orientation="vertical">
+        style="@style/StyleAction"
+        android:layout_width="@dimen/dp_400">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_title"
-            style="@style/StyleTitle"
-            tools:text="Title" />
+            android:id="@+id/tv_tip_cancel"
+            style="@style/StyleButton"
+            tools:text="CANCEL" />
+
+        <View style="@style/StyleButtonDivider" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tip_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_24"
-            android:includeFontPadding="false"
-            android:lineSpacingExtra="@dimen/dp_4"
-            android:textColor="@color/colorMainText"
-            android:textSize="@dimen/sp_16"
-            tools:text="Content" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_8"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/dp_16">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_tip_cancel"
-                style="@style/StyleButton"
-                tools:text="CANCEL" />
-
-            <View style="@style/StyleButtonDivider" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_tip_positive"
-                style="@style/StyleButton"
-                tools:text="DEFINE" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:id="@+id/tv_tip_positive"
+            style="@style/StyleButton"
+            tools:text="DEFINE" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

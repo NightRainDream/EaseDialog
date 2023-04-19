@@ -69,4 +69,8 @@ class TipsDialog : EaseFragmentDialog<TipsViewModel>() {
             mViewModel.onPositiveEvent("", mutableListOf())
         }
     }
+
+    override fun initAdapter(savedInstanceState: Bundle?) {
+
+    }
 }

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var mSelectSingleIndex = -1
 
     private val mMultipleList = mutableListOf(
-        "周日", "周一", "周二", "周三", "周四", "周五", "周六"
+        "周日", "周一", "周二", "周三", "周四", "周五", "周六", "黑色星期一"
     )
 
     private val mSelectMultipleIndex = mutableListOf<Int>()
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onTipWarnDialog(view: View) {
         DialogTools.getDialogBuilder()
-            .setMainText("确定删除当前联系人?")
+            .setMainText("确定删除当前联系人确定删除当前联系人确定删除当前联系人?")
             .setPositiveTextColor(Color.RED)
             .setPositiveText("删除")
             .toWarnDialog(this, object : IDialogActionCallback {
@@ -109,15 +109,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onMultipleDialog(view: View) {
-//        DialogTools.getDialogBuilder()
-//            .setTitleText("重复")
-//            .toMultipleMenu(this, mMultipleList, mSelectMultipleIndex,
-//                object : IDialogActionCallback {
-//                    override fun onPositive(content: String, index: MutableList<Int>) {
-//                        mSelectMultipleIndex.clear()
-//                        mSelectMultipleIndex.addAll(index)
-//                    }
-//                })
+        DialogTools.getDialogBuilder()
+            .setTitleText("重复")
+            .toMultipleMenu(this, mMultipleList, mSelectMultipleIndex,
+                object : IDialogActionCallback {
+                    override fun onPositive(content: String, index: MutableList<Int>) {
+                        mSelectMultipleIndex.clear()
+                        mSelectMultipleIndex.addAll(index)
+                    }
+                })
     }
 
 //    fun onDatePicker(view: View) {

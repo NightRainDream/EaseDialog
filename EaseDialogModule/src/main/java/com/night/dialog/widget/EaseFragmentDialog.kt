@@ -22,15 +22,16 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
     protected lateinit var mViewModel: VM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mViewModel = ViewModelProvider(this)[initViewModel()]
         return initLayoutView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewModel = ViewModelProvider(this)[initViewModel()]
         initView(view, savedInstanceState)
-        initData(savedInstanceState)
+        initAdapter(savedInstanceState)
         initListener(savedInstanceState)
+        initData(savedInstanceState)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -78,9 +79,11 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
 
     abstract fun initView(view: View, savedInstanceState: Bundle?)
 
-    abstract fun initData(savedInstanceState: Bundle?)
+    abstract fun initAdapter(savedInstanceState: Bundle?)
 
     abstract fun initListener(savedInstanceState: Bundle?)
+
+    abstract fun initData(savedInstanceState: Bundle?)
 
     abstract fun initGravity(): Int
 

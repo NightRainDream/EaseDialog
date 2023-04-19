@@ -7,6 +7,7 @@ import com.night.dialog.base.BaseDialogBuilder
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.PopMenuHelp
+import com.night.dialog.ui.multiple.MultipleMenuDialog
 import com.night.dialog.ui.sing.SingleMenuDialog
 import com.night.dialog.ui.tips.TipsDialog
 import com.night.dialog.ui.warn.WarnDialog
@@ -190,6 +191,14 @@ class DialogBuilder : BaseDialogBuilder() {
         mWarnDialog.setCallback(callback)
     }
 
+    /**
+     * 构建单选菜单
+     *
+     * @param activity Activity
+     * @param menu 菜单内容
+     * @param defIndex 默认选中位置
+     * @param callback 状态回调[IDialogActionCallback]
+     */
     fun toSingleMenu(
         activity: AppCompatActivity,
         menu: MutableList<String>,
@@ -211,6 +220,34 @@ class DialogBuilder : BaseDialogBuilder() {
         mSingleMenuDialog.setCallback(callback)
     }
 
+    /**
+     * 构建多选菜单
+     *
+     * @param activity Activity
+     * @param menu 菜单内容
+     * @param defIndex 默认选中位置
+     * @param callback 状态回调[IDialogActionCallback]
+     */
+    fun toMultipleMenu(
+        activity: AppCompatActivity,
+        menu: MutableList<String>,
+        defIndex: MutableList<Int>? = null,
+        callback: IDialogActionCallback?
+    ) {
+        val mFragmentManage = activity.supportFragmentManager
+        val mHistoryDialog = mFragmentManage.findFragmentByTag("MultipleMenuDialog")
+        if (mHistoryDialog != null && mHistoryDialog is MultipleMenuDialog) {
+            mHistoryDialog.dismiss()
+        }
+        val mMultipleMenuDialog = MultipleMenuDialog()
+        mMultipleMenuDialog.showNow(mFragmentManage, "MultipleMenuDialog")
+
+        mMultipleMenuDialog.setTitleTextInfo(mTitleTextInfo)
+        mMultipleMenuDialog.setCancelTextInfo(mCancelTextInfo)
+        mMultipleMenuDialog.setMenuList(menu)
+        mMultipleMenuDialog.setSelectIndex(defIndex)
+        mMultipleMenuDialog.setCallback(callback)
+    }
 
 
 //

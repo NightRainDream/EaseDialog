@@ -4,6 +4,8 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.text.TextUtils
 import android.util.TypedValue
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -13,8 +15,6 @@ import com.night.dialog.EaseDialog
 import com.night.dialog.R
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
-import java.util.*
-import kotlin.collections.HashMap
 
 internal object DialogHelp {
     private val mFragmentTag = mutableListOf<String>()
@@ -129,44 +129,36 @@ internal object DialogHelp {
         return mMaxHeight - mDecorate
     }
 
-    private val mStrList = listOf(
-        "Q",
-        "W",
-        "E",
-        "R",
-        "T",
-        "Y",
-        "U",
-        "I",
-        "O",
-        "P",
-        "A",
-        "S",
-        "D",
-        "F",
-        "G",
-        "H",
-        "J",
-        "K",
-        "L",
-        "Z",
-        "X",
-        "C",
-        "V",
-        "B",
-        "N",
-        "M"
-    )
-
-    fun getRandomStr(): String {
-        val mShuffled = mStrList.shuffled()
-        val mRandomStr = mShuffled[0].plus(mShuffled[1]).plus(mShuffled[2]).plus(mShuffled[3]).plus(mShuffled[4])
-        val isContain = isContainTag(mRandomStr)
-        if (isContain) {
-            return getRandomStr()
-        } else {
-            return mRandomStr
+    fun setDialogMaxSize(view: View?) {
+        if(view == null){
+            return
         }
+        //制定测量规则 参数表示size + mode
+        val width = View.MeasureSpec.makeMeasureSpec(
+            0,
+            View.MeasureSpec.UNSPECIFIED
+        )
+        val height = View.MeasureSpec.makeMeasureSpec(
+            0,
+            View.MeasureSpec.UNSPECIFIED
+        )
+        //调用measure方法之后就可以获取宽高
+        view.measure(width, height)
 
+        //Dialog最大高度
+        val mMaxHeight = if (isLandscape()) {
+            Resources.getSystem().displayMetrics.heightPixels * ConstantTools.HEIGHT_RATIO_LANDSCAPE
+        } else {
+            Resources.getSystem().displayMetrics.heightPixels * ConstantTools.HEIGHT_RATIO_PORTRAIT
+        }
+        //内容高度
+        val mContentHeight = view.measuredHeight
+        if (mContentHeight > mMaxHeight) {
+            val mParams = view.layoutParams
+            mParams.height = mMaxHeight.toInt()
+            view.layoutParams = mParams
+        }
     }
+
+
 }

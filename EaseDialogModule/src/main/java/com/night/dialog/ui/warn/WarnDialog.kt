@@ -63,4 +63,8 @@ class WarnDialog : EaseFragmentDialog<WarnViewModel>() {
     override fun isCancel(): Boolean {
         return true
     }
+
+    override fun initAdapter(savedInstanceState: Bundle?) {
+
+    }
 }

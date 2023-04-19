@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_menu_title"
+        style="@style/StyleTitle"
+        tools:text="Title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_weight="1"
+        android:background="@color/colorBackground" />
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dialog_marginHorizontal"
-        android:layout_marginBottom="@dimen/dialog_marginBottom"
-        android:background="@drawable/ease_dialog"
-        android:orientation="vertical">
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_menu_title"
-            style="@style/StyleTitle"
-            tools:text="Title" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_menu_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never" />
+        style="@style/StyleAction"
+        android:layout_marginBottom="@dimen/dp_20">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/rv_menu_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginBottom="@dimen/dp_16"
-            android:background="@drawable/ease_button"
-            android:gravity="center"
-            android:paddingVertical="@dimen/dp_12"
-            android:textColor="@color/colorButtonTextColor"
-            android:textSize="@dimen/text_sizeButton"
+            style="@style/StyleButton"
             tools:text="CANCEL" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

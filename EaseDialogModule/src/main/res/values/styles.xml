@@ -73,12 +73,28 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">@dimen/dp_24</item>
-        <item name="android:layout_marginEnd">@dimen/dp_24</item>
+        <item name="android:paddingStart">@dimen/dp_24</item>
+        <item name="android:paddingEnd">@dimen/dp_24</item>
         <item name="android:paddingTop">@dimen/dp_16</item>
         <item name="android:paddingBottom">@dimen/dp_16</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/colorTitleText</item>
         <item name="android:textSize">@dimen/text_sizeTitle</item>
+        <item name="android:background">@drawable/ease_title_background</item>
+        <item name="android:layout_marginStart">@dimen/dp_16</item>
+        <item name="android:layout_marginEnd">@dimen/dp_16</item>
+    </style>
+
+    <style name="StyleAction">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/dp_16</item>
+        <item name="android:layout_marginEnd">@dimen/dp_16</item>
+        <item name="android:background">@drawable/ease_action_background</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/dp_16</item>
+        <item name="android:paddingEnd">@dimen/dp_16</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
     </style>
 </resources>

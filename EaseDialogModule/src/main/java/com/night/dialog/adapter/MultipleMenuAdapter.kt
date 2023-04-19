@@ -1,92 +1,76 @@
 package com.night.dialog.adapter
 
-import android.util.SparseBooleanArray
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.util.forEach
-import androidx.core.util.set
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
+import com.night.dialog.entity.MenuEntity
 
-class MultipleMenuAdapter(menu: MutableList<String>, defaultSelect: MutableList<Int>?) :
-    RecyclerView.Adapter<MultipleMenuAdapter.SingleMenuHolder>() {
+class MultipleMenuAdapter(context: Context,menu: MutableList<MenuEntity>) : RecyclerView.Adapter<MultipleMenuAdapter.MultipleMenuHolder>() {
     private val mMenuList = menu
-    private lateinit var mLayoutInflater: LayoutInflater
+    private val mLayoutInflater: LayoutInflater
     private lateinit var mRoomView: RecyclerView
-    private val mState = SparseBooleanArray(mMenuList.size)
+    private var mOnItemClickListener: OnItemClickListener? = null
 
     init {
-        if (defaultSelect != null) {
-            for (i in defaultSelect) {
-                if (i < mMenuList.size) {
-                    mState[i] = true
-                }
-            }
-        }
+        mLayoutInflater = LayoutInflater.from(context)
     }
 
-    class SingleMenuHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val mTitleView = itemView.findViewById<AppCompatTextView>(R.id.tv_item_multiple_menu)
-        val mIconView = itemView.findViewById<AppCompatImageView>(R.id.iv_item_multiple_menu)
+    class MultipleMenuHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val mTitleView: AppCompatTextView = itemView.findViewById(R.id.tv_item_multiple_menu)
+        val mIconView: AppCompatImageView = itemView.findViewById(R.id.iv_item_multiple_menu)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleMenuHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MultipleMenuHolder {
         val mItemView = mLayoutInflater.inflate(R.layout.ease_layout_item_mulltiple_menu, parent, false)
         mItemView.setOnClickListener {
-            val touchIndex = mRoomView.getChildAdapterPosition(it)
-            setTouchIndex(touchIndex)
+            val touchIndex = mRoomView.getChildAdapterPosition(mItemView)
+            mOnItemClickListener?.onItemClick(mMenuList[touchIndex].title, touchIndex)
         }
-        return SingleMenuHolder(mItemView)
+        return MultipleMenuHolder(mItemView)
     }
 
     override fun getItemCount(): Int {
         return mMenuList.size
     }
 
-    override fun onBindViewHolder(holder: SingleMenuHolder, position: Int) {
-        holder.mTitleView.text = mMenuList[position]
+    override fun onBindViewHolder(holder: MultipleMenuHolder, position: Int) {
+        val mItemEntity = mMenuList[position]
+        holder.mTitleView.text = mItemEntity.title
         holder.mTitleView.textSize = 16F
-        holder.mIconView.isSelected = mState.get(position)
+        holder.mIconView.isSelected = mItemEntity.isSelect
     }
 
     override fun onBindViewHolder(
-        holder: SingleMenuHolder,
+        holder: MultipleMenuHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
         super.onBindViewHolder(holder, position, payloads)
+        val mItemEntity = mMenuList[position]
         for (key in payloads) {
-            if ("select" == key) {
-                holder.mIconView.isSelected = mState.get(position)
+            if ("multiple_state" == key) {
+                holder.mIconView.isSelected = mItemEntity.isSelect
             }
         }
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        mLayoutInflater = LayoutInflater.from(recyclerView.context)
         mRoomView = recyclerView
     }
 
-    fun setTouchIndex(index: Int) {
-        if (index >= mMenuList.size) {
-            return
-        }
-        mState[index] = !mState.get(index)
-        notifyItemChanged(index, "select")
+
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener
     }
 
-    fun getSelectData(): MutableList<Int> {
-        val mSel = mutableListOf<Int>()
-        mState.forEach { key, value ->
-            if (value) {
-                mSel.add(key)
-            }
-        }
-        return mSel
+    interface OnItemClickListener {
+        fun onItemClick(text: String, menuIndex: Int)
     }
-
 }
