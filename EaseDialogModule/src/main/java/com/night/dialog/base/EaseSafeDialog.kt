@@ -1,4 +1,4 @@
-package com.night.dialog.widget
+package com.night.dialog.base
 
 import android.app.Dialog
 import android.content.Context
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity
 import com.night.dialog.tools.LogcatToos
 import java.lang.ref.WeakReference
 
-internal class SafeDialog(context: Context,themeResId: Int) : Dialog(context,themeResId) {
+internal class EaseSafeDialog(context: Context, themeResId: Int) : Dialog(context,themeResId) {
     private val mWeakContext = WeakReference(context)
 
     override fun show() {

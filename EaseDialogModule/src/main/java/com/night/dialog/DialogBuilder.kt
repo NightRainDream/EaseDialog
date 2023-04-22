@@ -1,16 +1,15 @@
 package com.night.dialog
 
-import android.app.Activity
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.PopMenuHelp
-import com.night.dialog.ui.multiple.MultipleMenuDialog
-import com.night.dialog.ui.sing.SingleMenuDialog
-import com.night.dialog.ui.tips.TipsDialog
-import com.night.dialog.ui.warn.WarnDialog
+import com.night.dialog.ui.multiple.MultipleMenuDialogFragment
+import com.night.dialog.ui.sing.SingleMenuDialogFragment
+import com.night.dialog.ui.tips.TipsDialogFragment
+import com.night.dialog.ui.warn.WarnDialogFragment
 
 class DialogBuilder : BaseDialogBuilder() {
     private val mPopMenuHelp by lazy {
@@ -156,19 +155,21 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param activity Activity
      */
     fun toTipsDialog(activity: AppCompatActivity, callback: IDialogActionCallback?) {
+
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("TipsDialog")
-        if (mHistoryDialog != null && mHistoryDialog is TipsDialog) {
+        if (mHistoryDialog != null && mHistoryDialog is TipsDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mTipsDialog = TipsDialog()
-        mTipsDialog.showNow(mFragmentManage, "TipsDialog")
-
+        val mTipsDialog = TipsDialogFragment()
         mTipsDialog.setTitleTextInfo(mTitleTextInfo)
         mTipsDialog.setMainTextInfo(mMainTextInfo)
         mTipsDialog.setCancelTextInfo(mCancelTextInfo)
         mTipsDialog.setPositiveTextInfo(mPositiveTextInfo)
         mTipsDialog.setCallback(callback)
+        mTipsDialog.show(mFragmentManage, "TipsDialog")
+
+
     }
 
     /**
@@ -179,16 +180,15 @@ class DialogBuilder : BaseDialogBuilder() {
     fun toWarnDialog(activity: AppCompatActivity, callback: IDialogActionCallback?) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("WarnDialog")
-        if (mHistoryDialog != null && mHistoryDialog is WarnDialog) {
+        if (mHistoryDialog != null && mHistoryDialog is WarnDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mWarnDialog = WarnDialog()
-        mWarnDialog.showNow(mFragmentManage, "WarnDialog")
-
+        val mWarnDialog = WarnDialogFragment()
         mWarnDialog.setMainTextInfo(mMainTextInfo)
         mWarnDialog.setCancelTextInfo(mCancelTextInfo)
         mWarnDialog.setPositiveTextInfo(mPositiveTextInfo)
         mWarnDialog.setCallback(callback)
+        mWarnDialog.showNow(mFragmentManage, "WarnDialog")
     }
 
     /**
@@ -207,17 +207,15 @@ class DialogBuilder : BaseDialogBuilder() {
     ) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("SingleMenuDialog")
-        if (mHistoryDialog != null && mHistoryDialog is SingleMenuDialog) {
+        if (mHistoryDialog != null && mHistoryDialog is SingleMenuDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mSingleMenuDialog = SingleMenuDialog()
-        mSingleMenuDialog.showNow(mFragmentManage, "SingleMenuDialog")
-
+        val mSingleMenuDialog = SingleMenuDialogFragment()
         mSingleMenuDialog.setTitleTextInfo(mTitleTextInfo)
         mSingleMenuDialog.setCancelTextInfo(mCancelTextInfo)
-        mSingleMenuDialog.setMenuList(menu)
-        mSingleMenuDialog.setSelectIndex(defIndex)
+        mSingleMenuDialog.setMenuData(menu, defIndex)
         mSingleMenuDialog.setCallback(callback)
+        mSingleMenuDialog.showNow(mFragmentManage, "SingleMenuDialog")
     }
 
     /**
@@ -236,17 +234,15 @@ class DialogBuilder : BaseDialogBuilder() {
     ) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("MultipleMenuDialog")
-        if (mHistoryDialog != null && mHistoryDialog is MultipleMenuDialog) {
+        if (mHistoryDialog != null && mHistoryDialog is MultipleMenuDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mMultipleMenuDialog = MultipleMenuDialog()
-        mMultipleMenuDialog.showNow(mFragmentManage, "MultipleMenuDialog")
-
+        val mMultipleMenuDialog = MultipleMenuDialogFragment()
         mMultipleMenuDialog.setTitleTextInfo(mTitleTextInfo)
         mMultipleMenuDialog.setCancelTextInfo(mCancelTextInfo)
-        mMultipleMenuDialog.setMenuList(menu)
-        mMultipleMenuDialog.setSelectIndex(defIndex)
+        mMultipleMenuDialog.setMenuData(menu,defIndex)
         mMultipleMenuDialog.setCallback(callback)
+        mMultipleMenuDialog.showNow(mFragmentManage, "MultipleMenuDialog")
     }
 
 

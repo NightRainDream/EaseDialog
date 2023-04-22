@@ -57,7 +57,9 @@ internal object DialogHelp {
             view.text = info.text
         }
         view.setTextSize(TypedValue.COMPLEX_UNIT_PX, info.mTextSize)
-        view.setTextColor(info.textColor)
+        if(info.textColor != -1){
+            view.setTextColor(info.textColor)
+        }
     }
 
     /**

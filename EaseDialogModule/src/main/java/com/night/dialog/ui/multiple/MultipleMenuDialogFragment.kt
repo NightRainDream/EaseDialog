@@ -1,22 +1,18 @@
 package com.night.dialog.ui.multiple
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.adapter.MultipleMenuAdapter
+import com.night.dialog.base.EaseSafeDialogFragment
 import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.LogcatToos
 import com.night.dialog.tools.SmallDividerItem
-import com.night.dialog.widget.EaseFragmentDialog
 
 /**
  * ---------------------------------------------------
@@ -25,15 +21,21 @@ import com.night.dialog.widget.EaseFragmentDialog
  * 时    间: 2023/4/19
  * ---------------------------------------------------
  */
-class MultipleMenuDialog : EaseFragmentDialog<MultipleMenuViewModel>() {
+class MultipleMenuDialogFragment : EaseSafeDialogFragment<MultipleMenuViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
     private lateinit var mContentView: RecyclerView
     private lateinit var mMultipleMenuAdapter: MultipleMenuAdapter
+    private val mMenuData = mutableListOf<MenuEntity>()
 
-    override fun initLayoutView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.ease_laoyut_dialog_multiple_menu, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel.setMenuList(mMenuData)
+    }
+
+    override fun initLayout(): Int {
+        return R.layout.ease_laoyut_dialog_multiple_menu
     }
 
     override fun initViewModel(): Class<MultipleMenuViewModel> {
@@ -48,7 +50,7 @@ class MultipleMenuDialog : EaseFragmentDialog<MultipleMenuViewModel>() {
     }
 
     override fun initAdapter(savedInstanceState: Bundle?) {
-        mMultipleMenuAdapter = MultipleMenuAdapter(requireContext(), mViewModel.getMenuList())
+        mMultipleMenuAdapter = MultipleMenuAdapter(mViewModel.getMenuList())
         mContentView.layoutManager = LinearLayoutManager(activity)
         mContentView.adapter = mMultipleMenuAdapter
         mContentView.addItemDecoration(
@@ -91,24 +93,6 @@ class MultipleMenuDialog : EaseFragmentDialog<MultipleMenuViewModel>() {
         }
     }
 
-
-    fun setMenuList(menu: MutableList<String>) {
-        mViewModel.setMenuList(menu)
-        mMultipleMenuAdapter.notifyItemRangeInserted(0, menu.size)
-        DialogHelp.setDialogMaxSize(view)
-    }
-
-    fun setSelectIndex(index: MutableList<Int>?) {
-        if (index == null) {
-            return
-        }
-        for (position in index) {
-            if (mViewModel.setItemState(position)) {
-                mMultipleMenuAdapter.notifyItemChanged(position, "multiple_state")
-            }
-        }
-    }
-
     override fun initGravity(): Int {
         return if (DialogHelp.isLandscape()) Gravity.CENTER else Gravity.BOTTOM
     }
@@ -119,5 +103,12 @@ class MultipleMenuDialog : EaseFragmentDialog<MultipleMenuViewModel>() {
 
     override fun isCancel(): Boolean {
         return true
+    }
+
+    fun setMenuData(menu: MutableList<String>, def: MutableList<Int>?) {
+        for ((i, title) in menu.withIndex()) {
+            val mEntity = MenuEntity(title, def?.contains(i) ?: false)
+            mMenuData.add(mEntity)
+        }
     }
 }

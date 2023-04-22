@@ -1,4 +1,4 @@
-package com.night.dialog.widget
+package com.night.dialog.base
 
 import android.app.Dialog
 import android.graphics.Color
@@ -9,25 +9,67 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.night.dialog.R
-import com.night.dialog.base.EaseBaseViewModel
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
+import com.night.dialog.tools.LogcatToos
 
-abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
+abstract class EaseSafeDialogFragment<VM : EaseBaseViewModel> : DialogFragment() {
+    //标题属性
+    private var mTitleTextInfo: TextInfoEntity? = null
 
+    //提示文字属性
+    private var mMainTextInfo: TextInfoEntity? = null
+
+    //取消按钮属性
+    private var mCancelTextInfo: TextInfoEntity? = null
+
+    //确定按钮属性
+    private var mPositiveTextInfo: TextInfoEntity? = null
+
+    //回调事件
+    private var mCallback: IDialogActionCallback? = null
+
+    //ViewModel
     protected lateinit var mViewModel: VM
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        LogcatToos.w("EaseSafeDialog==> onCreate()")
+        mViewModel = ViewModelProvider(this)[initViewModel()]
+        mTitleTextInfo?.let {
+            LogcatToos.w("EaseSafeDialog==> 初始化标题属性")
+            mViewModel.setTitleTextInfo(it)
+        }
+        mMainTextInfo?.let {
+            LogcatToos.w("EaseSafeDialog==> 初始化提示文字属性")
+            mViewModel.setMainTextInfo(it)
+        }
+        mCancelTextInfo?.let {
+            LogcatToos.w("EaseSafeDialog==> 初始化取消按钮属性")
+            mViewModel.setCancelTextInfo(it)
+        }
+        mPositiveTextInfo?.let {
+            LogcatToos.w("EaseSafeDialog==> 初始化确定按钮属性")
+            mViewModel.setPositiveTextInfo(it)
+        }
+        mCallback?.let {
+            mViewModel.setCallback(it)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return initLayoutView(inflater, container, savedInstanceState)
+        LogcatToos.w("EaseSafeDialog==> onCreateView()")
+        return inflater.inflate(initLayout(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel = ViewModelProvider(this)[initViewModel()]
+        LogcatToos.w("EaseSafeDialog==> onViewCreated()")
         initView(view, savedInstanceState)
         initAdapter(savedInstanceState)
         initListener(savedInstanceState)
@@ -35,10 +77,12 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return SafeDialog(requireContext(), R.style.BaseDialog)
+        LogcatToos.w("EaseSafeDialog==> onCreateDialog()")
+        return EaseSafeDialog(requireContext(), R.style.BaseDialog)
     }
 
     override fun onStart() {
+        LogcatToos.w("onStart")
         val mWindow = dialog?.window
         mWindow ?: return
         val attributes = mWindow.attributes
@@ -68,13 +112,15 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
         super.onStart()
     }
 
-    abstract fun initLayoutView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun dismiss() {
+        LogcatToos.w("EaseSafeDialog==> dismiss()")
+        this.dismissAllowingStateLoss()
+    }
 
-    /**
-     * 初始化ViewModel
-     *
-     * @return BaseViewModel
-     */
+
+    @LayoutRes
+    abstract fun initLayout(): Int
+
     abstract fun initViewModel(): Class<VM>
 
     abstract fun initView(view: View, savedInstanceState: Bundle?)
@@ -91,8 +137,11 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
 
     abstract fun isCancel(): Boolean
 
-    override fun dismiss() {
-        this.dismissAllowingStateLoss()
+    protected fun setViewParameter(view: TextView?, textInfo: TextInfoEntity?) {
+        if (view == null || textInfo == null) {
+            return
+        }
+        DialogHelp.setTextViewInfo(view, textInfo)
     }
 
     /**
@@ -102,7 +151,7 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
      * @return DialogBuilder
      */
     fun setTitleTextInfo(title: TextInfoEntity) {
-        mViewModel.setTitleTextInfo(title)
+        this.mTitleTextInfo = title
     }
 
 
@@ -113,7 +162,7 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
      * @return DialogBuilder
      */
     fun setMainTextInfo(main: TextInfoEntity) {
-        mViewModel.setMainTextInfo(main)
+        this.mMainTextInfo = main
     }
 
 
@@ -124,7 +173,7 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
      * @return DialogBuilder
      */
     fun setCancelTextInfo(cancel: TextInfoEntity) {
-        mViewModel.setCancelTextInfo(cancel)
+        this.mCancelTextInfo = cancel
     }
 
 
@@ -135,20 +184,13 @@ abstract class EaseFragmentDialog<VM : EaseBaseViewModel> : DialogFragment() {
      * @return DialogBuilder
      */
     fun setPositiveTextInfo(positive: TextInfoEntity) {
-        mViewModel.setPositiveTextInfo(positive)
+        this.mPositiveTextInfo = positive
     }
 
     /**
      * 设置监听回调
      */
     fun setCallback(callback: IDialogActionCallback?) {
-        mViewModel.setCallback(callback)
-    }
-
-    protected fun setViewParameter(view: TextView?, textInfo: TextInfoEntity?) {
-        if (view == null || textInfo == null) {
-            return
-        }
-        DialogHelp.setTextViewInfo(view, textInfo)
+        this.mCallback = callback
     }
 }

@@ -1,20 +1,19 @@
 package com.night.dialog.adapter
 
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.util.set
-import androidx.core.util.size
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.entity.MenuEntity
-import com.night.dialog.tools.LogcatToos
 
-class SingleMenuAdapter(menu: MutableList<MenuEntity>) :
-    RecyclerView.Adapter<SingleMenuAdapter.SingleMenuHolder>() {
+/**
+ * @param menu 菜单按钮
+ * @param defPosition 默认选中位置
+ */
+class SingleMenuAdapter(menu: MutableList<MenuEntity>) : RecyclerView.Adapter<SingleMenuAdapter.SingleMenuHolder>() {
     private val mMenuList = menu
     private lateinit var mLayoutInflater: LayoutInflater
     private lateinit var mRoomView: RecyclerView
@@ -41,22 +40,21 @@ class SingleMenuAdapter(menu: MutableList<MenuEntity>) :
     override fun onBindViewHolder(holder: SingleMenuHolder, position: Int) {
         holder.mTitleView.text = mMenuList[position].title
         holder.mTitleView.textSize = 16F
-
         holder.mIconView.isSelected = mMenuList[position].isSelect
     }
 
-    override fun onBindViewHolder(
-        holder: SingleMenuHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        super.onBindViewHolder(holder, position, payloads)
-        for (key in payloads) {
-            if ("single_state" == key) {
-                holder.mIconView.isSelected = mMenuList[position].isSelect
-            }
-        }
-    }
+//    override fun onBindViewHolder(
+//        holder: SingleMenuHolder,
+//        position: Int,
+//        payloads: MutableList<Any>
+//    ) {
+//        super.onBindViewHolder(holder, position, payloads)
+//        for (key in payloads) {
+//            if ("single_state" == key) {
+//                holder.mIconView.isSelected = mMenuList[position].isSelect
+//            }
+//        }
+//    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)

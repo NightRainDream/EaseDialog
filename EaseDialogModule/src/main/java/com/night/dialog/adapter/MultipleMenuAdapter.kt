@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.entity.MenuEntity
 
-class MultipleMenuAdapter(context: Context,menu: MutableList<MenuEntity>) : RecyclerView.Adapter<MultipleMenuAdapter.MultipleMenuHolder>() {
+class MultipleMenuAdapter(menu: MutableList<MenuEntity>) :
+    RecyclerView.Adapter<MultipleMenuAdapter.MultipleMenuHolder>() {
     private val mMenuList = menu
-    private val mLayoutInflater: LayoutInflater
+    private lateinit var mLayoutInflater: LayoutInflater
     private lateinit var mRoomView: RecyclerView
     private var mOnItemClickListener: OnItemClickListener? = null
 
-    init {
-        mLayoutInflater = LayoutInflater.from(context)
-    }
 
     class MultipleMenuHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mTitleView: AppCompatTextView = itemView.findViewById(R.id.tv_item_multiple_menu)
@@ -61,9 +59,9 @@ class MultipleMenuAdapter(context: Context,menu: MutableList<MenuEntity>) : Recy
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
+        mLayoutInflater = LayoutInflater.from(recyclerView.context)
         mRoomView = recyclerView
     }
-
 
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {

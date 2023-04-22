@@ -2,27 +2,31 @@ package com.night.dialog.ui.sing
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
-import com.night.dialog.adapter.MultipleMenuAdapter
 import com.night.dialog.adapter.SingleMenuAdapter
+import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.SmallDividerItem
-import com.night.dialog.widget.EaseFragmentDialog
 
-class SingleMenuDialog : EaseFragmentDialog<SingleMenuViewModel>() {
+class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: RecyclerView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mSingleMenuAdapter: SingleMenuAdapter
+    private var mMenuData = mutableListOf<MenuEntity>()
 
-    override fun initLayoutView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.ease_layout_dialog_single_menu, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel.setMenuList(mMenuData)
+    }
+
+    override fun initLayout(): Int {
+        return R.layout.ease_layout_dialog_single_menu
     }
 
     override fun initViewModel(): Class<SingleMenuViewModel> {
@@ -62,27 +66,12 @@ class SingleMenuDialog : EaseFragmentDialog<SingleMenuViewModel>() {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mViewModel.mCancelTextInfo.observe(this) {
-            setViewParameter(mCancelView, it)
-        }
         mViewModel.mTitleTextInfo.observe(this) {
             setViewParameter(mTitleView, it)
         }
-
-        mViewModel.mNotifyPosition.observe(this) {
-            mSingleMenuAdapter.notifyItemChanged(it, "single_state")
+        mViewModel.mCancelTextInfo.observe(this) {
+            setViewParameter(mCancelView, it)
         }
-    }
-
-
-    fun setMenuList(menu: MutableList<String>) {
-        mViewModel.setMenuList(menu)
-        mSingleMenuAdapter.notifyItemRangeInserted(0, menu.size)
-        DialogHelp.setDialogMaxSize(view)
-    }
-
-    fun setSelectIndex(index: Int) {
-        mViewModel.setItemState(index)
     }
 
     override fun initGravity(): Int {
@@ -95,5 +84,16 @@ class SingleMenuDialog : EaseFragmentDialog<SingleMenuViewModel>() {
 
     override fun isCancel(): Boolean {
         return true
+    }
+
+    /**
+     * @param menu 菜单数据
+     * @param def 默认选中位置
+     */
+    fun setMenuData(menu: MutableList<String>, def: Int) {
+        for ((i, title) in menu.withIndex()) {
+            val mEntity = MenuEntity(title, i == def)
+            mMenuData.add(mEntity)
+        }
     }
 }

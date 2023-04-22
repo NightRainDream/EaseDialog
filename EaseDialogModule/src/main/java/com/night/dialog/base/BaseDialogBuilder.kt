@@ -1,29 +1,26 @@
 package com.night.dialog.base
 
-import androidx.annotation.ColorInt
 import com.night.dialog.R
-import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
-import com.night.dialog.widget.EaseFragmentDialog
 
 open class BaseDialogBuilder {
     /**
      * 默认标题文字详情
      */
-    protected var mTitleTextInfo = TextInfoEntity(20, DialogHelp.getColor(R.color.colorTitleText), isBold = true)
+    protected var mTitleTextInfo = TextInfoEntity(20, -1, isBold = true)
 
     /**
      * 默认主文字详情
      */
-    protected var mMainTextInfo = TextInfoEntity(15, DialogHelp.getColor(R.color.colorMainText))
+    protected var mMainTextInfo = TextInfoEntity(15,-1)
 
     /**
      * 默认取消按钮文字详情
      */
     protected var mCancelTextInfo = TextInfoEntity(
         16,
-        DialogHelp.getColor(R.color.colorButtonTextColor),
+        -1,
         DialogHelp.getString(R.string.cancel)
     )
 
@@ -32,7 +29,7 @@ open class BaseDialogBuilder {
      */
     protected var mPositiveTextInfo = TextInfoEntity(
         16,
-        DialogHelp.getColor(R.color.colorButtonTextColor),
+        -1,
         DialogHelp.getString(R.string.define)
     )
 

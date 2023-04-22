@@ -11,10 +11,10 @@ open class EaseBaseViewModel : ViewModel() {
     /**
      * 默认标题属性
      */
-     val mTitleTextInfo = MutableLiveData(
+    val mTitleTextInfo = MutableLiveData(
         TextInfoEntity(
             20,
-            DialogHelp.getColor(R.color.colorTitleText),
+            -1,
             isBold = true
         )
     )
@@ -22,20 +22,20 @@ open class EaseBaseViewModel : ViewModel() {
     /**
      * 默认主文字属性
      */
-     val mMainTextInfo = MutableLiveData(
+    val mMainTextInfo = MutableLiveData(
         TextInfoEntity(
             15,
-            DialogHelp.getColor(R.color.colorMainText)
+            -1
         )
     )
 
     /**
      * 默认取消按钮属性
      */
-     val mCancelTextInfo = MutableLiveData(
+    val mCancelTextInfo = MutableLiveData(
         TextInfoEntity(
             16,
-            DialogHelp.getColor(R.color.colorButtonTextColor),
+            -1,
             DialogHelp.getString(R.string.cancel)
         )
     )
@@ -43,11 +43,11 @@ open class EaseBaseViewModel : ViewModel() {
     /**
      * 默认确定按钮属性
      */
-     val mPositiveTextInfo =
+    val mPositiveTextInfo =
         MutableLiveData(
             TextInfoEntity(
                 16,
-                DialogHelp.getColor(R.color.colorButtonTextColor),
+                -1,
                 DialogHelp.getString(R.string.define)
             )
         )

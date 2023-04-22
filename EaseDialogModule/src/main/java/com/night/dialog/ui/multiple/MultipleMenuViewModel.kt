@@ -14,11 +14,12 @@ class MultipleMenuViewModel : EaseBaseViewModel() {
      *
      * @param menu 菜单数据
      */
-    fun setMenuList(menu: MutableList<String>) {
-        for (title in menu) {
-            val mEntity = MenuEntity(title, false)
-            mMenuList.add(mEntity)
+    fun setMenuList(menu: MutableList<MenuEntity>) {
+        if (menu.isEmpty()) {
+            return
         }
+        mMenuList.clear()
+        mMenuList.addAll(menu)
     }
 
     /**

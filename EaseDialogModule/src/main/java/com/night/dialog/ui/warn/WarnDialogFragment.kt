@@ -2,20 +2,25 @@ package com.night.dialog.ui.warn
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import com.night.dialog.R
+import com.night.dialog.base.EaseSafeDialogFragment
 import com.night.dialog.tools.DialogHelp
-import com.night.dialog.widget.EaseFragmentDialog
 
-class WarnDialog : EaseFragmentDialog<WarnViewModel>() {
+/**
+ * ---------------------------------------------------
+ * 说    明: 警告性质对话框
+ * 作    者: Night
+ * 时    间: 2023/4/22
+ * ---------------------------------------------------
+ */
+class WarnDialogFragment : EaseSafeDialogFragment<WarnViewModel>() {
     private lateinit var mContentView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
-    override fun initLayoutView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.ease_layout_dialog_warn, container, false)
+    override fun initLayout(): Int {
+        return R.layout.ease_layout_dialog_warn
     }
 
     override fun initViewModel(): Class<WarnViewModel> {
@@ -28,16 +33,8 @@ class WarnDialog : EaseFragmentDialog<WarnViewModel>() {
         mPositiveView = view.findViewById(R.id.tv_warn_positive)
     }
 
-    override fun initData(savedInstanceState: Bundle?) {
-        mViewModel.mMainTextInfo.observe(this) {
-            setViewParameter(mContentView, it)
-        }
-        mViewModel.mCancelTextInfo.observe(this) {
-            setViewParameter(mCancelView, it)
-        }
-        mViewModel.mPositiveTextInfo.observe(this) {
-            setViewParameter(mPositiveView, it)
-        }
+    override fun initAdapter(savedInstanceState: Bundle?) {
+
     }
 
     override fun initListener(savedInstanceState: Bundle?) {
@@ -52,6 +49,18 @@ class WarnDialog : EaseFragmentDialog<WarnViewModel>() {
         }
     }
 
+    override fun initData(savedInstanceState: Bundle?) {
+        mViewModel.mMainTextInfo.observe(this) {
+            setViewParameter(mContentView, it)
+        }
+        mViewModel.mCancelTextInfo.observe(this) {
+            setViewParameter(mCancelView, it)
+        }
+        mViewModel.mPositiveTextInfo.observe(this) {
+            setViewParameter(mPositiveView, it)
+        }
+    }
+
     override fun initGravity(): Int {
         return if (DialogHelp.isLandscape()) Gravity.CENTER else Gravity.BOTTOM
     }
@@ -62,9 +71,5 @@ class WarnDialog : EaseFragmentDialog<WarnViewModel>() {
 
     override fun isCancel(): Boolean {
         return true
-    }
-
-    override fun initAdapter(savedInstanceState: Bundle?) {
-
     }
 }
