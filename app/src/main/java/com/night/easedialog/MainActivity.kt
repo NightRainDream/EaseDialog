@@ -88,9 +88,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onMenuDialog(view: View) {
-//        DialogTools.getDialogBuilder()
-//            .setCancelable(true)
-//            .toLoadingDialog(this)
+        DialogTools.getDialogBuilder()
+            .toLoadingDialog(this)
     }
 
     fun onTipSingleDialog(view: View) {

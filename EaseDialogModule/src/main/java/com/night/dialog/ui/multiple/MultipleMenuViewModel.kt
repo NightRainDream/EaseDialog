@@ -1,9 +1,9 @@
 package com.night.dialog.ui.multiple
 
-import com.night.dialog.base.EaseBaseViewModel
+import com.night.dialog.base.EaseViewModel
 import com.night.dialog.entity.MenuEntity
 
-class MultipleMenuViewModel : EaseBaseViewModel() {
+class MultipleMenuViewModel : EaseViewModel() {
     /**
      * 多选菜单数据
      */

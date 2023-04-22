@@ -1,11 +1,14 @@
 package com.night.dialog
 
+import android.app.Activity
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
+import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.PopMenuHelp
+import com.night.dialog.ui.loading.LoadingDialogFragment
 import com.night.dialog.ui.multiple.MultipleMenuDialogFragment
 import com.night.dialog.ui.sing.SingleMenuDialogFragment
 import com.night.dialog.ui.tips.TipsDialogFragment
@@ -155,7 +158,6 @@ class DialogBuilder : BaseDialogBuilder() {
      * @param activity Activity
      */
     fun toTipsDialog(activity: AppCompatActivity, callback: IDialogActionCallback?) {
-
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("TipsDialog")
         if (mHistoryDialog != null && mHistoryDialog is TipsDialogFragment) {
@@ -189,6 +191,25 @@ class DialogBuilder : BaseDialogBuilder() {
         mWarnDialog.setPositiveTextInfo(mPositiveTextInfo)
         mWarnDialog.setCallback(callback)
         mWarnDialog.showNow(mFragmentManage, "WarnDialog")
+    }
+
+    /**
+     * 构建加载框
+     *
+     * @param activity Activity
+     * @param msg 提示内容
+     */
+    fun toLoadingDialog(activity: AppCompatActivity, msg: String = DialogHelp.getString(R.string.loading),callback: IDialogActionCallback?=null) {
+        val mFragmentManage = activity.supportFragmentManager
+        val mHistoryDialog = mFragmentManage.findFragmentByTag("LoadingDialog")
+        if (mHistoryDialog != null && mHistoryDialog is LoadingDialogFragment) {
+            mHistoryDialog.dismiss()
+        }
+        val mLoadingDialog = LoadingDialogFragment()
+        setMainText(msg)
+        mLoadingDialog.setMainTextInfo(mMainTextInfo)
+        mLoadingDialog.setCallback(callback)
+        mLoadingDialog.showNow(mFragmentManage, "LoadingDialog")
     }
 
     /**
@@ -240,7 +261,7 @@ class DialogBuilder : BaseDialogBuilder() {
         val mMultipleMenuDialog = MultipleMenuDialogFragment()
         mMultipleMenuDialog.setTitleTextInfo(mTitleTextInfo)
         mMultipleMenuDialog.setCancelTextInfo(mCancelTextInfo)
-        mMultipleMenuDialog.setMenuData(menu,defIndex)
+        mMultipleMenuDialog.setMenuData(menu, defIndex)
         mMultipleMenuDialog.setCallback(callback)
         mMultipleMenuDialog.showNow(mFragmentManage, "MultipleMenuDialog")
     }

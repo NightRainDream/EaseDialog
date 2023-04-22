@@ -1,6 +1,6 @@
 package com.night.dialog.ui.warn
 
-import com.night.dialog.base.EaseBaseViewModel
+import com.night.dialog.base.EaseViewModel
 
-class WarnViewModel:EaseBaseViewModel() {
+class WarnViewModel:EaseViewModel() {
 }

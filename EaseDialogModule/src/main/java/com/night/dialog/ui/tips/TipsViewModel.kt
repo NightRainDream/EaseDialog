@@ -1,8 +1,8 @@
 package com.night.dialog.ui.tips
 
-import com.night.dialog.base.EaseBaseViewModel
+import com.night.dialog.base.EaseViewModel
 
-class TipsViewModel: EaseBaseViewModel() {
+class TipsViewModel: EaseViewModel() {
 
 
 }

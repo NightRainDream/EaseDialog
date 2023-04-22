@@ -13,6 +13,13 @@ import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.SmallDividerItem
 
+/**
+ * ---------------------------------------------------
+ * 说    明: 单选对话框
+ * 作    者: Night
+ * 时    间: 2023/4/22
+ * ---------------------------------------------------
+ */
 class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: RecyclerView

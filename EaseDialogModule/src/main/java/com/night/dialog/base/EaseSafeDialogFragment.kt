@@ -18,7 +18,7 @@ import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.LogcatToos
 
-abstract class EaseSafeDialogFragment<VM : EaseBaseViewModel> : DialogFragment() {
+abstract class EaseSafeDialogFragment<VM : EaseViewModel> : DialogFragment() {
     //标题属性
     private var mTitleTextInfo: TextInfoEntity? = null
 
