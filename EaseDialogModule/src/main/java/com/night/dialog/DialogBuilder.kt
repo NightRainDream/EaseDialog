@@ -1,6 +1,5 @@
 package com.night.dialog
 
-import android.app.Activity
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
@@ -170,8 +169,6 @@ class DialogBuilder : BaseDialogBuilder() {
         mTipsDialog.setPositiveTextInfo(mPositiveTextInfo)
         mTipsDialog.setCallback(callback)
         mTipsDialog.show(mFragmentManage, "TipsDialog")
-
-
     }
 
     /**
