@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -149,9 +148,9 @@ internal object DialogHelp {
 
         //Dialog最大高度
         val mMaxHeight = if (isLandscape()) {
-            Resources.getSystem().displayMetrics.heightPixels * ConstantTools.HEIGHT_RATIO_LANDSCAPE
+            Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_LANDSCAPE
         } else {
-            Resources.getSystem().displayMetrics.heightPixels * ConstantTools.HEIGHT_RATIO_PORTRAIT
+            Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_PORTRAIT
         }
         //内容高度
         val mContentHeight = view.measuredHeight

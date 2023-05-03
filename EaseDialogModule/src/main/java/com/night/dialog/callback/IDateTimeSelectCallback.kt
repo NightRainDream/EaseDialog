@@ -6,4 +6,6 @@ interface IDateTimeSelectCallback {
     fun onSelectDate(result: DateTimeEntity)
 
     fun onCancel(){}
+
+    fun onDismiss(){}
 }

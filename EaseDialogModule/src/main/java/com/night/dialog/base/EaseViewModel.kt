@@ -116,7 +116,7 @@ open class EaseViewModel : ViewModel() {
     /**
      * 取消点击事件
      */
-    fun onCancelEvent() {
+    open fun onCancelEvent() {
         mCallback?.onCancel()
     }
 
@@ -126,8 +126,15 @@ open class EaseViewModel : ViewModel() {
      * @param content 内容
      * @param index 位置
      */
-    fun onPositiveEvent(content: String, index: MutableList<Int>) {
+    open fun onPositiveEvent(content: String, index: MutableList<Int>) {
         mCallback?.onPositive(content, index)
+    }
+
+    fun initNumberDisplay(num: Int): String{
+        if(num <= 9){
+            return "0".plus(num)
+        }
+        return num.toString()
     }
 
     override fun onCleared() {

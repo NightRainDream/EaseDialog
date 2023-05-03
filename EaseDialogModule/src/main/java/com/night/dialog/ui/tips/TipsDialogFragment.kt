@@ -41,12 +41,12 @@ class TipsDialogFragment : EaseSafeDialogFragment<TipsViewModel>() {
 
     override fun initListener(savedInstanceState: Bundle?) {
         mCancelView.setOnClickListener {
-            dismiss()
             mViewModel.onCancelEvent()
+            dismiss()
         }
         mPositiveView.setOnClickListener {
-            dismiss()
             mViewModel.onPositiveEvent("", mutableListOf())
+            dismiss()
         }
     }
 

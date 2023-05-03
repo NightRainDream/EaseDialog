@@ -114,25 +114,10 @@
                 android:gravity="center_vertical"
                 android:onClick="onDatePicker"
                 android:paddingHorizontal="16dp"
-                android:text="日期选择器"
+                android:text="日期时间选择器"
                 android:textColor="@color/colorMainText"
                 android:textSize="14sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="16dp"
-                android:background="#D9D9D9" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center_vertical"
-                android:onClick="onTimePicker"
-                android:paddingHorizontal="16dp"
-                android:text="时间选择器"
-                android:textColor="@color/colorMainText"
-                android:textSize="14sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -156,10 +141,10 @@
                 android:background="#D9D9D9" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_pop_menu"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
-                android:id="@+id/tv_pop_menu"
                 android:paddingHorizontal="16dp"
                 android:text="PopMenu"
                 android:textColor="@color/colorMainText"

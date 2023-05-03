@@ -20,19 +20,19 @@
         android:layout_marginHorizontal="@dimen/dp_16"
         android:orientation="horizontal">
 
-        <com.night.dialog.base.WheelView
+        <com.night.dialog.base.WheelViewS
             android:id="@+id/id_hour"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1.2" />
 
-        <com.night.dialog.base.WheelView
+        <com.night.dialog.base.WheelViewS
             android:id="@+id/id_minute"
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <com.night.dialog.base.WheelView
+        <com.night.dialog.base.WheelViewS
             android:id="@+id/id_second"
             android:layout_width="0px"
             android:layout_height="match_parent"

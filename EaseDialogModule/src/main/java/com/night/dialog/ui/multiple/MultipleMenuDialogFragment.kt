@@ -64,13 +64,13 @@ class MultipleMenuDialogFragment : EaseSafeDialogFragment<MultipleMenuViewModel>
 
     override fun initListener(savedInstanceState: Bundle?) {
         mPositiveView.setOnClickListener {
-            dismiss()
             LogcatToos.e(mViewModel.getSelectPositions().size.toString())
             mViewModel.onPositiveEvent("", mViewModel.getSelectPositions())
+            dismiss()
         }
         mCancelView.setOnClickListener {
-            dismiss()
             mViewModel.onCancelEvent()
+            dismiss()
         }
         mMultipleMenuAdapter.setOnItemClickListener(object : MultipleMenuAdapter.OnItemClickListener {
             override fun onItemClick(text: String, menuIndex: Int) {

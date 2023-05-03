@@ -1,8 +1,17 @@
 package com.night.dialog
 
+import android.app.Activity
+import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.night.dialog.adapter.PopupMenuAdapter
 import com.night.dialog.base.BaseDialogBuilder
+import com.night.dialog.base.BasePopupWindow
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
@@ -264,19 +273,19 @@ class DialogBuilder : BaseDialogBuilder() {
     }
 
 
-//
-//    /**
-//     * 设置PopMenu弹出坐标
-//     *
-//     * @param x 相对父容器X轴坐标
-//     * @param y 相对父容器Y轴坐标
-//     * @param rawX 相对屏幕X轴坐标
-//     * @param rawY 相对屏幕Y轴坐标
-//     */
-//    fun setTouchCoordinate(x: Float, y: Float, rawX: Float, rawY: Float): DialogBuilder {
-//        mPopMenuHelp.setTouchCoordinate(x, y, rawX, rawY)
-//        return this
-//    }
+
+    /**
+     * 设置PopMenu弹出坐标
+     *
+     * @param x 相对父容器X轴坐标
+     * @param y 相对父容器Y轴坐标
+     * @param rawX 相对屏幕X轴坐标
+     * @param rawY 相对屏幕Y轴坐标
+     */
+    fun setTouchCoordinate(x: Float, y: Float, rawX: Float, rawY: Float): DialogBuilder {
+        mPopMenuHelp.setTouchCoordinate(x, y, rawX, rawY)
+        return this
+    }
 //
 //    /**
 //     * 构建提示性质对话框
@@ -468,26 +477,26 @@ class DialogBuilder : BaseDialogBuilder() {
 //        }, R.style.CustomDialog, Gravity.CENTER, isCancel)
 //    }
 //
-//    fun toPopMenu(activity: Activity, anchor: View, menuList: MutableList<String>, callback: IDialogActionCallback) {
-//        val mPopMenu = BasePopupWindow(activity)
-//        mPopMenu.setBackgroundDrawable(ColorDrawable(DialogHelp.getColor(R.color.colorBackground)))
-//        val contentView = LayoutInflater.from(activity).inflate(R.layout.ease_layout_custom_popup_menu, null)
-//        val mRecyclerView = contentView.findViewById<RecyclerView>(R.id.rv_popup)
-//        val mPopupMenuAdapter = PopupMenuAdapter(activity, menuList)
-//        mRecyclerView.layoutManager = LinearLayoutManager(activity)
-//        mRecyclerView.adapter = mPopupMenuAdapter
-//        mPopupMenuAdapter.setOnItemClickListener(object : PopupMenuAdapter.OnItemClickListener {
-//            override fun onItemClick(text: String, menu: Int) {
-//                mPopMenu.dismiss()
-//                callback.onPositive(text, mutableListOf(menu))
-//            }
-//        })
-//        val mContentSize = mPopMenuHelp.getContentViewSize(contentView)
-//        mPopMenu.width = mContentSize[0]
-//        mPopMenu.height = mContentSize[1]
-//        val mOffset = mPopMenuHelp.getDropDownOffset(contentView, anchor)
-//        mPopMenu.contentView = contentView
-//        mPopMenu.elevation = EaseDialog.getContext().resources.getDimension(R.dimen.dp_10)
-//        mPopMenu.showAsDropDown(anchor, mOffset[0], mOffset[1], Gravity.START)
-//    }
+    fun toPopMenu(activity: Activity, anchor: View, menuList: MutableList<String>, callback: IDialogActionCallback) {
+        val mPopMenu = BasePopupWindow(activity)
+        mPopMenu.setBackgroundDrawable(ColorDrawable(DialogHelp.getColor(R.color.colorBackground)))
+        val contentView = LayoutInflater.from(activity).inflate(R.layout.ease_layout_custom_popup_menu, null)
+        val mRecyclerView = contentView.findViewById<RecyclerView>(R.id.rv_popup)
+        val mPopupMenuAdapter = PopupMenuAdapter(activity, menuList)
+        mRecyclerView.layoutManager = LinearLayoutManager(activity)
+        mRecyclerView.adapter = mPopupMenuAdapter
+        mPopupMenuAdapter.setOnItemClickListener(object : PopupMenuAdapter.OnItemClickListener {
+            override fun onItemClick(text: String, menu: Int) {
+                mPopMenu.dismiss()
+                callback.onPositive(text, mutableListOf(menu))
+            }
+        })
+        val mContentSize = mPopMenuHelp.getContentViewSize(contentView)
+        mPopMenu.width = mContentSize[0]
+        mPopMenu.height = mContentSize[1]
+        val mOffset = mPopMenuHelp.getDropDownOffset(contentView, anchor)
+        mPopMenu.contentView = contentView
+        mPopMenu.elevation = EaseDialog.getContext().resources.getDimension(R.dimen.dp_10)
+        mPopMenu.showAsDropDown(anchor, mOffset[0], mOffset[1], Gravity.START)
+    }
 }

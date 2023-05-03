@@ -61,13 +61,13 @@ class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
 
     override fun initListener(savedInstanceState: Bundle?) {
         mCancelView.setOnClickListener {
-            dismiss()
             mViewModel.onCancelEvent()
+            dismiss()
         }
         mSingleMenuAdapter.setOnItemClickListener(object : SingleMenuAdapter.OnItemClickListener {
             override fun onItemClick(text: String, menuIndex: Int) {
-                dismiss()
                 mViewModel.onPositiveEvent(text, mutableListOf(menuIndex))
+                dismiss()
             }
         })
     }

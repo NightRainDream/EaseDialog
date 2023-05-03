@@ -2,19 +2,16 @@ package com.night.easedialog
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.DialogTools
-import com.night.dialog.ToastBuilder
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.callback.IDialogActionCallback
-import com.night.dialog.entity.DateEntity
 import com.night.dialog.entity.DateTimeEntity
-import com.night.dialog.entity.TextInfoEntity
-import com.night.dialog.entity.TimeEntity
+import com.night.dialog.entity.DateTimePickerEntity
+import com.night.dialog.tools.EaseConstantTools
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,20 +28,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        findViewById<View>(R.id.tv_pop_menu).setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                DialogTools.getDialogBuilder()
+                    .setTouchCoordinate(event.x, event.y, event.rawX, event.rawY)
+                    .toPopMenu(this, v, mutableListOf("删除", "编辑", "复制"), object : IDialogActionCallback {
+                        override fun onPositive(content: String, index: MutableList<Int>) {
+                            DialogTools.getToastBuilder().toToast(content)
+                        }
 
-//        findViewById<View>(R.id.tv_pop_menu).setOnTouchListener { v, event ->
-//            if (event.action == MotionEvent.ACTION_UP) {
-//                DialogTools.getDialogBuilder()
-//                    .setTouchCoordinate(event.x, event.y, event.rawX, event.rawY)
-//                    .toPopMenu(this, v, mutableListOf("删除", "编辑", "复制"), object : IDialogActionCallback {
-//                        override fun onPositive(content: String, index: MutableList<Int>) {
-//                            DialogTools.getToastBuilder().toToast(content)
-//                        }
-//
-//                    })
-//            }
-//            true
-//        }
+                    })
+            }
+            true
+        }
     }
 
     fun onTipDialog(view: View) {
@@ -54,15 +50,13 @@ class MainActivity : AppCompatActivity() {
             .setPositiveTextColor(Color.RED)
             .toTipsDialog(this, object : IDialogActionCallback {
                 override fun onPositive(content: String, index: MutableList<Int>) {
-                    Toast.makeText(this@MainActivity, "确定", Toast.LENGTH_SHORT).show()
+                    DialogTools.getToastBuilder()
+                        .toToast("确定")
                 }
 
                 override fun onCancel() {
-                    Toast.makeText(this@MainActivity, "取消", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onDismiss() {
-                    //Toast.makeText(this@MainActivity, "onDismiss", Toast.LENGTH_SHORT).show()
+                    DialogTools.getToastBuilder()
+                        .toToast("取消")
                 }
             })
     }
@@ -74,15 +68,13 @@ class MainActivity : AppCompatActivity() {
             .setPositiveText("删除")
             .toWarnDialog(this, object : IDialogActionCallback {
                 override fun onPositive(content: String, index: MutableList<Int>) {
-                    Toast.makeText(this@MainActivity, "确定", Toast.LENGTH_SHORT).show()
+                    DialogTools.getToastBuilder()
+                        .toToast("确定")
                 }
 
                 override fun onCancel() {
-                    Toast.makeText(this@MainActivity, "取消", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onDismiss() {
-                    //Toast.makeText(this@MainActivity, "onDismiss", Toast.LENGTH_SHORT).show()
+                    DialogTools.getToastBuilder()
+                        .toToast("取消")
                 }
             })
     }
@@ -102,7 +94,14 @@ class MainActivity : AppCompatActivity() {
                 object : IDialogActionCallback {
                     override fun onPositive(content: String, index: MutableList<Int>) {
                         mSelectSingleIndex = index.first()
-                        Toast.makeText(this@MainActivity, content, Toast.LENGTH_SHORT).show()
+                        DialogTools.getToastBuilder()
+                            .toToast(content)
+                    }
+
+                    override fun onCancel() {
+                        super.onCancel()
+                        DialogTools.getToastBuilder()
+                            .toToast("取消")
                     }
                 })
     }
@@ -115,32 +114,38 @@ class MainActivity : AppCompatActivity() {
                     override fun onPositive(content: String, index: MutableList<Int>) {
                         mSelectMultipleIndex.clear()
                         mSelectMultipleIndex.addAll(index)
+                        DialogTools.getToastBuilder()
+                            .toToast("确定==>"+index.size)
+                    }
+
+                    override fun onCancel() {
+                        super.onCancel()
+                        DialogTools.getToastBuilder()
+                            .toToast("取消")
                     }
                 })
     }
 
-//    fun onDatePicker(view: View) {
-//        DialogTools.getPickerBuilder()
-//            .setTitleText("请选择日期")
-//            .toDatePicker(this, object : IDateTimeSelectCallback {
-//                override fun onSelectDate(result: DateTimeEntity) {
-//                    Toast.makeText(this@MainActivity, result.getDate(), Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//    }
-//
-//    fun onTimePicker(view: View) {
-//        DialogTools.getPickerBuilder()
-//            .setTitleText("请选择时间")
-//            .toTimePicker(this, object : IDateTimeSelectCallback {
-//                override fun onSelectDate(result: DateTimeEntity) {
-//                    Toast.makeText(this@MainActivity, result.getTime(), Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//    }
-//
-//    fun onToast(view: View) {
-//        DialogTools.getToastBuilder()
-//            .toToast("文件删除成功~")
-//    }
+    fun onDatePicker(view: View) {
+        DialogTools.getPickerBuilder()
+            .setTitleText("请选择日期和时间")
+            .setLabel(mutableListOf(EaseConstantTools.PICKER_LABEL_YEAR,EaseConstantTools.PICKER_LABEL_MONTH,EaseConstantTools.PICKER_LABEL_DAY,EaseConstantTools.PICKER_LABEL_HOUR,EaseConstantTools.PICKER_LABEL_MINUTE,EaseConstantTools.PICKER_LABEL_SECOND))
+            .toDateTimePicker(this, object : IDateTimeSelectCallback {
+                override fun onSelectDate(result: DateTimeEntity) {
+                    DialogTools.getToastBuilder()
+                        .toToast(result.getDateTime())
+                }
+
+                override fun onCancel() {
+                    super.onCancel()
+                    DialogTools.getToastBuilder()
+                        .toToast("取消")
+                }
+            })
+    }
+
+    fun onToast(view: View) {
+        DialogTools.getToastBuilder()
+            .toToast("文件删除成功~")
+    }
 }
