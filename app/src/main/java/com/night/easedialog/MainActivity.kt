@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                         mSelectMultipleIndex.clear()
                         mSelectMultipleIndex.addAll(index)
                         DialogTools.getToastBuilder()
-                            .toToast("确定==>"+index.size)
+                            .toToast("确定==>" + index.size)
                     }
 
                     override fun onCancel() {
@@ -129,7 +129,16 @@ class MainActivity : AppCompatActivity() {
     fun onDatePicker(view: View) {
         DialogTools.getPickerBuilder()
             .setTitleText("请选择日期和时间")
-            .setLabel(mutableListOf(EaseConstantTools.PICKER_LABEL_YEAR,EaseConstantTools.PICKER_LABEL_MONTH,EaseConstantTools.PICKER_LABEL_DAY,EaseConstantTools.PICKER_LABEL_HOUR,EaseConstantTools.PICKER_LABEL_MINUTE,EaseConstantTools.PICKER_LABEL_SECOND))
+            .setLabel(
+                mutableListOf(
+                    EaseConstantTools.PICKER_LABEL_YEAR,
+                    EaseConstantTools.PICKER_LABEL_MONTH,
+                    EaseConstantTools.PICKER_LABEL_DAY,
+                    EaseConstantTools.PICKER_LABEL_HOUR,
+                    EaseConstantTools.PICKER_LABEL_MINUTE,
+                    EaseConstantTools.PICKER_LABEL_SECOND
+                )
+            )
             .toDateTimePicker(this, object : IDateTimeSelectCallback {
                 override fun onSelectDate(result: DateTimeEntity) {
                     DialogTools.getToastBuilder()

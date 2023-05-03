@@ -110,31 +110,27 @@ DialogTools.getDialogBuilder()
         })
 ```
 
-#### 3.2.6.日期选择器
+#### 3.2.6.日期时间选择器
 
 ```kotlin
 DialogTools.getPickerBuilder()
-    .setTitleText("请选择日期")
-    .toDatePicker(this, object : IDateTimeSelectCallback {
+    .setTitleText("请选择日期和时间")
+    .setLabel(mutableListOf(EaseConstantTools.PICKER_LABEL_YEAR,EaseConstantTools.PICKER_LABEL_MONTH,EaseConstantTools.PICKER_LABEL_DAY,EaseConstantTools.PICKER_LABEL_HOUR,EaseConstantTools.PICKER_LABEL_MINUTE,EaseConstantTools.PICKER_LABEL_SECOND))
+    .toDateTimePicker(this, object : IDateTimeSelectCallback {
         override fun onSelectDate(result: DateTimeEntity) {
-            Toast.makeText(this@MainActivity, result.getDate(), Toast.LENGTH_SHORT).show()
+            DialogTools.getToastBuilder()
+                .toToast(result.getDateTime())
+        }
+
+        override fun onCancel() {
+            super.onCancel()
+            DialogTools.getToastBuilder()
+                .toToast("取消")
         }
     })
 ```
 
-#### 3.2.7.时间选择器
-
-```kotlin
-DialogTools.getPickerBuilder()
-    .setTitleText("请选择时间")
-    .toTimePicker(this, object : IDateTimeSelectCallback {
-        override fun onSelectDate(result: DateTimeEntity) {
-            Toast.makeText(this@MainActivity, result.getTime(), Toast.LENGTH_SHORT).show()
-        }
-    })
-```
-
-#### 3.2.8.Toast
+#### 3.2.7.Toast
 ```kotlin
 DialogTools.getToastBuilder()
     .toToast("文件删除成功~")
