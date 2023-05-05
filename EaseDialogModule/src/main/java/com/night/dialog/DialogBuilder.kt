@@ -368,7 +368,7 @@ class DialogBuilder : BaseDialogBuilder() {
 //                mContentView.addItemDecoration(
 //                    SmallDividerItem(
 //                        DialogHelp.dpToPx(0.5F),
-//                        DialogHelp.getColor(R.color.colorDivider)
+//                        DialogHelp.getColor(R.color.EaseColorDivider)
 //                    )
 //                )
 //                adapter.setSelectPosition(defIndex)
@@ -431,7 +431,7 @@ class DialogBuilder : BaseDialogBuilder() {
 //                mContentView.addItemDecoration(
 //                    SmallDividerItem(
 //                        DialogHelp.dpToPx(0.5F),
-//                        DialogHelp.getColor(R.color.colorDivider)
+//                        DialogHelp.getColor(R.color.EaseColorDivider)
 //                    )
 //                )
 //                val mMenuHeight = DialogHelp.getMaxMenuHeight()
@@ -479,7 +479,7 @@ class DialogBuilder : BaseDialogBuilder() {
 //
     fun toPopMenu(activity: Activity, anchor: View, menuList: MutableList<String>, callback: IDialogActionCallback) {
         val mPopMenu = BasePopupWindow(activity)
-        mPopMenu.setBackgroundDrawable(ColorDrawable(DialogHelp.getColor(R.color.colorBackground)))
+        mPopMenu.setBackgroundDrawable(ColorDrawable(DialogHelp.getColor(R.color.EaseColorBackground)))
         val contentView = LayoutInflater.from(activity).inflate(R.layout.ease_layout_custom_popup_menu, null)
         val mRecyclerView = contentView.findViewById<RecyclerView>(R.id.rv_popup)
         val mPopupMenuAdapter = PopupMenuAdapter(activity, menuList)

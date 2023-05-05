@@ -15,7 +15,7 @@ import com.night.dialog.tools.DialogHelp
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class TipsDialogFragment : EaseSafeDialogFragment<TipsViewModel>() {
+class TipsDialogFragment : EaseSafeDialogFragment<TipsBaseViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
@@ -24,8 +24,8 @@ class TipsDialogFragment : EaseSafeDialogFragment<TipsViewModel>() {
         return R.layout.ease_layout_dialog_tip
     }
 
-    override fun initViewModel(): Class<TipsViewModel> {
-        return TipsViewModel::class.java
+    override fun initViewModel(): Class<TipsBaseViewModel> {
+        return TipsBaseViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {

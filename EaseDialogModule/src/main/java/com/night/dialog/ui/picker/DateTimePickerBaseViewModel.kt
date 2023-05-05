@@ -1,12 +1,12 @@
 package com.night.dialog.ui.picker
 
 import androidx.lifecycle.MutableLiveData
-import com.night.dialog.base.EaseViewModel
+import com.night.dialog.base.EaseBaseViewModel
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimeEntity
 import com.night.dialog.entity.DateTimePickerEntity
 
-class DateTimePickerViewModel : EaseViewModel() {
+class DateTimePickerBaseViewModel : EaseBaseViewModel() {
     private var minDateTime: DateTimePickerEntity? = null
     private var maxDateTime: DateTimePickerEntity? = null
     private var selDateTime: DateTimePickerEntity? = null

@@ -4,12 +4,12 @@ object EaseConstantTools {
     /**
      * 横屏Dialog高度占比
      */
-    const val HEIGHT_RATIO_LANDSCAPE = 0.8F
+    const val HEIGHT_RATIO_LANDSCAPE = 0.7F
 
     /**
      * 竖屏Dialog高度占比
      */
-    const val HEIGHT_RATIO_PORTRAIT = 0.6F
+    const val HEIGHT_RATIO_PORTRAIT = 0.5F
 
     const val PICKER_LABEL_YEAR = 1001
 

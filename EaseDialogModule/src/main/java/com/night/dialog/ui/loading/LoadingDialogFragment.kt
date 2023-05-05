@@ -14,14 +14,14 @@ import com.night.dialog.base.EaseSafeDialogFragment
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class LoadingDialogFragment : EaseSafeDialogFragment<LoadingDialogViewModel>() {
+class LoadingDialogFragment : EaseSafeDialogFragment<LoadingDialogBaseViewModel>() {
     private lateinit var mLoadingTextView: AppCompatTextView
     override fun initLayout(): Int {
         return R.layout.ease_layout_dialog_loading
     }
 
-    override fun initViewModel(): Class<LoadingDialogViewModel> {
-        return LoadingDialogViewModel::class.java
+    override fun initViewModel(): Class<LoadingDialogBaseViewModel> {
+        return LoadingDialogBaseViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {

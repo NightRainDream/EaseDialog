@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/dp_12"
         android:gravity="center"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/EaseColorMainText"
         android:textSize="@dimen/text_sizeMain" />
 </LinearLayout>

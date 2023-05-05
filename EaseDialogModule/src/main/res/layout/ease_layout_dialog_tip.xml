@@ -15,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:background="@color/colorBackground"
+        android:background="@color/EaseColorBackground"
         android:includeFontPadding="false"
         android:lineSpacingExtra="@dimen/dp_4"
         android:paddingHorizontal="@dimen/dp_24"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/EaseColorMainText"
         android:textSize="@dimen/sp_16"
         tools:text="Content" />
 

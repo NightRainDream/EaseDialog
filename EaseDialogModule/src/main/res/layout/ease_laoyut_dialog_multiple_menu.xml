@@ -16,7 +16,7 @@
         android:layout_height="0px"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_weight="1"
-        android:background="@color/colorBackground" />
+        android:background="@color/EaseColorBackground" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         style="@style/StyleAction"

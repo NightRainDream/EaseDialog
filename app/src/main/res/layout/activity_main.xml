@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/EaseColorBackground"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
+            android:background="@color/EaseColorBackground"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
@@ -24,7 +24,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="13dp"
                 android:text="自带样式"
-                android:textColor="@color/colorTitleText"
+                android:textColor="@color/EaseColorTitleText"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
                 android:onClick="onTipDialog"
                 android:paddingHorizontal="16dp"
                 android:text="提示性质对话框"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -51,7 +51,7 @@
                 android:onClick="onTipWarnDialog"
                 android:paddingHorizontal="16dp"
                 android:text="警告性质对话框"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -67,7 +67,7 @@
                 android:onClick="onMenuDialog"
                 android:paddingHorizontal="16dp"
                 android:text="加载框"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -83,7 +83,7 @@
                 android:onClick="onTipSingleDialog"
                 android:paddingHorizontal="16dp"
                 android:text="底部单选菜单"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -99,7 +99,7 @@
                 android:onClick="onMultipleDialog"
                 android:paddingHorizontal="16dp"
                 android:text="底部多选菜单"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -115,7 +115,7 @@
                 android:onClick="onDatePicker"
                 android:paddingHorizontal="16dp"
                 android:text="日期时间选择器"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -131,7 +131,7 @@
                 android:onClick="onToast"
                 android:paddingHorizontal="16dp"
                 android:text="Toast"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
 
             <View
@@ -147,7 +147,7 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
                 android:text="PopMenu"
-                android:textColor="@color/colorMainText"
+                android:textColor="@color/EaseColorMainText"
                 android:textSize="14sp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

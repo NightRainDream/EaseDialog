@@ -17,7 +17,7 @@
         android:gravity="center_vertical"
         android:lines="1"
         android:paddingVertical="@dimen/dp_14"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/EaseColorMainText"
         android:textSize="@dimen/text_sizeMain"
         tool:text="Item Content" />
 

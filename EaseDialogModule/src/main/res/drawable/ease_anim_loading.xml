@@ -11,8 +11,8 @@
 
         <gradient
             android:centerY="0.50"
-            android:endColor="@color/colorProgressEnd"
-            android:startColor="@color/colorProgressStart"
+            android:endColor="@color/EaseColorProgressEnd"
+            android:startColor="@color/EaseColorProgressStart"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

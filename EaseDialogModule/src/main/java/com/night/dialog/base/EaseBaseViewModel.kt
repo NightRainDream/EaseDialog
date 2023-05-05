@@ -7,7 +7,7 @@ import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
 
-open class EaseViewModel : ViewModel() {
+open class EaseBaseViewModel : ViewModel() {
     /**
      * 默认标题属性
      */

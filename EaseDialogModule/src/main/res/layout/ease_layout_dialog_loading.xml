@@ -28,7 +28,7 @@
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:lines="1"
-            android:textColor="@color/colorMainText"
+            android:textColor="@color/EaseColorMainText"
             android:textSize="@dimen/sp_14"
             tool:text="加载中..." />
     </androidx.appcompat.widget.LinearLayoutCompat>

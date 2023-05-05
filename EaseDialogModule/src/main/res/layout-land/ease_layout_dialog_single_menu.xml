@@ -9,21 +9,21 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_menu_title"
         style="@style/StyleTitle"
-        android:layout_width="@dimen/dp_400"
+        android:layout_width="@dimen/dp_472"
         tools:text="Title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_menu_title"
-        android:layout_width="@dimen/dp_400"
+        android:layout_width="@dimen/dp_472"
         android:layout_height="0px"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_weight="1"
-        android:background="@color/colorBackground" />
+        android:background="@color/EaseColorBackground" />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         style="@style/StyleAction"
-        android:layout_width="@dimen/dp_400">
+        android:layout_width="@dimen/dp_472">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/rv_menu_cancel"

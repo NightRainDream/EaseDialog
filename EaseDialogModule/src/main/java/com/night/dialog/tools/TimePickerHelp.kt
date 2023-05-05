@@ -1,9 +1,5 @@
 package com.night.dialog.tools
 
-import android.app.Activity
-import com.night.dialog.R
-import com.night.dialog.entity.TimeEntity
-
 internal class TimePickerHelp {
 //    //选中时的位置
 //    private var selectHourIndex = 0

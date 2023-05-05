@@ -11,17 +11,18 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_picker_title"
         style="@style/StyleTitle"
-        android:layout_width="@dimen/dp_400"
+        android:layout_width="@dimen/dp_472"
         android:gravity="center_horizontal"
         tools:text="Title" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_picker"
-        android:layout_width="@dimen/dp_400"
-        android:layout_height="@dimen/dp_150"
+        android:layout_width="@dimen/dp_472"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:paddingHorizontal="@dimen/dp_16"
-        android:background="@color/colorBackground"
+        android:background="@color/EaseColorBackground"
         android:orientation="horizontal">
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
@@ -33,11 +34,11 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
             android:id="@+id/id_month"
@@ -48,11 +49,11 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
             android:id="@+id/id_day"
@@ -63,11 +64,11 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
             android:id="@+id/id_hour"
@@ -78,11 +79,11 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
             android:id="@+id/id_minute"
@@ -93,11 +94,11 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
 
 
         <com.github.gzuliyujiang.wheelview.widget.WheelView
@@ -109,15 +110,15 @@
             app:wheel_curvedMaxAngle="45"
             app:wheel_cyclicEnabled="true"
             app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/colorMainText"
-            app:wheel_itemTextColorSelected="@color/colorButtonTextColor"
+            app:wheel_itemTextColor="@color/EaseColorMainText"
+            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
             app:wheel_itemTextSize="@dimen/sp_14"
             app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="3" />
+            app:wheel_visibleItemCount="5" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="@dimen/dp_400"
+        android:layout_width="@dimen/dp_472"
         style="@style/StyleAction">
 
         <androidx.appcompat.widget.AppCompatTextView

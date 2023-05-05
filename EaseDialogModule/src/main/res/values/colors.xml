@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--标题颜色-->
-    <color name="colorTitleText">#191919</color>
+    <color name="EaseColorTitleText">#191919</color>
     <!--主文字颜色-->
-    <color name="colorMainText">#1A1A1A</color>
+    <color name="EaseColorMainText">#1A1A1A</color>
     <!--背景颜色-->
-    <color name="colorBackground">#FFFFFF</color>
+    <color name="EaseColorBackground">#FFFFFF</color>
     <!--按下颜色-->
-    <color name="colorPress">#E7E7E7</color>
+    <color name="EaseColorPress">#E7E7E7</color>
     <!--确定按钮颜色-->
-    <color name="colorButtonTextColor">#0A59F5</color>
+    <color name="EaseColorButtonTextColor">#0A59F5</color>
     <!--分割线颜色-->
-    <color name="colorDivider">#CCCCCC</color>
+    <color name="EaseColorDivider">#CCCCCC</color>
     <!--警告色-->
-    <color name="colorWarn">#E84026</color>
+    <color name="EaseColorWarn">#E84026</color>
     <!--加载框开始颜色-->
-    <color name="colorProgressStart">#00000000</color>
+    <color name="EaseColorProgressStart">#00000000</color>
     <!--加载框结束颜色-->
-    <color name="colorProgressEnd">#99000000</color>
+    <color name="EaseColorProgressEnd">#99000000</color>
     <!--Toast背景色-->
-    <color name="colorToastBackground">#B3000000</color>
+    <color name="EaseColorToastBackground">#B3000000</color>
     <!--Toast文字颜色-->
-    <color name="colorToastTextColor">#FFFFFF</color>
+    <color name="EaseColorToastTextColor">#FFFFFF</color>
 </resources>

@@ -7,10 +7,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:text="我是文字"
-        android:background="@color/colorBackground"
+        android:background="@color/EaseColorBackground"
         android:textSize="30sp"
         android:gravity="center"
-        android:textColor="@color/colorMainText"
+        android:textColor="@color/EaseColorMainText"
         android:layout_width="200dp"
         android:layout_height="100dp"/>
 

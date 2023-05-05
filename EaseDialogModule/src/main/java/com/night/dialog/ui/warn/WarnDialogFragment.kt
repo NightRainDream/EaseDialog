@@ -15,7 +15,7 @@ import com.night.dialog.tools.DialogHelp
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class WarnDialogFragment : EaseSafeDialogFragment<WarnViewModel>() {
+class WarnDialogFragment : EaseSafeDialogFragment<WarnBaseViewModel>() {
     private lateinit var mContentView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
@@ -23,8 +23,8 @@ class WarnDialogFragment : EaseSafeDialogFragment<WarnViewModel>() {
         return R.layout.ease_layout_dialog_warn
     }
 
-    override fun initViewModel(): Class<WarnViewModel> {
-        return WarnViewModel::class.java
+    override fun initViewModel(): Class<WarnBaseViewModel> {
+        return WarnBaseViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {

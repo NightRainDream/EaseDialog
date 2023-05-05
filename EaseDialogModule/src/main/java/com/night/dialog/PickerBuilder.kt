@@ -6,7 +6,7 @@ import com.night.dialog.base.BaseDialogBuilder
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimePickerEntity
 import com.night.dialog.entity.TextInfoEntity
-import com.night.dialog.ui.picker.DateTimePickerDialog
+import com.night.dialog.ui.picker.DateTimePickerDialogFragment
 
 class PickerBuilder : BaseDialogBuilder() {
     private var mMinDateTime: DateTimePickerEntity? = null
@@ -169,21 +169,21 @@ class PickerBuilder : BaseDialogBuilder() {
     fun toDateTimePicker(activity: AppCompatActivity, callback: IDateTimeSelectCallback) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("DateTimePicker")
-        if (mHistoryDialog != null && mHistoryDialog is DateTimePickerDialog) {
+        if (mHistoryDialog != null && mHistoryDialog is DateTimePickerDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mDateTimePickerDialog = DateTimePickerDialog()
-        mDateTimePickerDialog.setTitleTextInfo(mTitleTextInfo)
-        mDateTimePickerDialog.setMainTextInfo(mMainTextInfo)
-        mDateTimePickerDialog.setCancelTextInfo(mCancelTextInfo)
-        mDateTimePickerDialog.setPositiveTextInfo(mPositiveTextInfo)
-        mDateTimePickerDialog.setCallback(callback)
-        mDateTimePickerDialog.setMinDateTime(mMinDateTime)
-        mDateTimePickerDialog.setMaxDateTime(mMaxDateTime)
-        mDateTimePickerDialog.setSelDateTime(mSelDateTime)
+        val mDateTimePickerDialogFragment = DateTimePickerDialogFragment()
+        mDateTimePickerDialogFragment.setTitleTextInfo(mTitleTextInfo)
+        mDateTimePickerDialogFragment.setMainTextInfo(mMainTextInfo)
+        mDateTimePickerDialogFragment.setCancelTextInfo(mCancelTextInfo)
+        mDateTimePickerDialogFragment.setPositiveTextInfo(mPositiveTextInfo)
+        mDateTimePickerDialogFragment.setCallback(callback)
+        mDateTimePickerDialogFragment.setMinDateTime(mMinDateTime)
+        mDateTimePickerDialogFragment.setMaxDateTime(mMaxDateTime)
+        mDateTimePickerDialogFragment.setSelDateTime(mSelDateTime)
         if (mLabel != null) {
-            mDateTimePickerDialog.setLabel(mLabel!!)
+            mDateTimePickerDialogFragment.setLabel(mLabel!!)
         }
-        mDateTimePickerDialog.show(mFragmentManage, "DateTimePicker")
+        mDateTimePickerDialogFragment.show(mFragmentManage, "DateTimePicker")
     }
 }

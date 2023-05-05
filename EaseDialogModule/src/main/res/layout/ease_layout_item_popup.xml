@@ -9,5 +9,5 @@
     android:ellipsize="end"
     android:gravity="center"
     android:lines="1"
-    android:textColor="@color/colorMainText"
+    android:textColor="@color/EaseColorMainText"
     android:textSize="@dimen/text_sizeMain" />

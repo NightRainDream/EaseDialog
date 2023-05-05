@@ -1,5 +1,6 @@
 package com.night.dialog.ui.picker
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -15,7 +16,7 @@ import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.EaseConstantTools
 import com.night.dialog.tools.LogcatToos
 
-class DateTimePickerDialog : EaseSafeDialogFragment<DateTimePickerViewModel>() {
+class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseViewModel>() {
     private lateinit var mYearView: WheelView
     private lateinit var mMonthView: WheelView
     private lateinit var mDayView: WheelView
@@ -54,8 +55,8 @@ class DateTimePickerDialog : EaseSafeDialogFragment<DateTimePickerViewModel>() {
         }
     }
 
-    override fun initViewModel(): Class<DateTimePickerViewModel> {
-        return DateTimePickerViewModel::class.java
+    override fun initViewModel(): Class<DateTimePickerBaseViewModel> {
+        return DateTimePickerBaseViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -71,6 +72,13 @@ class DateTimePickerDialog : EaseSafeDialogFragment<DateTimePickerViewModel>() {
     }
 
     override fun initAdapter(savedInstanceState: Bundle?) {
+        //Dialog最大高度
+        if(DialogHelp.isLandscape()){
+            val mMaxHeight =  Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_LANDSCAPE
+            val mParams = view?.layoutParams
+            mParams?.height = mMaxHeight.toInt()
+            view?.layoutParams = mParams
+        }
 
     }
 

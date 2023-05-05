@@ -1,9 +1,9 @@
 package com.night.dialog.ui.sing
 
-import com.night.dialog.base.EaseViewModel
+import com.night.dialog.base.EaseBaseViewModel
 import com.night.dialog.entity.MenuEntity
 
-class SingleMenuViewModel : EaseViewModel() {
+class SingleMenuBaseViewModel : EaseBaseViewModel() {
     /**
      * 单选菜单数据
      */

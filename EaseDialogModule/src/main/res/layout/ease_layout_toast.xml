@@ -14,7 +14,7 @@
         android:paddingVertical="@dimen/dp_16"
         android:lines="1"
         android:paddingHorizontal="@dimen/dp_24"
-        android:textColor="@color/colorToastTextColor"
+        android:textColor="@color/EaseColorToastTextColor"
         android:textSize="@dimen/sp_14"
         android:textStyle="bold" />
 </LinearLayout>

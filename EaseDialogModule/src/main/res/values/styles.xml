@@ -52,7 +52,7 @@
         <item name="android:layout_marginEnd">@dimen/dp_10</item>
         <item name="android:layout_marginTop">@dimen/dp_10</item>
         <item name="android:layout_marginBottom">@dimen/dp_10</item>
-        <item name="android:background">@color/colorDivider</item>
+        <item name="android:background">@color/EaseColorDivider</item>
     </style>
 
     <!--底部按钮样式-->
@@ -63,7 +63,7 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:background">@drawable/ease_button</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorButtonTextColor</item>
+        <item name="android:textColor">@color/EaseColorButtonTextColor</item>
         <item name="android:textSize">@dimen/text_sizeButton</item>
         <item name="android:paddingTop">@dimen/dp_12</item>
         <item name="android:paddingBottom">@dimen/dp_12</item>
@@ -78,7 +78,7 @@
         <item name="android:paddingTop">@dimen/dp_16</item>
         <item name="android:paddingBottom">@dimen/dp_16</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/colorTitleText</item>
+        <item name="android:textColor">@color/EaseColorTitleText</item>
         <item name="android:textSize">@dimen/text_sizeTitle</item>
         <item name="android:background">@drawable/ease_title_background</item>
         <item name="android:layout_marginStart">@dimen/dp_16</item>

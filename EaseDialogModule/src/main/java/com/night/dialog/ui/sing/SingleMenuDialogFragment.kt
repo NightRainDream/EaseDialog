@@ -20,7 +20,7 @@ import com.night.dialog.tools.SmallDividerItem
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
+class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuBaseViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: RecyclerView
     private lateinit var mCancelView: AppCompatTextView
@@ -36,8 +36,8 @@ class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
         return R.layout.ease_layout_dialog_single_menu
     }
 
-    override fun initViewModel(): Class<SingleMenuViewModel> {
-        return SingleMenuViewModel::class.java
+    override fun initViewModel(): Class<SingleMenuBaseViewModel> {
+        return SingleMenuBaseViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
         mContentView.addItemDecoration(
             SmallDividerItem(
                 DialogHelp.dpToPx(0.5F),
-                DialogHelp.getColor(R.color.colorDivider)
+                DialogHelp.getColor(R.color.EaseColorDivider)
             )
         )
         DialogHelp.setDialogMaxSize(view)

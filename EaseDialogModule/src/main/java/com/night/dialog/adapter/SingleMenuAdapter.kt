@@ -11,7 +11,6 @@ import com.night.dialog.entity.MenuEntity
 
 /**
  * @param menu 菜单按钮
- * @param defPosition 默认选中位置
  */
 class SingleMenuAdapter(menu: MutableList<MenuEntity>) : RecyclerView.Adapter<SingleMenuAdapter.SingleMenuHolder>() {
     private val mMenuList = menu
