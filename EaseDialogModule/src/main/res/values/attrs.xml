@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="EaseDateTimePickerView">
+        <attr name="customDefTextColor" format="color" />
+        <attr name="customSelTextColor" format="color" />
+        <attr name="customDefTextSize" format="dimension" />
+        <attr name="customSelTextSize" format="dimension" />
+        <attr name="customIndicatorColor" format="color" />
+    </declare-styleable>
+</resources>

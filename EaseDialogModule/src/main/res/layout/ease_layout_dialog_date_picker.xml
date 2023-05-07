@@ -13,116 +13,121 @@
         android:gravity="center_horizontal"
         tools:text="Title" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_picker"
+    <com.night.dialog.widget.EaseDateTimePickerView
+        android:id="@+id/ease_date_time"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_250"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:paddingHorizontal="@dimen/dp_16"
-        android:background="@color/EaseColorBackground"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/dp_250" />
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_year"
-            android:visibility="gone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.3"
-            app:wheel_curvedEnabled="true"
-            app:wheel_curvedMaxAngle="45"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
+    <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--        android:id="@+id/ll_picker"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/dp_250"-->
+    <!--        android:layout_marginHorizontal="@dimen/dp_16"-->
+    <!--        android:paddingHorizontal="@dimen/dp_16"-->
+    <!--        android:background="@color/EaseColorBackground"-->
+    <!--        android:orientation="horizontal">-->
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_month"
-            android:layout_width="0dp"
-            android:visibility="gone"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:wheel_curvedEnabled="true"
-            app:wheel_curvedMaxAngle="45"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_year"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1.3"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_day"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone"
-            app:wheel_curvedEnabled="true"
-            app:wheel_curvedMaxAngle="45"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_month"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_hour"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:wheel_curvedEnabled="true"
-            app:wheel_curvedMaxAngle="45"
-            android:visibility="gone"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_day"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_minute"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone"
-            app:wheel_curvedEnabled="true"
-            app:wheel_curvedMaxAngle="45"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_hour"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
+
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_minute"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
 
 
-        <com.github.gzuliyujiang.wheelview.widget.WheelView
-            android:id="@+id/id_second"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:wheel_curvedEnabled="true"
-            android:visibility="gone"
-            app:wheel_curvedMaxAngle="45"
-            app:wheel_cyclicEnabled="true"
-            app:wheel_itemTextBoldSelected="true"
-            app:wheel_itemTextColor="@color/EaseColorMainText"
-            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"
-            app:wheel_itemTextSize="@dimen/sp_14"
-            app:wheel_itemTextSizeSelected="@dimen/sp_15"
-            app:wheel_visibleItemCount="5" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <!--        <com.github.gzuliyujiang.wheelview.widget.WheelView-->
+    <!--            android:id="@+id/id_second"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            app:wheel_curvedEnabled="true"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:wheel_curvedMaxAngle="45"-->
+    <!--            app:wheel_cyclicEnabled="true"-->
+    <!--            app:wheel_itemTextBoldSelected="true"-->
+    <!--            app:wheel_itemTextColor="@color/EaseColorMainText"-->
+    <!--            app:wheel_itemTextColorSelected="@color/EaseColorButtonTextColor"-->
+    <!--            app:wheel_itemTextSize="@dimen/sp_14"-->
+    <!--            app:wheel_itemTextSizeSelected="@dimen/sp_15"-->
+    <!--            app:wheel_visibleItemCount="5" />-->
+    <!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_marginBottom="@dimen/dp_20"
-        style="@style/StyleAction">
+        style="@style/StyleAction"
+        android:layout_marginBottom="@dimen/dp_20">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_picker_cancel"

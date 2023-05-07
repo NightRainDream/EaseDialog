@@ -43,7 +43,7 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
 
     private var mPickerCallback: IDateTimeSelectCallback? = null
 
-     val mLabel = MutableLiveData<List<Int>>()
+    val mLabel = MutableLiveData<Int>()
 
     /**
      * 设置选择器最小时间
@@ -395,9 +395,9 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
     }
 
 
-    fun setLabel(label: List<Int>) {
-        if(mLabel.value == null){
-            mLabel.value = label
+    fun setLabel(mode: Int) {
+        if (mLabel.value == null) {
+            mLabel.value = mode
         }
     }
 

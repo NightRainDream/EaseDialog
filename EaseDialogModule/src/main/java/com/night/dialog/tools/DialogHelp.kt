@@ -56,7 +56,7 @@ internal object DialogHelp {
             view.text = info.text
         }
         view.setTextSize(TypedValue.COMPLEX_UNIT_PX, info.mTextSize)
-        if(info.textColor != -1){
+        if (info.textColor != -1) {
             view.setTextColor(info.textColor)
         }
     }
@@ -131,7 +131,7 @@ internal object DialogHelp {
     }
 
     fun setDialogMaxSize(view: View?) {
-        if(view == null){
+        if (view == null) {
             return
         }
         //制定测量规则 参数表示size + mode
@@ -148,9 +148,9 @@ internal object DialogHelp {
 
         //Dialog最大高度
         val mMaxHeight = if (isLandscape()) {
-            Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_LANDSCAPE
+            Resources.getSystem().displayMetrics.heightPixels * HEIGHT_RATIO_LANDSCAPE
         } else {
-            Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_PORTRAIT
+            Resources.getSystem().displayMetrics.heightPixels * HEIGHT_RATIO_PORTRAIT
         }
         //内容高度
         val mContentHeight = view.measuredHeight

@@ -6,13 +6,14 @@ import com.night.dialog.base.BaseDialogBuilder
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimePickerEntity
 import com.night.dialog.entity.TextInfoEntity
+import com.night.dialog.tools.DateTimeMode
 import com.night.dialog.ui.picker.DateTimePickerDialogFragment
 
 class PickerBuilder : BaseDialogBuilder() {
     private var mMinDateTime: DateTimePickerEntity? = null
     private var mMaxDateTime: DateTimePickerEntity? = null
     private var mSelDateTime: DateTimePickerEntity? = null
-    private var mLabel: List<Int>? = null
+    private var mLabel: Int = -1
 
     /**
      * 设置标题TextView属性
@@ -161,8 +162,8 @@ class PickerBuilder : BaseDialogBuilder() {
         return this
     }
 
-    fun setLabel(label: List<Int>?): PickerBuilder {
-        this.mLabel = label
+    fun setLabel(@DateTimeMode mode: Int): PickerBuilder {
+        this.mLabel = mode
         return this
     }
 
@@ -181,8 +182,8 @@ class PickerBuilder : BaseDialogBuilder() {
         mDateTimePickerDialogFragment.setMinDateTime(mMinDateTime)
         mDateTimePickerDialogFragment.setMaxDateTime(mMaxDateTime)
         mDateTimePickerDialogFragment.setSelDateTime(mSelDateTime)
-        if (mLabel != null) {
-            mDateTimePickerDialogFragment.setLabel(mLabel!!)
+        if (mLabel != -1) {
+            mDateTimePickerDialogFragment.setLabel(mLabel)
         }
         mDateTimePickerDialogFragment.show(mFragmentManage, "DateTimePicker")
     }

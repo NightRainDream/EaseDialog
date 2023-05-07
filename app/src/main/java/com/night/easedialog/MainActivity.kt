@@ -4,14 +4,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.DialogTools
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.DateTimeEntity
-import com.night.dialog.entity.DateTimePickerEntity
-import com.night.dialog.tools.EaseConstantTools
 
 class MainActivity : AppCompatActivity() {
 
@@ -129,16 +126,6 @@ class MainActivity : AppCompatActivity() {
     fun onDatePicker(view: View) {
         DialogTools.getPickerBuilder()
             .setTitleText("请选择日期和时间")
-            .setLabel(
-                mutableListOf(
-                    EaseConstantTools.PICKER_LABEL_YEAR,
-                    EaseConstantTools.PICKER_LABEL_MONTH,
-                    EaseConstantTools.PICKER_LABEL_DAY,
-                    EaseConstantTools.PICKER_LABEL_HOUR,
-                    EaseConstantTools.PICKER_LABEL_MINUTE,
-                    EaseConstantTools.PICKER_LABEL_SECOND
-                )
-            )
             .toDateTimePicker(this, object : IDateTimeSelectCallback {
                 override fun onSelectDate(result: DateTimeEntity) {
                     DialogTools.getToastBuilder()

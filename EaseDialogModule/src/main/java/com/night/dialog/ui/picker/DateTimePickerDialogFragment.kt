@@ -12,8 +12,8 @@ import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimePickerEntity
+import com.night.dialog.tools.*
 import com.night.dialog.tools.DialogHelp
-import com.night.dialog.tools.EaseConstantTools
 import com.night.dialog.tools.LogcatToos
 
 class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseViewModel>() {
@@ -30,14 +30,7 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
     private var mMaxData = DateTimePickerEntity.getDefaultMax()
     private var mSelData = DateTimePickerEntity.getToday()
     private var mCallback: IDateTimeSelectCallback? = null
-    private var mLabel = mutableListOf(
-        EaseConstantTools.PICKER_LABEL_YEAR,
-        EaseConstantTools.PICKER_LABEL_MINUTE,
-        EaseConstantTools.PICKER_LABEL_DAY,
-        EaseConstantTools.PICKER_LABEL_HOUR,
-        EaseConstantTools.PICKER_LABEL_MINUTE,
-        EaseConstantTools.PICKER_LABEL_SECOND,
-    )
+    private var mLabel = PICKER_DATE_HOUR_MINUTE
 
 
     override fun initLayout(): Int {
@@ -73,8 +66,9 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
 
     override fun initAdapter(savedInstanceState: Bundle?) {
         //Dialog最大高度
-        if(DialogHelp.isLandscape()){
-            val mMaxHeight =  Resources.getSystem().displayMetrics.heightPixels * EaseConstantTools.HEIGHT_RATIO_LANDSCAPE
+        if (DialogHelp.isLandscape()) {
+            val mMaxHeight =
+                Resources.getSystem().displayMetrics.heightPixels * HEIGHT_RATIO_LANDSCAPE
             val mParams = view?.layoutParams
             mParams?.height = mMaxHeight.toInt()
             view?.layoutParams = mParams
@@ -210,23 +204,70 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
 
     override fun initData(savedInstanceState: Bundle?) {
         mViewModel.mLabel.observe(this) {
-            if (it.contains(EaseConstantTools.PICKER_LABEL_YEAR)) {
-                mYearView.isVisible = true
-            }
-            if (it.contains(EaseConstantTools.PICKER_LABEL_MONTH)) {
-                mMonthView.isVisible = true
-            }
-            if (it.contains(EaseConstantTools.PICKER_LABEL_DAY)) {
-                mDayView.isVisible = true
-            }
-            if (it.contains(EaseConstantTools.PICKER_LABEL_HOUR)) {
-                mHourView.isVisible = true
-            }
-            if (it.contains(EaseConstantTools.PICKER_LABEL_MINUTE)) {
-                mMinuteView.isVisible = true
-            }
-            if (it.contains(EaseConstantTools.PICKER_LABEL_SECOND)) {
-                mSecondView.isVisible = true
+            when (it) {
+                PICKER_TIME -> {
+                    //时-分-秒
+                    mHourView.isVisible = true
+                    mMinuteView.isVisible = true
+                    mSecondView.isVisible = true
+                }
+                PICKER_MINUTE_SECOND -> {
+                    //分-秒
+                    mMinuteView.isVisible = true
+                    mSecondView.isVisible = true
+                }
+                PICKER_SECOND -> {
+                    //秒
+                    mSecondView.isVisible = true
+                }
+                PICKER_DATE -> {
+                    //年-月-日
+                    mYearView.isVisible = true
+                    mMonthView.isVisible = true
+                    mDayView.isVisible = true
+                }
+//                PICKER_DATE_MONTH_DAY -> {
+//                    //月-日
+//                    mMonthView.isVisible = true
+//                    mDayView.isVisible = true
+//                }
+//                PICKER_DATE_DAY -> {
+//                    //日
+//                    mDayView.isVisible = true
+//                }
+//                PICKER_DATE_YEAR ->{
+//                    //年
+//                    mYearView.isVisible = true
+//                }
+//                PICKER_DATE_YEAR_MONTH ->{
+//                    //年
+//                    mYearView.isVisible = true
+//                    mMonthView.isVisible = true
+//                }
+                PICKER_ALL -> {
+                    //全部
+                    mYearView.isVisible = true
+                    mMonthView.isVisible = true
+                    mDayView.isVisible = true
+                    mHourView.isVisible = true
+                    mMinuteView.isVisible = true
+                    mSecondView.isVisible = true
+                }
+                PICKER_DATE_HOUR -> {
+                    //年月日时
+                    mYearView.isVisible = true
+                    mMonthView.isVisible = true
+                    mDayView.isVisible = true
+                    mHourView.isVisible = true
+                }
+                PICKER_DATE_HOUR_MINUTE -> {
+                    //年月日时分
+                    mYearView.isVisible = true
+                    mMonthView.isVisible = true
+                    mDayView.isVisible = true
+                    mHourView.isVisible = true
+                    mMinuteView.isVisible = true
+                }
             }
         }
         mViewModel.mTitleTextInfo.observe(this) {
@@ -344,9 +385,8 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
         this.mSelData = entity
     }
 
-    fun setLabel(label: List<Int>) {
-        this.mLabel.clear()
-        this.mLabel.addAll(label)
+    fun setLabel(mode: Int) {
+        this.mLabel = mode
     }
 
     fun setCallback(callback: IDateTimeSelectCallback?) {
