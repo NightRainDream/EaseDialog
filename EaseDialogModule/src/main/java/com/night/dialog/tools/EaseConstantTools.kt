@@ -5,7 +5,7 @@ import androidx.annotation.IntDef
 /**
  * 横屏Dialog高度占比
  */
-const val HEIGHT_RATIO_LANDSCAPE = 0.7F
+const val HEIGHT_RATIO_LANDSCAPE = 0.8F
 
 /**
  * 竖屏Dialog高度占比
@@ -24,7 +24,7 @@ const val PICKER_HOUR_MINUTE = 1007
 const val PICKER_MINUTE_SECOND = 1008
 const val PICKER_SECOND = 1009
 
-const val PICKER_ALL = 10010
+const val PICKER_ALL = 1010
 const val PICKER_DATE_HOUR = 1011
 const val PICKER_DATE_HOUR_MINUTE = 1012
 @IntDef(

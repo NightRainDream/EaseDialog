@@ -5,32 +5,25 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.isVisible
-import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
-import com.github.gzuliyujiang.wheelview.widget.WheelView
 import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.callback.IDateTimePickerListener
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimePickerEntity
 import com.night.dialog.tools.*
 import com.night.dialog.tools.DialogHelp
-import com.night.dialog.tools.LogcatToos
+import com.night.dialog.widget.EaseDateTimePickerView
 
 class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseViewModel>() {
-    private lateinit var mYearView: WheelView
-    private lateinit var mMonthView: WheelView
-    private lateinit var mDayView: WheelView
-    private lateinit var mHourView: WheelView
-    private lateinit var mMinuteView: WheelView
-    private lateinit var mSecondView: WheelView
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
+    private lateinit var mDateTimeView : EaseDateTimePickerView
     private var mMinData = DateTimePickerEntity.getDefaultMin()
     private var mMaxData = DateTimePickerEntity.getDefaultMax()
     private var mSelData = DateTimePickerEntity.getToday()
     private var mCallback: IDateTimeSelectCallback? = null
-    private var mLabel = PICKER_DATE_HOUR_MINUTE
+    private var mLabel = -1
 
 
     override fun initLayout(): Int {
@@ -39,10 +32,12 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel.setMinDateTime(mMinData)
-        mViewModel.setMaxDateTime(mMaxData)
-        mViewModel.setSelDateTime(mSelData)
-        mViewModel.setLabel(mLabel)
+        mViewModel.initMinDateTime(mMinData)
+        mViewModel.initMaxDateTime(mMaxData)
+        mViewModel.initSelDateTime(mSelData)
+        if(mLabel != -1){
+            mViewModel.setLabel(mLabel)
+        }
         mCallback?.let {
             mViewModel.setCallback(it)
         }
@@ -53,15 +48,10 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        mYearView = view.findViewById(R.id.id_year)
-        mMonthView = view.findViewById(R.id.id_month)
-        mDayView = view.findViewById(R.id.id_day)
-        mHourView = view.findViewById(R.id.id_hour)
-        mMinuteView = view.findViewById(R.id.id_minute)
-        mSecondView = view.findViewById(R.id.id_second)
         mTitleView = view.findViewById(R.id.tv_picker_title)
         mCancelView = view.findViewById(R.id.tv_picker_cancel)
         mPositiveView = view.findViewById(R.id.tv_picker_positive)
+        mDateTimeView = view.findViewById(R.id.ease_date_time)
     }
 
     override fun initAdapter(savedInstanceState: Bundle?) {
@@ -87,189 +77,18 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
             dismiss()
         }
 
-        mYearView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中年份: " + position)
-                mViewModel.setSelectYear(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
-            }
-        })
-
-        mMonthView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中月份: " + position)
-                mViewModel.setSelectMonth(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
-            }
-        })
-
-        mDayView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中日: " + position)
-                mViewModel.setSelectDay(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
-            }
-        })
-
-        mHourView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中小时: " + position)
-                mViewModel.setSelectHour(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
-            }
-        })
-
-        mMinuteView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中分钟: " + position)
-                mViewModel.setSelectMinute(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
-            }
-        })
-
-        mSecondView.setOnWheelChangedListener(object : OnWheelChangedListener {
-            override fun onWheelScrolled(view: WheelView?, offset: Int) {
-
-            }
-
-            override fun onWheelSelected(view: WheelView?, position: Int) {
-                LogcatToos.w("选中秒: " + position)
-                mViewModel.setSelectSecond(position)
-            }
-
-            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
-
-            }
-
-            override fun onWheelLoopFinished(view: WheelView?) {
-
+        mDateTimeView.setListener(object : IDateTimePickerListener {
+            override fun onSelected(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+                mViewModel.setSelDateTime(DateTimePickerEntity(year, month, day, hour, minute, second))
             }
         })
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mViewModel.mLabel.observe(this) {
-            when (it) {
-                PICKER_TIME -> {
-                    //时-分-秒
-                    mHourView.isVisible = true
-                    mMinuteView.isVisible = true
-                    mSecondView.isVisible = true
-                }
-                PICKER_MINUTE_SECOND -> {
-                    //分-秒
-                    mMinuteView.isVisible = true
-                    mSecondView.isVisible = true
-                }
-                PICKER_SECOND -> {
-                    //秒
-                    mSecondView.isVisible = true
-                }
-                PICKER_DATE -> {
-                    //年-月-日
-                    mYearView.isVisible = true
-                    mMonthView.isVisible = true
-                    mDayView.isVisible = true
-                }
-//                PICKER_DATE_MONTH_DAY -> {
-//                    //月-日
-//                    mMonthView.isVisible = true
-//                    mDayView.isVisible = true
-//                }
-//                PICKER_DATE_DAY -> {
-//                    //日
-//                    mDayView.isVisible = true
-//                }
-//                PICKER_DATE_YEAR ->{
-//                    //年
-//                    mYearView.isVisible = true
-//                }
-//                PICKER_DATE_YEAR_MONTH ->{
-//                    //年
-//                    mYearView.isVisible = true
-//                    mMonthView.isVisible = true
-//                }
-                PICKER_ALL -> {
-                    //全部
-                    mYearView.isVisible = true
-                    mMonthView.isVisible = true
-                    mDayView.isVisible = true
-                    mHourView.isVisible = true
-                    mMinuteView.isVisible = true
-                    mSecondView.isVisible = true
-                }
-                PICKER_DATE_HOUR -> {
-                    //年月日时
-                    mYearView.isVisible = true
-                    mMonthView.isVisible = true
-                    mDayView.isVisible = true
-                    mHourView.isVisible = true
-                }
-                PICKER_DATE_HOUR_MINUTE -> {
-                    //年月日时分
-                    mYearView.isVisible = true
-                    mMonthView.isVisible = true
-                    mDayView.isVisible = true
-                    mHourView.isVisible = true
-                    mMinuteView.isVisible = true
-                }
-            }
-        }
+        mDateTimeView.setLabel(mViewModel.getLabel())
+
+        mDateTimeView.setDateTime(mViewModel.getStartDateTime(),mViewModel.getEndDateTime(),mViewModel.getDefDateTime())
+
         mViewModel.mTitleTextInfo.observe(this) {
             setViewParameter(mTitleView, it)
         }
@@ -279,77 +98,6 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
         mViewModel.mPositiveTextInfo.observe(this) {
             setViewParameter(mPositiveView, it)
         }
-        mViewModel.mYearData.observe(this) {
-            if (mYearView.isVisible) {
-                mYearView.data = it
-            }
-        }
-        mViewModel.mSelYear.observe(this) {
-            if (mYearView.isVisible) {
-                mYearView.setDefaultValue(it)
-            }
-        }
-
-        mViewModel.mMonthData.observe(this) {
-            if (mMonthView.isVisible) {
-                mMonthView.data = it
-            }
-        }
-        mViewModel.mSelMonth.observe(this) {
-            if (mMonthView.isVisible) {
-                mMonthView.setDefaultValue(it)
-            }
-        }
-
-        mViewModel.mDayData.observe(this) {
-            if (mDayView.isVisible) {
-                mDayView.data = it
-            }
-        }
-        mViewModel.mSelDay.observe(this) {
-            if (mDayView.isVisible) {
-                mDayView.setDefaultValue(it)
-            }
-        }
-
-        mViewModel.mHourData.observe(this) {
-            if (mHourView.isVisible) {
-                mHourView.data = it
-            }
-        }
-        mViewModel.mSelHour.observe(this) {
-            if (mHourView.isVisible) {
-                mHourView.setDefaultValue(it)
-            }
-        }
-
-        mViewModel.mMinuteData.observe(this) {
-            if (mMinuteView.isVisible) {
-                mMinuteView.data = it
-            }
-        }
-        mViewModel.mSelMinute.observe(this) {
-            if (mMinuteView.isVisible) {
-                mMinuteView.setDefaultValue(it)
-            }
-        }
-
-        mViewModel.mSecondData.observe(this) {
-            if (mSecondView.isVisible) {
-                mSecondView.data = it
-            }
-        }
-        mViewModel.mSelSecond.observe(this) {
-            if (mSecondView.isVisible) {
-                mSecondView.setDefaultValue(it)
-            }
-        }
-        mViewModel.initYearData()
-        mViewModel.initMonthData()
-        mViewModel.initDayData()
-        mViewModel.initHourData()
-        mViewModel.initMinuteData()
-        mViewModel.initSecondData()
     }
 
     override fun initGravity(): Int {

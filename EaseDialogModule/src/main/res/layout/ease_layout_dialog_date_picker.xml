@@ -16,7 +16,15 @@
     <com.night.dialog.widget.EaseDateTimePickerView
         android:id="@+id/ease_date_time"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_250" />
+        app:customDefTextColor="@color/EaseColorMainText"
+        app:customSelTextColor="@color/EaseColorButtonTextColor"
+        app:customDefTextSize="14sp"
+        app:customSelTextSize="15sp"
+        app:customIndicatorColor="#DDDDDD"
+        android:layout_height="@dimen/dp_250"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:background="@color/EaseColorBackground"
+        android:paddingHorizontal="@dimen/dp_16" />
 
     <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
     <!--        android:id="@+id/ll_picker"-->

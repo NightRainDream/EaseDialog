@@ -182,9 +182,7 @@ class PickerBuilder : BaseDialogBuilder() {
         mDateTimePickerDialogFragment.setMinDateTime(mMinDateTime)
         mDateTimePickerDialogFragment.setMaxDateTime(mMaxDateTime)
         mDateTimePickerDialogFragment.setSelDateTime(mSelDateTime)
-        if (mLabel != -1) {
-            mDateTimePickerDialogFragment.setLabel(mLabel)
-        }
+        mDateTimePickerDialogFragment.setLabel(mLabel)
         mDateTimePickerDialogFragment.show(mFragmentManage, "DateTimePicker")
     }
 }

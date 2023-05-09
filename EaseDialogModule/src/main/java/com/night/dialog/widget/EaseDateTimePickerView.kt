@@ -14,11 +14,12 @@ import androidx.core.view.isVisible
 import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
 import com.github.gzuliyujiang.wheelview.widget.WheelView
 import com.night.dialog.R
+import com.night.dialog.callback.IDateTimePickerListener
 import com.night.dialog.entity.DateTimePickerEntity
 import com.night.dialog.tools.*
 
-class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    LinearLayoutCompat(context, attrs, defStyleAttr) {
+class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
+    LinearLayoutCompat(context, attrs) {
     private var mYearView: WheelView
     private var mMonthView: WheelView
     private var mDayView: WheelView
@@ -35,36 +36,31 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defS
     private var mStartDateTime: DateTimePickerEntity? = null
     private var mEndDateTime: DateTimePickerEntity? = null
     private var mDefDateTime: DateTimePickerEntity? = null
+    private var mCallback: IDateTimePickerListener? = null
 
     //年
     private val mYearData = mutableListOf<String>()
-    private var mSelYear = ""
-    private var mYear: Int = 0
+    private var mSelectYear = ""
 
     //月
     private val mMonthData = mutableListOf<String>()
-    private var mSelMonth = ""
-    private var mMonth: Int = 0
+    private var mSelectMonth = ""
 
     //日
     private val mDayData = mutableListOf<String>()
-    private var mSelDay = ""
-    private var mDay: Int = 0
+    private var mSelectDay = ""
 
     //时
     private val mHourData = mutableListOf<String>()
-    private var mSelHour = ""
-    private var mHour: Int = 0
+    private var mSelectHour = ""
 
     //分
     private val mMinuteData = mutableListOf<String>()
-    private var mSelMinute = ""
-    private var mMinute: Int = 0
+    private var mSelectMinute = ""
 
     //秒
     private val mSecondData = mutableListOf<String>()
-    private var mSelSecond = ""
-    private var mSecond: Int = 0
+    private var mSelectSecond = ""
 
     init {
         //设置方向
@@ -131,21 +127,8 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defS
         mSecondView.textSize = mDefTextSize
         mSecondView.selectedTextSize = mSelTextSize
         mSecondView.indicatorColor = mIndicatorColor
-        //初始化基础设置
-        initLabel()
         //初始化监听
         initListener()
-    }
-
-
-    @ColorInt
-    private fun getColor(context: Context, @ColorRes id: Int): Int {
-        return ContextCompat.getColor(context, id)
-    }
-
-    @Px
-    private fun dpToPx(context: Context, dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
     }
 
     /**
@@ -173,6 +156,13 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defS
     fun setLabel(@DateTimeMode mode: Int) {
         this.mLabel = mode
         initLabel()
+    }
+
+    /**
+     * 设置监听
+     */
+    fun setListener(callback: IDateTimePickerListener) {
+        this.mCallback = callback
     }
 
     /**
@@ -262,85 +252,184 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defS
         if (mStartDateTime == null || mEndDateTime == null || mDefDateTime == null) {
             return
         }
-        //年
-        if (mYearData.isNotEmpty()) {
-            mYearData.clear()
-        }
-        val maxYear = mEndDateTime!!.year
-        val minYear = mStartDateTime!!.year
-        for (year in minYear..maxYear) {
-            mYearData.add(year.toString() + "年")
-        }
-        mSelYear = initNumberDisplay(mDefDateTime!!.year) + "年"
-        mYear = mDefDateTime!!.year
-        //月
-        if (mMonthData.isNotEmpty()) {
-            mMonthData.clear()
-        }
-        val maxMonth = mEndDateTime!!.month
-        val minMonth = mStartDateTime!!.month
-        for (i in minMonth..maxMonth) {
-            mMonthData.add(initNumberDisplay(i) + "月")
-        }
-        mSelMonth = initNumberDisplay(mDefDateTime!!.month) + "月"
-        mMonth = mDefDateTime!!.month
-        //日
-        if (mDayData.isNotEmpty()) {
-            mDayData.clear()
-        }
-        val maxDay = mEndDateTime!!.day
-        val minDay = mStartDateTime!!.day
-        for (i in minDay..maxDay) {
-            mDayData.add(initNumberDisplay(i) + "日")
-        }
-        mSelDay = initNumberDisplay(mDefDateTime!!.day) + "日"
-        mDay = mDefDateTime!!.day
-        //时
-        if (mHourData.isNotEmpty()) {
-            mHourData.clear()
-        }
-        val maxHour = mEndDateTime!!.hour
-        val minHour = mStartDateTime!!.hour
-        for (i in minHour..maxHour) {
-            mHourData.add(initNumberDisplay(i) + "时")
-        }
-        mSelHour = initNumberDisplay(mDefDateTime!!.hour) + "时"
-        mHour = mDefDateTime!!.hour
-        //分
-        if (mMinuteData.isNotEmpty()) {
-            mMinuteData.clear()
-        }
-        val maxMinute = mEndDateTime!!.minute
-        val minMinute = mStartDateTime!!.minute
-        for (i in minMinute..maxMinute) {
-            mMinuteData.add(initNumberDisplay(i) + "分")
-        }
-        mSelMinute = initNumberDisplay(mDefDateTime!!.minute) + "分"
-        mMinute = mDefDateTime!!.minute
-        //秒
-        if (mSecondData.isNotEmpty()) {
-            mSecondData.clear()
-        }
-        val maxSecond = mEndDateTime!!.second
-        val minSecond = mStartDateTime!!.second
-        for (i in minSecond..maxSecond) {
-            mSecondData.add(initNumberDisplay(i) + "秒")
-        }
-        mSelSecond = initNumberDisplay(mDefDateTime!!.second) + "秒"
-        mSecond = mDefDateTime!!.second
+        this.mSelectYear = initNumberDisplay(mDefDateTime!!.year).plus("年")
+        this.mSelectMonth = initNumberDisplay(mDefDateTime!!.month).plus("月")
+        this.mSelectDay = initNumberDisplay(mDefDateTime!!.day).plus("日")
+        this.mSelectHour = initNumberDisplay(mDefDateTime!!.hour).plus("时")
+        this.mSelectMinute = initNumberDisplay(mDefDateTime!!.minute).plus("分")
+        this.mSelectSecond = initNumberDisplay(mDefDateTime!!.second).plus("秒")
+        setYearData(mSelectYear)
+        setMonthData(mSelectYear, mSelectMonth)
+        setDayDate(mSelectYear, mSelectMonth, mSelectDay)
+        setHourDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour)
+        setMinuteDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute)
+        setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
     }
 
     /**
      * 初始化监听
      */
-    private fun initListener(){
+    private fun initListener() {
         mYearView.setOnWheelChangedListener(object : OnWheelChangedListener {
             override fun onWheelScrolled(view: WheelView?, offset: Int) {
 
             }
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectYear = mYearData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
+                setMonthData(mSelectYear, mSelectMonth)
+                setDayDate(mSelectYear, mSelectMonth, mSelectDay)
+                setHourDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour)
+                setMinuteDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute)
+                setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
+            }
 
+            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
+
+            }
+
+            override fun onWheelLoopFinished(view: WheelView?) {
+
+            }
+        })
+
+        mMonthView.setOnWheelChangedListener(object : OnWheelChangedListener {
+            override fun onWheelScrolled(view: WheelView?, offset: Int) {
+
+            }
+
+            override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectMonth = mMonthData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
+                setDayDate(mSelectYear, mSelectMonth, mSelectDay)
+                setHourDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour)
+                setMinuteDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute)
+                setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
+            }
+
+            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
+
+            }
+
+            override fun onWheelLoopFinished(view: WheelView?) {
+
+            }
+        })
+
+        mDayView.setOnWheelChangedListener(object : OnWheelChangedListener {
+            override fun onWheelScrolled(view: WheelView?, offset: Int) {
+
+            }
+
+            override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectDay = mDayData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
+                setHourDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour)
+                setMinuteDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute)
+                setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
+            }
+
+            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
+
+            }
+
+            override fun onWheelLoopFinished(view: WheelView?) {
+
+            }
+        })
+
+        mHourView.setOnWheelChangedListener(object : OnWheelChangedListener {
+            override fun onWheelScrolled(view: WheelView?, offset: Int) {
+
+            }
+
+            override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectHour = mHourData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
+                setMinuteDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute)
+                setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
+            }
+
+            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
+
+            }
+
+            override fun onWheelLoopFinished(view: WheelView?) {
+
+            }
+        })
+
+        mMinuteView.setOnWheelChangedListener(object : OnWheelChangedListener {
+            override fun onWheelScrolled(view: WheelView?, offset: Int) {
+
+            }
+
+            override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectMinute = mMinuteData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
+                setSecondDate(mSelectYear, mSelectMonth, mSelectDay, mSelectHour, mSelectMinute, mSelectSecond)
+            }
+
+            override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
+
+            }
+
+            override fun onWheelLoopFinished(view: WheelView?) {
+
+            }
+        })
+
+        mSecondView.setOnWheelChangedListener(object : OnWheelChangedListener {
+            override fun onWheelScrolled(view: WheelView?, offset: Int) {
+
+            }
+
+            override fun onWheelSelected(view: WheelView?, position: Int) {
+                mSelectSecond = mSecondData[position]
+                mCallback?.onSelected(
+                    initStrInt(mSelectYear),
+                    initStrInt(mSelectMonth),
+                    initStrInt(mSelectDay),
+                    initStrInt(mSelectHour),
+                    initStrInt(mSelectMinute),
+                    initStrInt(mSelectSecond)
+                )
             }
 
             override fun onWheelScrollStateChanged(view: WheelView?, state: Int) {
@@ -352,10 +441,312 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet? = null, defS
             }
         })
     }
+
+    /**
+     * 设置年数据
+     *
+     * @param defaultYear 默认选中数据
+     */
+    private fun setYearData(defaultYear: String) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mYearData.isNotEmpty()) {
+            mYearData.clear()
+        }
+        for (i in mStartDateTime!!.year..mEndDateTime!!.year) {
+            mYearData.add(i.toString().plus("年"))
+        }
+        var mPosition = mYearData.indexOf(defaultYear)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectYear = mYearData[mPosition]
+        mYearView.setData(mYearData, mPosition)
+    }
+
+    /**
+     * 设置月数据
+     * @param defaultYear 当前年
+     * @param defaultMonth 默认选中月
+     */
+    private fun setMonthData(defaultYear: String, defaultMonth: String) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mMonthData.isNotEmpty()) {
+            mMonthData.clear()
+        }
+        val intYear = initStrInt(defaultYear)
+        val min: Int
+        val max: Int
+        if (mStartDateTime!!.year == intYear) {
+            min = mStartDateTime!!.month
+            max = 12
+        } else if (mEndDateTime!!.year == intYear) {
+            min = 1
+            max = mEndDateTime!!.month
+        } else {
+            min = 1
+            max = 12
+        }
+        for (i in min..max) {
+            mMonthData.add(initNumberDisplay(i).plus("月"))
+        }
+        var mPosition = mMonthData.indexOf(defaultMonth)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectMonth = mMonthData[mPosition]
+        mMonthView.setData(mMonthData, mPosition)
+    }
+
+    /**
+     * 设置日数据
+     * @param defaultYear 当前年
+     * @param defaultMonth 当前月
+     * @param defaultDay 默认选中日
+     */
+    private fun setDayDate(defaultYear: String, defaultMonth: String, defaultDay: String) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mDayData.isNotEmpty()) {
+            mDayData.clear()
+        }
+        val intYear = initStrInt(defaultYear)
+        val intMonth = initStrInt(defaultMonth)
+        val min: Int
+        val max: Int
+        if (mStartDateTime!!.year == intYear && mStartDateTime!!.month == intMonth) {
+            min = mStartDateTime!!.day
+            max = initTotalDaysInMonth(intYear, intMonth)
+        } else if (mEndDateTime!!.year == intYear && mEndDateTime!!.month == intMonth) {
+            min = 1
+            max = mEndDateTime!!.day
+        } else {
+            min = 1
+            max = initTotalDaysInMonth(intYear, intMonth)
+        }
+        for (i in min..max) {
+            mDayData.add(initNumberDisplay(i).plus("日"))
+        }
+        var mPosition = mDayData.indexOf(defaultDay)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectDay = mDayData[mPosition]
+        mDayView.setData(mDayData, mPosition)
+    }
+
+    /**
+     * 设置小时数据
+     * @param defaultYear 当前年
+     * @param defaultMonth 当前月
+     * @param defaultDay 当前日
+     * @param defaultHour 默认选中小时
+     */
+    private fun setHourDate(defaultYear: String, defaultMonth: String, defaultDay: String, defaultHour: String) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mHourData.isNotEmpty()) {
+            mHourData.clear()
+        }
+        val intYear = initStrInt(defaultYear)
+        val intMonth = initStrInt(defaultMonth)
+        val intDay = initStrInt(defaultDay)
+        val min: Int
+        val max: Int
+        if (mStartDateTime!!.year == intYear && mStartDateTime!!.month == intMonth && mStartDateTime!!.day == intDay) {
+            min = mStartDateTime!!.hour
+            max = 23
+        } else if (mEndDateTime!!.year == intYear && mEndDateTime!!.month == intMonth && mEndDateTime!!.day == intDay) {
+            min = 0
+            max = mEndDateTime!!.hour
+        } else {
+            min = 0
+            max = 23
+        }
+        for (i in min..max) {
+            mHourData.add(initNumberDisplay(i).plus("时"))
+        }
+        var mPosition = mHourData.indexOf(defaultHour)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectHour = mHourData[mPosition]
+        mHourView.setData(mHourData, mPosition)
+    }
+
+    /**
+     * 设置分钟数据
+     * @param defaultYear 当前年
+     * @param defaultMonth 当前月
+     * @param defaultDay 当前日
+     * @param defaultHour 当前小时
+     * @param defaultMinute 默认选中分钟
+     */
+    private fun setMinuteDate(
+        defaultYear: String,
+        defaultMonth: String,
+        defaultDay: String,
+        defaultHour: String,
+        defaultMinute: String
+    ) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mMinuteData.isNotEmpty()) {
+            mMinuteData.clear()
+        }
+        val intYear = initStrInt(defaultYear)
+        val intMonth = initStrInt(defaultMonth)
+        val intDay = initStrInt(defaultDay)
+        val intHour = initStrInt(defaultHour)
+        val min: Int
+        val max: Int
+        if (mStartDateTime!!.year == intYear && mStartDateTime!!.month == intMonth && mStartDateTime!!.day == intDay && mStartDateTime!!.hour == intHour) {
+            min = mStartDateTime!!.minute
+            max = 59
+        } else if (mEndDateTime!!.year == intYear && mEndDateTime!!.month == intMonth && mEndDateTime!!.day == intDay && mEndDateTime!!.hour == intHour) {
+            min = 0
+            max = mEndDateTime!!.minute
+        } else {
+            min = 0
+            max = 59
+        }
+        for (i in min..max) {
+            mMinuteData.add(initNumberDisplay(i).plus("分"))
+        }
+        var mPosition = mMinuteData.indexOf(defaultMinute)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectMinute = mMinuteData[mPosition]
+        mMinuteView.setData(mMinuteData, mPosition)
+    }
+
+    /**
+     * 设置秒数据
+     * @param defaultYear 当前年
+     * @param defaultMonth 当前月
+     * @param defaultDay 当前日
+     * @param defaultHour 当前小时
+     * @param defaultMinute 当前分钟
+     * @param defaultSecond 默认选中秒
+     */
+    private fun setSecondDate(
+        defaultYear: String,
+        defaultMonth: String,
+        defaultDay: String,
+        defaultHour: String,
+        defaultMinute: String,
+        defaultSecond: String
+    ) {
+        if (mStartDateTime == null || mEndDateTime == null) {
+            return
+        }
+        if (mSecondData.isNotEmpty()) {
+            mSecondData.clear()
+        }
+        val intYear = initStrInt(defaultYear)
+        val intMonth = initStrInt(defaultMonth)
+        val intDay = initStrInt(defaultDay)
+        val intHour = initStrInt(defaultHour)
+        val intMinute = initStrInt(defaultMinute)
+        val min: Int
+        val max: Int
+        if (mStartDateTime!!.year == intYear && mStartDateTime!!.month == intMonth && mStartDateTime!!.day == intDay && mStartDateTime!!.hour == intHour && mStartDateTime!!.minute == intMinute) {
+            min = mStartDateTime!!.minute
+            max = 59
+        } else if (mEndDateTime!!.year == intYear && mEndDateTime!!.month == intMonth && mEndDateTime!!.day == intDay && mEndDateTime!!.hour == intHour && mEndDateTime!!.minute == intMinute) {
+            min = 0
+            max = mEndDateTime!!.minute
+        } else {
+            min = 0
+            max = 59
+        }
+        for (i in min..max) {
+            mSecondData.add(initNumberDisplay(i).plus("秒"))
+        }
+        var mPosition = mSecondData.indexOf(defaultSecond)
+        if (mPosition == -1) {
+            mPosition = 0
+        }
+        mSelectSecond = mSecondData[mPosition]
+        mSecondView.setData(mSecondData, mPosition)
+    }
+
+
+    private fun initStrInt(data: String): Int {
+        return data.removeRange(data.length - 1, data.length).toInt()
+    }
+
+
     private fun initNumberDisplay(num: Int): String {
         if (num <= 9) {
             return "0".plus(num)
         }
         return num.toString()
+    }
+
+    private fun initTotalDaysInMonth(year: Int, month: Int): Int {
+        return when (month) {
+            1 -> {
+                31
+            }
+            3 -> {
+                31
+            }
+            5 -> {
+                31
+            }
+            7 -> {
+                31
+            }
+            8 -> {
+                31
+            }
+            10 -> {
+                31
+            }
+            12 -> {
+                31
+            }
+            4 -> {
+                30
+            }
+            6 -> {
+                30
+            }
+            9 -> {
+                30
+            }
+            11 -> {
+                30
+            }
+            2 -> {
+                val isLeap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+                if (isLeap) {
+                    return 29
+                } else {
+                    return 28
+                }
+            }
+            else -> {
+                30
+            }
+        }
+    }
+
+    @ColorInt
+    private fun getColor(context: Context, @ColorRes id: Int): Int {
+        return ContextCompat.getColor(context, id)
+    }
+
+    @Px
+    private fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
     }
 }

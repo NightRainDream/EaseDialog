@@ -9,6 +9,8 @@ import com.night.dialog.DialogTools
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.DateTimeEntity
+import com.night.dialog.tools.PICKER_ALL
+import com.night.dialog.tools.PICKER_DATE
 
 class MainActivity : AppCompatActivity() {
 
@@ -126,6 +128,7 @@ class MainActivity : AppCompatActivity() {
     fun onDatePicker(view: View) {
         DialogTools.getPickerBuilder()
             .setTitleText("请选择日期和时间")
+            .setLabel(PICKER_ALL)
             .toDateTimePicker(this, object : IDateTimeSelectCallback {
                 override fun onSelectDate(result: DateTimeEntity) {
                     DialogTools.getToastBuilder()
