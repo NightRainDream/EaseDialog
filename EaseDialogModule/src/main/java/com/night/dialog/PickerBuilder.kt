@@ -3,10 +3,13 @@ package com.night.dialog
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
+import com.night.dialog.callback.IAddressPickerCallback
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.entity.DateTimePickerEntity
 import com.night.dialog.entity.TextInfoEntity
+import com.night.dialog.tools.AddressMode
 import com.night.dialog.tools.DateTimeMode
+import com.night.dialog.ui.picker.AddressPickerDialogFragment
 import com.night.dialog.ui.picker.DateTimePickerDialogFragment
 
 class PickerBuilder : BaseDialogBuilder() {
@@ -165,6 +168,22 @@ class PickerBuilder : BaseDialogBuilder() {
     fun setLabel(@DateTimeMode mode: Int): PickerBuilder {
         this.mLabel = mode
         return this
+    }
+
+    fun toAddressPicker(activity: AppCompatActivity,@AddressMode mode: Int,callback: IAddressPickerCallback){
+        val mFragmentManage = activity.supportFragmentManager
+        val mHistoryDialog = mFragmentManage.findFragmentByTag("AddressPicker")
+        if (mHistoryDialog != null && mHistoryDialog is AddressPickerDialogFragment) {
+            mHistoryDialog.dismiss()
+        }
+        val mAddressPickerDialogFragment = AddressPickerDialogFragment()
+        mAddressPickerDialogFragment.setTitleTextInfo(mTitleTextInfo)
+        mAddressPickerDialogFragment.setMainTextInfo(mMainTextInfo)
+        mAddressPickerDialogFragment.setCancelTextInfo(mCancelTextInfo)
+        mAddressPickerDialogFragment.setPositiveTextInfo(mPositiveTextInfo)
+        mAddressPickerDialogFragment.setCallback(callback)
+        mAddressPickerDialogFragment.setLabel(mode)
+        mAddressPickerDialogFragment.show(mFragmentManage, "AddressPicker")
     }
 
     fun toDateTimePicker(activity: AppCompatActivity, callback: IDateTimeSelectCallback) {

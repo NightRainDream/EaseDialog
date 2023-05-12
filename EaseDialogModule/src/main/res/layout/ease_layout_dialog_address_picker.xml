@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_picker_title"
         style="@style/StyleTitle"
         android:gravity="center_horizontal"
         tools:text="Title" />
 
-    <com.night.dialog.widget.EaseDateTimePickerView
-        android:id="@+id/ease_date_time"
+    <com.night.dialog.widget.EaseAddressPickerView
+        android:id="@+id/ease_address"
         android:layout_width="match_parent"
-        app:customDefTextColor="@color/EaseColorMainText"
-        app:customSelTextColor="@color/EaseColorButtonTextColor"
-        app:customDefTextSize="14sp"
-        app:customSelTextSize="15sp"
-        app:customIndicatorColor="#DDDDDD"
+        app:addressDefTextColor="@color/EaseColorMainText"
+        app:addressSelTextColor="@color/EaseColorButtonTextColor"
+        app:addressDefTextSize="14sp"
+        app:addressSelTextSize="15sp"
+        app:addressIndicatorColor="#DDDDDD"
         android:layout_height="@dimen/dp_250"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:background="@color/EaseColorBackground"

@@ -7,4 +7,12 @@
         <attr name="customSelTextSize" format="dimension" />
         <attr name="customIndicatorColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="EaseAddressPickerView">
+        <attr name="addressDefTextColor" format="color" />
+        <attr name="addressSelTextColor" format="color" />
+        <attr name="addressDefTextSize" format="dimension" />
+        <attr name="addressSelTextSize" format="dimension" />
+        <attr name="addressIndicatorColor" format="color" />
+    </declare-styleable>
 </resources>

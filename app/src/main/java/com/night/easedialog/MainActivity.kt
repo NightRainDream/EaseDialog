@@ -6,9 +6,13 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.DialogTools
+import com.night.dialog.callback.IAddressPickerCallback
 import com.night.dialog.callback.IDateTimeSelectCallback
 import com.night.dialog.callback.IDialogActionCallback
+import com.night.dialog.entity.AddressEntity
 import com.night.dialog.entity.DateTimeEntity
+import com.night.dialog.entity.EaseLocationEntity
+import com.night.dialog.tools.PICKER_ADDRESS_PROVINCE_CITY
 import com.night.dialog.tools.PICKER_ALL
 import com.night.dialog.tools.PICKER_DATE
 
@@ -146,5 +150,20 @@ class MainActivity : AppCompatActivity() {
     fun onToast(view: View) {
         DialogTools.getToastBuilder()
             .toToast("文件删除成功~")
+    }
+
+    fun onAddressPicker(view: View) {
+        DialogTools.getPickerBuilder()
+            .setTitleText("请选择地址")
+            .toAddressPicker(this, PICKER_ADDRESS_PROVINCE_CITY, object : IAddressPickerCallback {
+                override fun onAddressSelected(
+                    province: EaseLocationEntity?,
+                    city: EaseLocationEntity?,
+                    county: EaseLocationEntity?
+                ) {
+                    DialogTools.getToastBuilder().toToast(province?.name + city?.name + county?.name)
+                }
+
+            })
     }
 }

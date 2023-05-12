@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_picker_title"
         style="@style/StyleTitle"
+        android:layout_width="@dimen/dp_472"
         android:gravity="center_horizontal"
         tools:text="Title" />
 
-    <com.night.dialog.widget.EaseDateTimePickerView
-        android:id="@+id/ease_date_time"
-        android:layout_width="match_parent"
-        app:customDefTextColor="@color/EaseColorMainText"
-        app:customSelTextColor="@color/EaseColorButtonTextColor"
-        app:customDefTextSize="14sp"
-        app:customSelTextSize="15sp"
-        app:customIndicatorColor="#DDDDDD"
-        android:layout_height="@dimen/dp_250"
-        android:layout_marginHorizontal="@dimen/dp_16"
+    <com.night.dialog.widget.EaseAddressPickerView
+        android:id="@+id/ease_address"
+        android:layout_width="@dimen/dp_472"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/EaseColorBackground"
-        android:paddingHorizontal="@dimen/dp_16" />
+        app:addressDefTextColor="@color/EaseColorMainText"
+        app:addressSelTextColor="@color/EaseColorButtonTextColor"
+        app:addressDefTextSize="14sp"
+        app:addressSelTextSize="15sp"
+        app:addressIndicatorColor="#DDDDDD"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         style="@style/StyleAction"
-        android:layout_marginBottom="@dimen/dp_20">
+        android:layout_width="@dimen/dp_472">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_picker_cancel"
