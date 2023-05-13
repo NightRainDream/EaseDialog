@@ -46,13 +46,16 @@ override fun onCreate() {
 DialogTools.getDialogBuilder()
     .setTitleText("允许日历联网")
     .setMainText("下载或更新节假日、班休、历法、订阅等信息。")
+    .setPositiveTextColor(Color.RED)
     .toTipsDialog(this, object : IDialogActionCallback {
         override fun onPositive(content: String, index: MutableList<Int>) {
-            DialogTools.getToastBuilder().toToast("确认")
+            DialogTools.getToastBuilder()
+                .toToast("确定")
         }
 
         override fun onCancel() {
-            DialogTools.getToastBuilder().toToast("取消")
+            DialogTools.getToastBuilder()
+                .toToast("取消")
         }
     })
 ```
@@ -61,12 +64,18 @@ DialogTools.getDialogBuilder()
 
 ```kotlin
 DialogTools.getDialogBuilder()
-    .setMainText("确定删除当前联系人?")
+    .setMainText("确定删除当前联系人确定删除当前联系人确定删除当前联系人?")
     .setPositiveTextColor(Color.RED)
     .setPositiveText("删除")
     .toWarnDialog(this, object : IDialogActionCallback {
         override fun onPositive(content: String, index: MutableList<Int>) {
-            DialogTools.getToastBuilder().toToast("删除")
+            DialogTools.getToastBuilder()
+                .toToast("确定")
+        }
+
+        override fun onCancel() {
+            DialogTools.getToastBuilder()
+                .toToast("取消")
         }
     })
 ```
@@ -75,7 +84,6 @@ DialogTools.getDialogBuilder()
 
 ```kotlin
 DialogTools.getDialogBuilder()
-    .setCancelable(true)
     .toLoadingDialog(this)
 ```
 
@@ -91,7 +99,14 @@ DialogTools.getDialogBuilder()
         object : IDialogActionCallback {
             override fun onPositive(content: String, index: MutableList<Int>) {
                 mSelectSingleIndex = index.first()
-                Toast.makeText(this@MainActivity, content, Toast.LENGTH_SHORT).show()
+                DialogTools.getToastBuilder()
+                    .toToast(content)
+            }
+
+            override fun onCancel() {
+                super.onCancel()
+                DialogTools.getToastBuilder()
+                    .toToast("取消")
             }
         })
 ```
@@ -106,6 +121,14 @@ DialogTools.getDialogBuilder()
             override fun onPositive(content: String, index: MutableList<Int>) {
                 mSelectMultipleIndex.clear()
                 mSelectMultipleIndex.addAll(index)
+                DialogTools.getToastBuilder()
+                    .toToast("确定==>" + index.size)
+            }
+
+            override fun onCancel() {
+                super.onCancel()
+                DialogTools.getToastBuilder()
+                    .toToast("取消")
             }
         })
 ```
@@ -115,9 +138,8 @@ DialogTools.getDialogBuilder()
 ```kotlin
 DialogTools.getPickerBuilder()
     .setTitleText("请选择日期和时间")
-    .setLabel(mutableListOf(EaseConstantTools.PICKER_LABEL_YEAR,EaseConstantTools.PICKER_LABEL_MONTH,EaseConstantTools.PICKER_LABEL_DAY,EaseConstantTools.PICKER_LABEL_HOUR,EaseConstantTools.PICKER_LABEL_MINUTE,EaseConstantTools.PICKER_LABEL_SECOND))
-    .toDateTimePicker(this, object : IDateTimeCallback {
-        override fun onSelectDate(result: DateTimeEntity) {
+    .toDateTimePicker(this,PICKER_ALL, object : IDateTimeCallback {
+        override fun onSelectDate(result: EaseDateTimeEntity) {
             DialogTools.getToastBuilder()
                 .toToast(result.getDateTime())
         }
@@ -130,7 +152,27 @@ DialogTools.getPickerBuilder()
     })
 ```
 
-#### 3.2.7.Toast
+#### 3.2.7.地址选择器
+```kotlin
+DialogTools.getPickerBuilder()
+    .setTitleText("请选择地址")
+    .setSelectProvince(mProvince)
+    .setSelectCity(mCity)
+    .setSelectCounty(mCounty)
+    .toAddressPicker(this, PICKER_ADDRESS_PROVINCE_CITY, object : ILocationCallback {
+        override fun onAddressSelected(
+            province: EaseLocationEntity,
+            city: EaseLocationEntity,
+            county: EaseLocationEntity
+        ) {
+            mProvince = province
+            mCity = city
+            mCounty = county
+            DialogTools.getToastBuilder().toToast(province.name + city.name + county.name)
+        }
+    })
+```
+#### 3.2.8.地址选择器
 ```kotlin
 DialogTools.getToastBuilder()
     .toToast("文件删除成功~")

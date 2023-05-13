@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     fun onDatePicker(view: View) {
         DialogTools.getPickerBuilder()
             .setTitleText("请选择日期和时间")
-            .toDateTimePicker(this,PICKER_ALL, object : IDateTimeCallback {
+            .toDateTimePicker(this, PICKER_ALL, object : IDateTimeCallback {
                 override fun onSelectDate(result: EaseDateTimeEntity) {
                     DialogTools.getToastBuilder()
                         .toToast(result.getDateTime())
@@ -147,9 +147,10 @@ class MainActivity : AppCompatActivity() {
         DialogTools.getToastBuilder()
             .toToast("文件删除成功~")
     }
-    private var mProvince: EaseLocationEntity?=null
-    private var mCity: EaseLocationEntity?=null
-    private var mCounty: EaseLocationEntity?=null
+
+    private var mProvince: EaseLocationEntity? = null
+    private var mCity: EaseLocationEntity? = null
+    private var mCounty: EaseLocationEntity? = null
     fun onAddressPicker(view: View) {
         DialogTools.getPickerBuilder()
             .setTitleText("请选择地址")
