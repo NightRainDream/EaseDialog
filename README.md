@@ -183,7 +183,7 @@ DialogTools.getPickerBuilder()
     })
 ```
 
-#### 3.2.9.地址选择器
+#### 3.2.9.Toast
 ```kotlin
 DialogTools.getToastBuilder()
     .toToast("文件删除成功~")
