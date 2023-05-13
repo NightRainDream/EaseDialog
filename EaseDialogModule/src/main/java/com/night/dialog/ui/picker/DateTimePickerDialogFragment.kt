@@ -7,22 +7,22 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
-import com.night.dialog.callback.IDateTimePickerListener
-import com.night.dialog.callback.IDateTimeSelectCallback
-import com.night.dialog.entity.DateTimePickerEntity
-import com.night.dialog.tools.*
+import com.night.dialog.callback.IDateTimeCallback
+import com.night.dialog.callback.IDateTimeChanceListener
+import com.night.dialog.entity.EaseDateTimeEntity
 import com.night.dialog.tools.DialogHelp
+import com.night.dialog.tools.HEIGHT_RATIO_LANDSCAPE
 import com.night.dialog.widget.EaseDateTimePickerView
 
-class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseViewModel>() {
+class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
     private lateinit var mDateTimeView : EaseDateTimePickerView
-    private var mMinData = DateTimePickerEntity.getDefaultMin()
-    private var mMaxData = DateTimePickerEntity.getDefaultMax()
-    private var mSelData = DateTimePickerEntity.getToday()
-    private var mCallback: IDateTimeSelectCallback? = null
+    private var mMinData = EaseDateTimeEntity.getDefaultMin()
+    private var mMaxData = EaseDateTimeEntity.getDefaultMax()
+    private var mSelData = EaseDateTimeEntity.getToday()
+    private var mCallback: IDateTimeCallback? = null
     private var mLabel = -1
 
 
@@ -43,8 +43,8 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
         }
     }
 
-    override fun initViewModel(): Class<DateTimePickerBaseViewModel> {
-        return DateTimePickerBaseViewModel::class.java
+    override fun initViewModel(): Class<DateTimePickerViewModel> {
+        return DateTimePickerViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -77,9 +77,9 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
             dismiss()
         }
 
-        mDateTimeView.setListener(object : IDateTimePickerListener {
-            override fun onSelected(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
-                mViewModel.setSelDateTime(DateTimePickerEntity(year, month, day, hour, minute, second))
+        mDateTimeView.setListener(object : IDateTimeChanceListener {
+            override fun onDateTimeChange(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+                mViewModel.setSelDateTime(EaseDateTimeEntity(year, month, day, hour, minute, second))
             }
         })
     }
@@ -112,21 +112,21 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
         return true
     }
 
-    fun setMinDateTime(entity: DateTimePickerEntity?) {
+    fun setMinDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
         this.mMinData = entity
     }
 
-    fun setMaxDateTime(entity: DateTimePickerEntity?) {
+    fun setMaxDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
         this.mMaxData = entity
     }
 
-    fun setSelDateTime(entity: DateTimePickerEntity?) {
+    fun setSelDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
@@ -137,7 +137,7 @@ class DateTimePickerDialogFragment : EaseSafeDialogFragment<DateTimePickerBaseVi
         this.mLabel = mode
     }
 
-    fun setCallback(callback: IDateTimeSelectCallback?) {
+    fun setCallback(callback: IDateTimeCallback?) {
         this.mCallback = callback
     }
 }

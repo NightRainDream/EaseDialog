@@ -10,7 +10,7 @@ const val HEIGHT_RATIO_LANDSCAPE = 0.8F
 /**
  * 竖屏Dialog高度占比
  */
-const val HEIGHT_RATIO_PORTRAIT = 0.5F
+const val HEIGHT_RATIO_PORTRAIT = 0.6F
 
 //------------------------> 日期时间选择器 开始 <------------------------
 const val PICKER_DATE = 1000

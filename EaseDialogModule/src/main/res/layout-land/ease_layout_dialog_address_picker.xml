@@ -15,7 +15,7 @@
         android:gravity="center_horizontal"
         tools:text="Title" />
 
-    <com.night.dialog.widget.EaseAddressPickerView
+    <com.night.dialog.widget.EaseLocationPickerView
         android:id="@+id/ease_address"
         android:layout_width="@dimen/dp_472"
         android:layout_height="0dp"

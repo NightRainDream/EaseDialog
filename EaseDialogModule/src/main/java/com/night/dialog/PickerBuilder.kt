@@ -3,20 +3,24 @@ package com.night.dialog
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
-import com.night.dialog.callback.IAddressPickerCallback
-import com.night.dialog.callback.IDateTimeSelectCallback
-import com.night.dialog.entity.DateTimePickerEntity
+import com.night.dialog.callback.IDateTimeCallback
+import com.night.dialog.callback.ILocationCallback
+import com.night.dialog.entity.EaseDateTimeEntity
+import com.night.dialog.entity.EaseLocationEntity
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.AddressMode
 import com.night.dialog.tools.DateTimeMode
-import com.night.dialog.ui.picker.AddressPickerDialogFragment
 import com.night.dialog.ui.picker.DateTimePickerDialogFragment
+import com.night.dialog.ui.picker.LocationPickerDialogFragment
 
 class PickerBuilder : BaseDialogBuilder() {
-    private var mMinDateTime: DateTimePickerEntity? = null
-    private var mMaxDateTime: DateTimePickerEntity? = null
-    private var mSelDateTime: DateTimePickerEntity? = null
-    private var mLabel: Int = -1
+    private var mMinDateTime: EaseDateTimeEntity? = null
+    private var mMaxDateTime: EaseDateTimeEntity? = null
+    private var mSelDateTime: EaseDateTimeEntity? = null
+
+    private var mSelProvince: EaseLocationEntity? = EaseLocationEntity("北京市", "110000")
+    private var mSelCity: EaseLocationEntity? = EaseLocationEntity("北京市", "110000")
+    private var mSelCounty: EaseLocationEntity? = EaseLocationEntity("朝阳区", "110105")
 
     /**
      * 设置标题TextView属性
@@ -81,6 +85,21 @@ class PickerBuilder : BaseDialogBuilder() {
      */
     fun setMainTextColor(@ColorInt main: Int): PickerBuilder {
         this.mMainTextInfo.textColor = main
+        return this
+    }
+
+    fun setSelectProvince(entity: EaseLocationEntity?): PickerBuilder {
+        this.mSelProvince = entity
+        return this
+    }
+
+    fun setSelectCity(entity: EaseLocationEntity?): PickerBuilder {
+        this.mSelCity = entity
+        return this
+    }
+
+    fun setSelectCounty(entity: EaseLocationEntity?): PickerBuilder {
+        this.mSelCounty = entity
         return this
     }
 
@@ -150,43 +169,39 @@ class PickerBuilder : BaseDialogBuilder() {
         return this
     }
 
-    fun setMinDateTime(entity: DateTimePickerEntity): PickerBuilder {
+    fun setMinDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mMinDateTime = entity
         return this
     }
 
-    fun setMaxDateTime(entity: DateTimePickerEntity): PickerBuilder {
+    fun setMaxDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mMaxDateTime = entity
         return this
     }
 
-    fun setSelDateTime(entity: DateTimePickerEntity): PickerBuilder {
+    fun setSelDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mSelDateTime = entity
         return this
     }
 
-    fun setLabel(@DateTimeMode mode: Int): PickerBuilder {
-        this.mLabel = mode
-        return this
-    }
-
-    fun toAddressPicker(activity: AppCompatActivity,@AddressMode mode: Int,callback: IAddressPickerCallback){
+    fun toAddressPicker(activity: AppCompatActivity, @AddressMode mode: Int, callback: ILocationCallback) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("AddressPicker")
-        if (mHistoryDialog != null && mHistoryDialog is AddressPickerDialogFragment) {
+        if (mHistoryDialog != null && mHistoryDialog is LocationPickerDialogFragment) {
             mHistoryDialog.dismiss()
         }
-        val mAddressPickerDialogFragment = AddressPickerDialogFragment()
-        mAddressPickerDialogFragment.setTitleTextInfo(mTitleTextInfo)
-        mAddressPickerDialogFragment.setMainTextInfo(mMainTextInfo)
-        mAddressPickerDialogFragment.setCancelTextInfo(mCancelTextInfo)
-        mAddressPickerDialogFragment.setPositiveTextInfo(mPositiveTextInfo)
-        mAddressPickerDialogFragment.setCallback(callback)
-        mAddressPickerDialogFragment.setLabel(mode)
-        mAddressPickerDialogFragment.show(mFragmentManage, "AddressPicker")
+        val mLocationPickerDialogFragment = LocationPickerDialogFragment()
+        mLocationPickerDialogFragment.setTitleTextInfo(mTitleTextInfo)
+        mLocationPickerDialogFragment.setMainTextInfo(mMainTextInfo)
+        mLocationPickerDialogFragment.setCancelTextInfo(mCancelTextInfo)
+        mLocationPickerDialogFragment.setPositiveTextInfo(mPositiveTextInfo)
+        mLocationPickerDialogFragment.setCallback(callback)
+        mLocationPickerDialogFragment.setLabel(mode)
+        mLocationPickerDialogFragment.setSelectLocation(mSelProvince, mSelCity, mSelCounty)
+        mLocationPickerDialogFragment.show(mFragmentManage, "AddressPicker")
     }
 
-    fun toDateTimePicker(activity: AppCompatActivity, callback: IDateTimeSelectCallback) {
+    fun toDateTimePicker(activity: AppCompatActivity, @DateTimeMode mode: Int, callback: IDateTimeCallback) {
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("DateTimePicker")
         if (mHistoryDialog != null && mHistoryDialog is DateTimePickerDialogFragment) {
@@ -201,7 +216,7 @@ class PickerBuilder : BaseDialogBuilder() {
         mDateTimePickerDialogFragment.setMinDateTime(mMinDateTime)
         mDateTimePickerDialogFragment.setMaxDateTime(mMaxDateTime)
         mDateTimePickerDialogFragment.setSelDateTime(mSelDateTime)
-        mDateTimePickerDialogFragment.setLabel(mLabel)
+        mDateTimePickerDialogFragment.setLabel(mode)
         mDateTimePickerDialogFragment.show(mFragmentManage, "DateTimePicker")
     }
 }

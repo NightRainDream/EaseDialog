@@ -7,30 +7,37 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
-import com.night.dialog.callback.IAddressPickerCallback
+import com.night.dialog.callback.ILocationCallback
 import com.night.dialog.callback.ILocationChangeListener
 import com.night.dialog.entity.EaseLocationEntity
-import com.night.dialog.tools.*
+import com.night.dialog.tools.AddressMode
 import com.night.dialog.tools.DialogHelp
-import com.night.dialog.widget.EaseAddressPickerView
+import com.night.dialog.tools.HEIGHT_RATIO_LANDSCAPE
+import com.night.dialog.tools.PICKER_ADDRESS_ALL
+import com.night.dialog.widget.EaseLocationPickerView
 
-class AddressPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewModel>() {
+class LocationPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
-    private lateinit var mAddressView: EaseAddressPickerView
+    private lateinit var mAddressView: EaseLocationPickerView
+
     @AddressMode
     private var mLabel = PICKER_ADDRESS_ALL
-    private var mIAddressPickerCallback: IAddressPickerCallback? = null
+    private var mIAddressPickerCallback: ILocationCallback? = null
+    private var mDefaultProvince: EaseLocationEntity? = null
+    private var mDefaultCity: EaseLocationEntity? = null
+    private var mDefaultCounty: EaseLocationEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(mLabel != -1){
+        if (mLabel != -1) {
             mViewModel.setLabel(mLabel)
         }
         mIAddressPickerCallback?.let {
             mViewModel.setCallback(it)
         }
+        mViewModel.setSelectLocation(mDefaultProvince,mDefaultCity,mDefaultCounty)
     }
 
     override fun initLayout(): Int {
@@ -83,7 +90,7 @@ class AddressPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewMode
 
     override fun initData(savedInstanceState: Bundle?) {
         mAddressView.setMode(mViewModel.getLabel())
-
+        mAddressView.setDefaultData(mViewModel.getSelectProvince(),mViewModel.getSelectCity(),mViewModel.getSelectCounty())
         mViewModel.mTitleTextInfo.observe(this) {
             setViewParameter(mTitleView, it)
         }
@@ -107,11 +114,17 @@ class AddressPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewMode
         return true
     }
 
-    fun setLabel(@AddressMode mode: Int){
+    fun setLabel(@AddressMode mode: Int) {
         this.mLabel = mode
     }
 
-    fun setCallback(callback: IAddressPickerCallback){
+    fun setSelectLocation(province: EaseLocationEntity?, city: EaseLocationEntity?, county: EaseLocationEntity?) {
+        mDefaultProvince = province
+        mDefaultCity = city
+        mDefaultCounty = county
+    }
+
+    fun setCallback(callback: ILocationCallback) {
         this.mIAddressPickerCallback = callback
     }
 

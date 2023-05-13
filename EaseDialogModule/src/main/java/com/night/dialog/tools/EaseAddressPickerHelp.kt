@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.WorkerThread
-import com.night.dialog.callback.EaseILoadAddressCallback
+import com.night.dialog.callback.EaseILoadLocationCallback
 import com.night.dialog.entity.EaseCityEntity
 import com.night.dialog.entity.EaseCountyEntity
 import com.night.dialog.entity.EaseProvinceEntity
@@ -22,9 +22,9 @@ object EaseAddressPickerHelp {
      * 获取地址数据
      *
      * @param context 上下文
-     * @param callback 数据回调[EaseILoadAddressCallback]
+     * @param callback 数据回调[EaseILoadLocationCallback]
      */
-    fun getAddressData(context: Context, callback: EaseILoadAddressCallback) {
+    fun getAddressData(context: Context, callback: EaseILoadLocationCallback) {
         if (mAddressList.isEmpty()) {
             Executors.newSingleThreadExecutor().execute {
                 val text = loadFromAssets(context)

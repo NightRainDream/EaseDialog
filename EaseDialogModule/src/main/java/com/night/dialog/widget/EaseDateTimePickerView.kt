@@ -14,8 +14,8 @@ import androidx.core.view.isVisible
 import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
 import com.github.gzuliyujiang.wheelview.widget.WheelView
 import com.night.dialog.R
-import com.night.dialog.callback.IDateTimePickerListener
-import com.night.dialog.entity.DateTimePickerEntity
+import com.night.dialog.callback.IDateTimeChanceListener
+import com.night.dialog.entity.EaseDateTimeEntity
 import com.night.dialog.tools.*
 
 class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
@@ -33,10 +33,10 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
     private var mSelTextSize = 15F
     private var mIndicatorColor = Color.GRAY
 
-    private var mStartDateTime: DateTimePickerEntity? = null
-    private var mEndDateTime: DateTimePickerEntity? = null
-    private var mDefDateTime: DateTimePickerEntity? = null
-    private var mCallback: IDateTimePickerListener? = null
+    private var mStartDateTime: EaseDateTimeEntity? = null
+    private var mEndDateTime: EaseDateTimeEntity? = null
+    private var mDefDateTime: EaseDateTimeEntity? = null
+    private var mCallback: IDateTimeChanceListener? = null
 
     //年
     private val mYearData = mutableListOf<String>()
@@ -138,7 +138,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
      * @param end 结束日期时间数据
      * @param def 默认选中时间数据
      */
-    fun setDateTime(start: DateTimePickerEntity?, end: DateTimePickerEntity?, def: DateTimePickerEntity?) {
+    fun setDateTime(start: EaseDateTimeEntity?, end: EaseDateTimeEntity?, def: EaseDateTimeEntity?) {
         if (start == null || end == null || def == null) {
             return
         }
@@ -161,7 +161,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
     /**
      * 设置监听
      */
-    fun setListener(callback: IDateTimePickerListener) {
+    fun setListener(callback: IDateTimeChanceListener) {
         this.mCallback = callback
     }
 
@@ -277,7 +277,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectYear = mYearData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),
@@ -308,7 +308,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectMonth = mMonthData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),
@@ -338,7 +338,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectDay = mDayData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),
@@ -367,7 +367,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectHour = mHourData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),
@@ -395,7 +395,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectMinute = mMinuteData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),
@@ -422,7 +422,7 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
 
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 mSelectSecond = mSecondData[position]
-                mCallback?.onSelected(
+                mCallback?.onDateTimeChange(
                     initStrInt(mSelectYear),
                     initStrInt(mSelectMonth),
                     initStrInt(mSelectDay),

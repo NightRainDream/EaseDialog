@@ -15,7 +15,7 @@ import androidx.core.view.isVisible
 import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
 import com.github.gzuliyujiang.wheelview.widget.WheelView
 import com.night.dialog.R
-import com.night.dialog.callback.EaseILoadAddressCallback
+import com.night.dialog.callback.EaseILoadLocationCallback
 import com.night.dialog.callback.ILocationChangeListener
 import com.night.dialog.entity.EaseCityEntity
 import com.night.dialog.entity.EaseCountyEntity
@@ -24,7 +24,7 @@ import com.night.dialog.entity.EaseProvinceEntity
 import com.night.dialog.tools.*
 
 
-class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : LinearLayoutCompat(context, attrs, 0) {
+class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : LinearLayoutCompat(context, attrs, 0) {
     private var mProvinceView: WheelView
     private var mCityView: WheelView
     private var mCountyView: WheelView
@@ -96,8 +96,6 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
         mCountyView.indicatorColor = mIndicatorColor
         //初始化监听
         initListener()
-        //初始化数据
-        initAddressData(context)
     }
 
     /**
@@ -134,6 +132,8 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
         this.mProvinceEntity = province
         this.mCityEntity = city
         this.mCountyEntity = county
+        //初始化数据
+        initAddressData(context)
     }
 
     fun setOnLocalChangeListener(listener: ILocationChangeListener) {
@@ -149,8 +149,12 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 val mSelectProvince = mProvinceData[position]
                 setProvinceEntity(mSelectProvince)
-                initCityData(getCityList(mSelectProvince), mCityData.first())
-                initCountyData(getCountyList(mSelectProvince, mCityData.first()), mCountyData.first())
+                val mCityList = getCityList(mSelectProvince)
+                val mCityFirst = mCityList.first()
+                initCityData(mCityList, mCityFirst.name)
+                val mCountyList = getCountyList(mSelectProvince, mCityFirst.name)
+                val mCountyFirst = mCountyList.first()
+                initCountyData(mCountyList, mCountyFirst.name)
                 mListener?.onLocationChange(mProvinceEntity, mCityEntity, mCountyEntity)
             }
 
@@ -170,7 +174,9 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
             override fun onWheelSelected(view: WheelView?, position: Int) {
                 val mSelectCity = mCityData[position]
                 setCityEntity(mSelectCity)
-                initCountyData(getCountyList(mProvinceEntity.name, mSelectCity), mCountyData.first())
+                val mCountyList = getCountyList(mProvinceEntity.name, mSelectCity)
+                val mCountyFirst = mCountyList.first()
+                initCountyData(mCountyList, mCountyFirst.name)
                 mListener?.onLocationChange(mProvinceEntity, mCityEntity, mCountyEntity)
             }
 
@@ -204,12 +210,16 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
     }
 
     private fun initAddressData(context: Context) {
-        EaseAddressPickerHelp.getAddressData(context, object : EaseILoadAddressCallback {
+        EaseAddressPickerHelp.getAddressData(context, object : EaseILoadLocationCallback {
             override fun onLoadAddress(address: ArrayList<EaseProvinceEntity>) {
-                this@EaseAddressPickerView.mAddressData = address
-                initProvinceData(mAddressData!!, mProvinceEntity.name)
-                initCityData(getCityList(mProvinceEntity.name), mCityEntity.name)
-                initCountyData(getCountyList(mProvinceEntity.name, mCityEntity.name), mCountyEntity.name)
+                this@EaseLocationPickerView.mAddressData = address
+                val mDefaultProvince = mProvinceEntity.name
+                val mDefaultCity = mCityEntity.name
+                val mDefaultCounty = mCountyEntity.name
+                initProvinceData(mAddressData!!, mDefaultProvince)
+                initCityData(getCityList(mDefaultProvince), mDefaultCity)
+                initCountyData(getCountyList(mDefaultProvince, mDefaultCity), mDefaultCounty)
+                mListener?.onLocationChange(mProvinceEntity, mCityEntity, mCountyEntity)
             }
         })
     }
@@ -222,6 +232,7 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
         for (entity in provinces) {
             val mTitle = entity.name ?: ""
             mProvinceData.add(mTitle)
+            //有默认选中的数据
             if (mTitle == defaultProvince) {
                 mProvinceEntity = EaseLocationEntity(mTitle, entity.code)
                 val mCityFirst = entity.city.first()
@@ -230,6 +241,7 @@ class EaseAddressPickerView(context: Context, attrs: AttributeSet? = null) : Lin
                 mCountyEntity = EaseLocationEntity(mCountyFirst.name ?: "", mCountyFirst.code)
             }
         }
+
         var mPosition = mProvinceData.indexOf(defaultProvince)
         if (mPosition == -1) {
             mPosition = 0

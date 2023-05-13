@@ -12,33 +12,9 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.night.dialog.EaseDialog
 import com.night.dialog.R
-import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 
 internal object DialogHelp {
-    private val mFragmentTag = mutableListOf<String>()
-    private val mFragmentListener = HashMap<String, IDialogActionCallback>()
-
-    fun onCreateDialog(tag: String, iDialogActionCallback: IDialogActionCallback) {
-        mFragmentTag.add(tag)
-        mFragmentListener[tag] = iDialogActionCallback
-    }
-
-    fun getListener(tag: String?): IDialogActionCallback? {
-        if (tag == null) {
-            return null
-        }
-        return mFragmentListener[tag]
-    }
-
-    fun onDestroyDialog(tag: String) {
-        mFragmentTag.remove(tag)
-        mFragmentListener.remove(tag)
-    }
-
-    fun isContainTag(tag: String): Boolean {
-        return mFragmentTag.indexOf(tag) != -1
-    }
 
 
     /**
@@ -160,6 +136,4 @@ internal object DialogHelp {
             view.layoutParams = mParams
         }
     }
-
-
 }

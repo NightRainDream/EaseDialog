@@ -1,23 +1,22 @@
 package com.night.dialog.ui.picker
 
 import com.night.dialog.base.EaseBaseViewModel
-import com.night.dialog.callback.IDateTimeSelectCallback
-import com.night.dialog.entity.DateTimeEntity
-import com.night.dialog.entity.DateTimePickerEntity
+import com.night.dialog.callback.IDateTimeCallback
+import com.night.dialog.entity.EaseDateTimeEntity
 import com.night.dialog.tools.DateTimeMode
 import com.night.dialog.tools.PICKER_DATE_HOUR_MINUTE
 
-class DateTimePickerBaseViewModel : EaseBaseViewModel() {
-    private var minDateTime: DateTimePickerEntity? = null
-    private var maxDateTime: DateTimePickerEntity? = null
-    private var selDateTime: DateTimePickerEntity? = null
-    private var mPickerCallback: IDateTimeSelectCallback? = null
+class DateTimePickerViewModel : EaseBaseViewModel() {
+    private var minDateTime: EaseDateTimeEntity? = null
+    private var maxDateTime: EaseDateTimeEntity? = null
+    private var selDateTime: EaseDateTimeEntity? = null
+    private var mPickerCallback: IDateTimeCallback? = null
     private var mLabel: Int = PICKER_DATE_HOUR_MINUTE
 
     /**
      * 设置选择器最小时间
      */
-    fun initMinDateTime(entity: DateTimePickerEntity?) {
+    fun initMinDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
@@ -30,7 +29,7 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
     /**
      * 设置选择器最小时间
      */
-    fun initMaxDateTime(entity: DateTimePickerEntity?) {
+    fun initMaxDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
@@ -43,16 +42,17 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
     /**
      * 设置选择器最小时间
      */
-    fun initSelDateTime(entity: DateTimePickerEntity?) {
+    fun initSelDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
-        if(selDateTime != null){
+        if (selDateTime != null) {
             return
         }
         this.selDateTime = entity
     }
-    fun setSelDateTime(entity: DateTimePickerEntity?) {
+
+    fun setSelDateTime(entity: EaseDateTimeEntity?) {
         if (entity == null) {
             return
         }
@@ -63,19 +63,19 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
         mLabel = mode
     }
 
-    fun setCallback(callback: IDateTimeSelectCallback?) {
+    fun setCallback(callback: IDateTimeCallback?) {
         this.mPickerCallback = callback
     }
 
-    fun getStartDateTime(): DateTimePickerEntity? {
+    fun getStartDateTime(): EaseDateTimeEntity? {
         return minDateTime
     }
 
-    fun getEndDateTime(): DateTimePickerEntity? {
+    fun getEndDateTime(): EaseDateTimeEntity? {
         return maxDateTime
     }
 
-    fun getDefDateTime(): DateTimePickerEntity? {
+    fun getDefDateTime(): EaseDateTimeEntity? {
         return selDateTime
     }
 
@@ -89,13 +89,13 @@ class DateTimePickerBaseViewModel : EaseBaseViewModel() {
     }
 
     fun onPositiveEvent() {
-        val mDateTimeEntity = DateTimeEntity(
-            selDateTime!!.year.toString(),
-            selDateTime!!.month.toString(),
-            selDateTime!!.day.toString(),
-            selDateTime!!.hour.toString(),
-            selDateTime!!.minute.toString(),
-            selDateTime!!.second.toString()
+        val mDateTimeEntity = EaseDateTimeEntity(
+            selDateTime!!.year,
+            selDateTime!!.month,
+            selDateTime!!.day,
+            selDateTime!!.hour,
+            selDateTime!!.minute,
+            selDateTime!!.second
         )
         mPickerCallback?.onSelectDate(mDateTimeEntity)
     }

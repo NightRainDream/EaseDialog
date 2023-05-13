@@ -116,7 +116,7 @@ DialogTools.getDialogBuilder()
 DialogTools.getPickerBuilder()
     .setTitleText("请选择日期和时间")
     .setLabel(mutableListOf(EaseConstantTools.PICKER_LABEL_YEAR,EaseConstantTools.PICKER_LABEL_MONTH,EaseConstantTools.PICKER_LABEL_DAY,EaseConstantTools.PICKER_LABEL_HOUR,EaseConstantTools.PICKER_LABEL_MINUTE,EaseConstantTools.PICKER_LABEL_SECOND))
-    .toDateTimePicker(this, object : IDateTimeSelectCallback {
+    .toDateTimePicker(this, object : IDateTimeCallback {
         override fun onSelectDate(result: DateTimeEntity) {
             DialogTools.getToastBuilder()
                 .toToast(result.getDateTime())
