@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.night.dialog.EaseDialog
-import com.night.dialog.R
 import com.night.dialog.entity.TextInfoEntity
 
 internal object DialogHelp {
@@ -71,6 +71,7 @@ internal object DialogHelp {
      * @param dp dp值
      * @return px值
      */
+    @Px
     fun dpToPx(dp: Float): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -85,25 +86,13 @@ internal object DialogHelp {
      * @param dp sp值
      * @return px值
      */
+    @Px
     fun spToPx(dp: Float): Float {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             dp,
             EaseDialog.getContext().resources.displayMetrics
         )
-    }
-
-    /**
-     * 获取Menu最大高度
-     */
-    fun getMaxMenuHeight(): Float {
-        val mMaxHeight = if (isLandscape()) {
-            Resources.getSystem().displayMetrics.heightPixels * 0.8F
-        } else {
-            Resources.getSystem().displayMetrics.heightPixels * 0.7F
-        }
-        val mDecorate = EaseDialog.getContext().resources.getDimension(R.dimen.dp_120)
-        return mMaxHeight - mDecorate
     }
 
     fun setDialogMaxSize(view: View?) {

@@ -4,13 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.LayoutInflater
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.Px
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
 import com.github.gzuliyujiang.wheelview.widget.WheelView
@@ -52,28 +47,28 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
         mCityView = this.findViewById(R.id.id_city)
         mCountyView = this.findViewById(R.id.id_county)
         //获取自定义属性
-        val arrayType = context.obtainStyledAttributes(attrs, R.styleable.EaseAddressPickerView)
+        val arrayType = context.obtainStyledAttributes(attrs, R.styleable.EaseLocationPickerView)
         mDefTextColor = arrayType.getColor(
-            R.styleable.EaseAddressPickerView_addressDefTextColor,
-            getColor(context, R.color.EaseColorMainText)
+            R.styleable.EaseLocationPickerView_addressDefTextColor,
+            DialogHelp.getColor(R.color.EaseColorMainText)
         )
         mSelTextColor = arrayType.getColor(
-            R.styleable.EaseAddressPickerView_addressSelTextColor,
-            getColor(context, R.color.EaseColorButtonTextColor)
+            R.styleable.EaseLocationPickerView_addressSelTextColor,
+            DialogHelp.getColor(R.color.EaseColorButtonTextColor)
         )
         mIndicatorColor = arrayType.getColor(
-            R.styleable.EaseAddressPickerView_addressIndicatorColor,
-            getColor(context, R.color.EaseColorMainText)
+            R.styleable.EaseLocationPickerView_addressIndicatorColor,
+            DialogHelp.getColor(R.color.EaseColorMainText)
         )
         mDefTextSize =
             arrayType.getDimension(
-                R.styleable.EaseAddressPickerView_addressDefTextSize,
-                dpToPx(context, 14F)
+                R.styleable.EaseLocationPickerView_addressDefTextSize,
+                DialogHelp.dpToPx(14F).toFloat()
             )
         mSelTextSize =
             arrayType.getDimension(
-                R.styleable.EaseAddressPickerView_addressSelTextSize,
-                dpToPx(context, 15F)
+                R.styleable.EaseLocationPickerView_addressSelTextSize,
+                DialogHelp.dpToPx(15F).toFloat()
             )
         arrayType.recycle()
         //初始化自定义属性
@@ -210,7 +205,7 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
     }
 
     private fun initAddressData(context: Context) {
-        EaseAddressPickerHelp.getAddressData(context, object : EaseILoadLocationCallback {
+        EaseLocationPickerHelp.getAddressData(context, object : EaseILoadLocationCallback {
             override fun onLoadAddress(address: ArrayList<EaseProvinceEntity>) {
                 this@EaseLocationPickerView.mAddressData = address
                 val mDefaultProvince = mProvinceEntity.name
@@ -230,15 +225,15 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
             mProvinceData.clear()
         }
         for (entity in provinces) {
-            val mTitle = entity.name ?: ""
+            val mTitle = entity.name
             mProvinceData.add(mTitle)
             //有默认选中的数据
             if (mTitle == defaultProvince) {
                 mProvinceEntity = EaseLocationEntity(mTitle, entity.code)
                 val mCityFirst = entity.city.first()
-                mCityEntity = EaseLocationEntity(mCityFirst.name ?: "", mCityFirst.code)
+                mCityEntity = EaseLocationEntity(mCityFirst.name, mCityFirst.code)
                 val mCountyFirst = mCityFirst.county.first()
-                mCountyEntity = EaseLocationEntity(mCountyFirst.name ?: "", mCountyFirst.code)
+                mCountyEntity = EaseLocationEntity(mCountyFirst.name, mCountyFirst.code)
             }
         }
 
@@ -254,12 +249,12 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
             mCityData.clear()
         }
         for (entity in citys) {
-            val mTitle = entity.name ?: ""
+            val mTitle = entity.name
             mCityData.add(mTitle)
             if (mTitle == defaultCity) {
                 mCityEntity = EaseLocationEntity(mTitle, entity.code)
                 val mCountyFirst = entity.county.first()
-                mCountyEntity = EaseLocationEntity(mCountyFirst.name ?: "", mCountyFirst.code)
+                mCountyEntity = EaseLocationEntity(mCountyFirst.name, mCountyFirst.code)
             }
         }
         var mPosition = mCityData.indexOf(defaultCity)
@@ -274,7 +269,7 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
             mCountyData.clear()
         }
         for (entity in countys) {
-            val mTitle = entity.name ?: ""
+            val mTitle = entity.name
             mCountyData.add(mTitle)
             if (mTitle == defaultCounty) {
                 mCountyEntity = EaseLocationEntity(mTitle, entity.code)
@@ -360,20 +355,4 @@ class EaseLocationPickerView(context: Context, attrs: AttributeSet? = null) : Li
         }
         return listOf()
     }
-
-
-    @ColorInt
-    private fun getColor(context: Context, @ColorRes id: Int): Int {
-        return ContextCompat.getColor(context, id)
-    }
-
-    @Px
-    private fun dpToPx(context: Context, dp: Float): Float {
-        return TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            context.resources.displayMetrics
-        )
-    }
-
 }

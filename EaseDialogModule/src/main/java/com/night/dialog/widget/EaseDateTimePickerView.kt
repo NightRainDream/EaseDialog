@@ -3,13 +3,8 @@ package com.night.dialog.widget
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.LayoutInflater
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.Px
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.github.gzuliyujiang.wheelview.contract.OnWheelChangedListener
 import com.github.gzuliyujiang.wheelview.widget.WheelView
@@ -76,20 +71,20 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
         val arrayType = context.obtainStyledAttributes(attrs, R.styleable.EaseDateTimePickerView)
         mDefTextColor = arrayType.getColor(
             R.styleable.EaseDateTimePickerView_customDefTextColor,
-            getColor(context, R.color.EaseColorMainText)
+            DialogHelp.getColor(R.color.EaseColorMainText)
         )
         mSelTextColor = arrayType.getColor(
             R.styleable.EaseDateTimePickerView_customSelTextColor,
-            getColor(context, R.color.EaseColorButtonTextColor)
+            DialogHelp.getColor(R.color.EaseColorButtonTextColor)
         )
         mIndicatorColor = arrayType.getColor(
             R.styleable.EaseDateTimePickerView_customIndicatorColor,
-            getColor(context, R.color.EaseColorMainText)
+            DialogHelp.getColor(R.color.EaseColorMainText)
         )
         mDefTextSize =
-            arrayType.getDimension(R.styleable.EaseDateTimePickerView_customDefTextSize, dpToPx(context, 14F))
+            arrayType.getDimension(R.styleable.EaseDateTimePickerView_customDefTextSize, DialogHelp.dpToPx( 14F).toFloat())
         mSelTextSize =
-            arrayType.getDimension(R.styleable.EaseDateTimePickerView_customSelTextSize, dpToPx(context, 15F))
+            arrayType.getDimension(R.styleable.EaseDateTimePickerView_customSelTextSize, DialogHelp.dpToPx( 15F).toFloat())
         arrayType.recycle()
         //初始化自定义属性
         mYearView.textColor = mDefTextColor
@@ -738,15 +733,5 @@ class EaseDateTimePickerView(context: Context, attrs: AttributeSet?) :
                 30
             }
         }
-    }
-
-    @ColorInt
-    private fun getColor(context: Context, @ColorRes id: Int): Int {
-        return ContextCompat.getColor(context, id)
-    }
-
-    @Px
-    private fun dpToPx(context: Context, dp: Float): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
     }
 }

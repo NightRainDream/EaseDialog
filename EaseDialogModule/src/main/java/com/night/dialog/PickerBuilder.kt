@@ -88,16 +88,25 @@ class PickerBuilder : BaseDialogBuilder() {
         return this
     }
 
+    /**
+     * 设置默认选中省
+     */
     fun setSelectProvince(entity: EaseLocationEntity?): PickerBuilder {
         this.mSelProvince = entity
         return this
     }
 
+    /**
+     * 设置默认选中市
+     */
     fun setSelectCity(entity: EaseLocationEntity?): PickerBuilder {
         this.mSelCity = entity
         return this
     }
 
+    /**
+     * 设置默认选中县
+     */
     fun setSelectCounty(entity: EaseLocationEntity?): PickerBuilder {
         this.mSelCounty = entity
         return this

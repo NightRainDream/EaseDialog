@@ -14,7 +14,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.util.concurrent.Executors
 
-object EaseAddressPickerHelp {
+object EaseLocationPickerHelp {
     private val mAddressList = ArrayList<EaseProvinceEntity>()
     private val mHandler = Handler(Looper.getMainLooper())
 

@@ -8,7 +8,7 @@
         <attr name="customIndicatorColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="EaseAddressPickerView">
+    <declare-styleable name="EaseLocationPickerView">
         <attr name="addressDefTextColor" format="color" />
         <attr name="addressSelTextColor" format="color" />
         <attr name="addressDefTextSize" format="dimension" />
