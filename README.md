@@ -172,7 +172,18 @@ DialogTools.getPickerBuilder()
         }
     })
 ```
-#### 3.2.8.地址选择器
+#### 3.2.8.颜色选择器
+```kotlin
+DialogTools.getPickerBuilder()
+    .setTitleText("请选择颜色")
+    .toColorPicker(this, object : IColorSelectCallback {
+        override fun onSelected(red: Int, green: Int, blue: Int) {
+            DialogTools.getToastBuilder().toToast("R:".plus(red).plus("|G:").plus(green).plus("|B:").plus(blue))
+        }
+    })
+```
+
+#### 3.2.9.地址选择器
 ```kotlin
 DialogTools.getToastBuilder()
     .toToast("文件删除成功~")
