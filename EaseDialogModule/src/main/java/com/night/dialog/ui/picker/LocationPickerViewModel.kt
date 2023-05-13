@@ -6,7 +6,7 @@ import com.night.dialog.entity.*
 import com.night.dialog.tools.AddressMode
 import com.night.dialog.tools.PICKER_ADDRESS_ALL
 
-class AddressPickerViewModel : EaseBaseViewModel() {
+class LocationPickerViewModel : EaseBaseViewModel() {
     @AddressMode
     private var mLabel: Int = PICKER_ADDRESS_ALL
     private var mCallback: ILocationCallback? = null

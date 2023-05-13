@@ -176,6 +176,22 @@
                     android:text="地址选择器"
                     android:textColor="@color/EaseColorMainText"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:background="#DDDDDD" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:onClick="onColorPicker"
+                    android:paddingHorizontal="16dp"
+                    android:text="颜色选择器"
+                    android:textColor="@color/EaseColorMainText"
+                    android:textSize="14sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 

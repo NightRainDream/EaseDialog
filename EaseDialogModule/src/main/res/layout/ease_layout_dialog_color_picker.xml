@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_picker_title"
+        style="@style/StyleTitle"
+        android:gravity="center_horizontal"
+        tools:text="Title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:layout_weight="1"
+        android:background="@color/EaseColorBackground">
+
+        <com.night.dialog.widget.EaseColorPickerView
+            android:id="@+id/ease_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/dp_16" />
+
+        <View
+            android:id="@+id/v_show"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="@dimen/dp_16" />
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        style="@style/StyleAction"
+        android:layout_marginBottom="@dimen/dp_20">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_picker_cancel"
+            style="@style/StyleButton"
+            tools:text="CANCEL" />
+
+        <View style="@style/StyleButtonDivider" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_picker_positive"
+            style="@style/StyleButton"
+            tools:text="DEFINE" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.DialogTools
+import com.night.dialog.callback.IColorSelectCallback
 import com.night.dialog.callback.IDateTimeCallback
 import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.callback.ILocationCallback
@@ -167,6 +168,16 @@ class MainActivity : AppCompatActivity() {
                     mCity = city
                     mCounty = county
                     DialogTools.getToastBuilder().toToast(province.name + city.name + county.name)
+                }
+            })
+    }
+
+    fun onColorPicker(view: View) {
+        DialogTools.getPickerBuilder()
+            .setTitleText("请选择颜色")
+            .toColorPicker(this, object : IColorSelectCallback {
+                override fun onSelected(red: Int, green: Int, blue: Int) {
+                    DialogTools.getToastBuilder().toToast("R:".plus(red).plus("|G:").plus(green).plus("|B:").plus(blue))
                 }
             })
     }

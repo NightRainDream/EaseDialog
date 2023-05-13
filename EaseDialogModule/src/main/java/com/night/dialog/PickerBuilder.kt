@@ -3,6 +3,7 @@ package com.night.dialog
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.night.dialog.base.BaseDialogBuilder
+import com.night.dialog.callback.IColorSelectCallback
 import com.night.dialog.callback.IDateTimeCallback
 import com.night.dialog.callback.ILocationCallback
 import com.night.dialog.entity.EaseDateTimeEntity
@@ -10,6 +11,7 @@ import com.night.dialog.entity.EaseLocationEntity
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.AddressMode
 import com.night.dialog.tools.DateTimeMode
+import com.night.dialog.ui.picker.ColorPickerDialogFragment
 import com.night.dialog.ui.picker.DateTimePickerDialogFragment
 import com.night.dialog.ui.picker.LocationPickerDialogFragment
 
@@ -191,6 +193,21 @@ class PickerBuilder : BaseDialogBuilder() {
     fun setSelDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mSelDateTime = entity
         return this
+    }
+
+    fun toColorPicker(activity: AppCompatActivity,callback: IColorSelectCallback){
+        val mFragmentManage = activity.supportFragmentManager
+        val mHistoryDialog = mFragmentManage.findFragmentByTag("ColorPicker")
+        if (mHistoryDialog != null && mHistoryDialog is ColorPickerDialogFragment) {
+            mHistoryDialog.dismiss()
+        }
+        val mColorPickerDialogFragment = ColorPickerDialogFragment()
+        mColorPickerDialogFragment.setTitleTextInfo(mTitleTextInfo)
+        mColorPickerDialogFragment.setMainTextInfo(mMainTextInfo)
+        mColorPickerDialogFragment.setCancelTextInfo(mCancelTextInfo)
+        mColorPickerDialogFragment.setPositiveTextInfo(mPositiveTextInfo)
+        mColorPickerDialogFragment.setCallback(callback)
+        mColorPickerDialogFragment.show(mFragmentManage, "ColorPicker")
     }
 
     fun toAddressPicker(activity: AppCompatActivity, @AddressMode mode: Int, callback: ILocationCallback) {

@@ -16,7 +16,7 @@ import com.night.dialog.tools.HEIGHT_RATIO_LANDSCAPE
 import com.night.dialog.tools.PICKER_ADDRESS_ALL
 import com.night.dialog.widget.EaseLocationPickerView
 
-class LocationPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewModel>() {
+class LocationPickerDialogFragment : EaseSafeDialogFragment<LocationPickerViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
@@ -44,8 +44,8 @@ class LocationPickerDialogFragment : EaseSafeDialogFragment<AddressPickerViewMod
         return R.layout.ease_layout_dialog_address_picker
     }
 
-    override fun initViewModel(): Class<AddressPickerViewModel> {
-        return AddressPickerViewModel::class.java
+    override fun initViewModel(): Class<LocationPickerViewModel> {
+        return LocationPickerViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
