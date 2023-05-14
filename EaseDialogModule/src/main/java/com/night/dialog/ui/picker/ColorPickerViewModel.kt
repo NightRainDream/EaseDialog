@@ -21,12 +21,12 @@ class ColorPickerViewModel:EaseBaseViewModel() {
         this.mSelectB = blue
     }
 
-    override fun onCancelEvent() {
+    fun onCancelEvent() {
         mCallback?.onCancel()
     }
 
     fun onPositiveEvent() {
-        mCallback?.onSelected(mSelectR, mSelectG, mSelectB)
+        mCallback?.onPositive(mSelectR, mSelectG, mSelectB)
     }
 
     override fun onCleared() {

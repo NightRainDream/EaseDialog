@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.callback.ILoadingCallback
 
 /**
  * ---------------------------------------------------
@@ -14,14 +15,22 @@ import com.night.dialog.base.EaseSafeDialogFragment
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class LoadingDialogFragment : EaseSafeDialogFragment<LoadingDialogBaseViewModel>() {
+class LoadingDialogFragment : EaseSafeDialogFragment<LoadingDialogViewModel>() {
     private lateinit var mLoadingTextView: AppCompatTextView
+    private var mCallback: ILoadingCallback? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel.setCallback(mCallback)
+    }
+
+
     override fun initLayout(): Int {
         return R.layout.ease_layout_dialog_loading
     }
 
-    override fun initViewModel(): Class<LoadingDialogBaseViewModel> {
-        return LoadingDialogBaseViewModel::class.java
+    override fun initViewModel(): Class<LoadingDialogViewModel> {
+        return LoadingDialogViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -53,5 +62,14 @@ class LoadingDialogFragment : EaseSafeDialogFragment<LoadingDialogBaseViewModel>
     override fun isCancel(): Boolean {
         dialog?.setCanceledOnTouchOutside(false)
         return true
+    }
+
+    /**
+     * 设置回调事件
+     *
+     * @param callback ITipsModalCallback
+     */
+    fun setCallback(callback: ILoadingCallback?) {
+        this.mCallback = callback
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.night.dialog.R
 import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.callback.ITipsModalCallback
 import com.night.dialog.tools.DialogHelp
 
 /**
@@ -15,17 +16,24 @@ import com.night.dialog.tools.DialogHelp
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class TipsDialogFragment : EaseSafeDialogFragment<TipsBaseViewModel>() {
+class TipsDialogFragment : EaseSafeDialogFragment<TipsViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: AppCompatTextView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mPositiveView: AppCompatTextView
+    private var mCallback: ITipsModalCallback? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel.setCallback(mCallback)
+    }
+
     override fun initLayout(): Int {
         return R.layout.ease_layout_dialog_tip
     }
 
-    override fun initViewModel(): Class<TipsBaseViewModel> {
-        return TipsBaseViewModel::class.java
+    override fun initViewModel(): Class<TipsViewModel> {
+        return TipsViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +53,7 @@ class TipsDialogFragment : EaseSafeDialogFragment<TipsBaseViewModel>() {
             dismiss()
         }
         mPositiveView.setOnClickListener {
-            mViewModel.onPositiveEvent("", mutableListOf())
+            mViewModel.onPositiveEvent()
             dismiss()
         }
     }
@@ -75,5 +83,14 @@ class TipsDialogFragment : EaseSafeDialogFragment<TipsBaseViewModel>() {
 
     override fun isCancel(): Boolean {
         return true
+    }
+
+    /**
+     * 设置回调事件
+     *
+     * @param callback ITipsModalCallback
+     */
+    fun setCallback(callback: ITipsModalCallback?) {
+        this.mCallback = callback
     }
 }

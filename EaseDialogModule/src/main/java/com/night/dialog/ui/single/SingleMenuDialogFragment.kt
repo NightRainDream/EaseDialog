@@ -1,4 +1,4 @@
-package com.night.dialog.ui.sing
+package com.night.dialog.ui.single
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.adapter.SingleMenuAdapter
 import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.callback.ISingleMenuCallback
 import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.SmallDividerItem
@@ -20,24 +21,26 @@ import com.night.dialog.tools.SmallDividerItem
  * 时    间: 2023/4/22
  * ---------------------------------------------------
  */
-class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuBaseViewModel>() {
+class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuViewModel>() {
     private lateinit var mTitleView: AppCompatTextView
     private lateinit var mContentView: RecyclerView
     private lateinit var mCancelView: AppCompatTextView
     private lateinit var mSingleMenuAdapter: SingleMenuAdapter
+    private var mCallback: ISingleMenuCallback? = null
     private var mMenuData = mutableListOf<MenuEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.setMenuList(mMenuData)
+        mViewModel.setCallback(mCallback)
     }
 
     override fun initLayout(): Int {
         return R.layout.ease_layout_dialog_single_menu
     }
 
-    override fun initViewModel(): Class<SingleMenuBaseViewModel> {
-        return SingleMenuBaseViewModel::class.java
+    override fun initViewModel(): Class<SingleMenuViewModel> {
+        return SingleMenuViewModel::class.java
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
@@ -66,7 +69,7 @@ class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuBaseViewModel>
         }
         mSingleMenuAdapter.setOnItemClickListener(object : SingleMenuAdapter.OnItemClickListener {
             override fun onItemClick(text: String, menuIndex: Int) {
-                mViewModel.onPositiveEvent(text, mutableListOf(menuIndex))
+                mViewModel.onPositiveEvent(text, menuIndex)
                 dismiss()
             }
         })
@@ -102,5 +105,14 @@ class SingleMenuDialogFragment : EaseSafeDialogFragment<SingleMenuBaseViewModel>
             val mEntity = MenuEntity(title, i == def)
             mMenuData.add(mEntity)
         }
+    }
+
+    /**
+     * 设置回调事件
+     *
+     * @param callback ISingleMenuCallback
+     */
+    fun setCallback(callback: ISingleMenuCallback?) {
+        this.mCallback = callback
     }
 }

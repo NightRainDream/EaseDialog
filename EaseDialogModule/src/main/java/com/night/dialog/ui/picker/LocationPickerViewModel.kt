@@ -41,22 +41,31 @@ class LocationPickerViewModel : EaseBaseViewModel() {
         return mLabel
     }
 
-    fun getSelectProvince():EaseLocationEntity{
+    fun getSelectProvince(): EaseLocationEntity {
         return mDefaultProvince
     }
 
 
-    fun getSelectCity():EaseLocationEntity{
+    fun getSelectCity(): EaseLocationEntity {
         return mDefaultCity
     }
 
 
-    fun getSelectCounty():EaseLocationEntity{
+    fun getSelectCounty(): EaseLocationEntity {
         return mDefaultCounty
     }
 
     fun onPositiveEvent() {
-        mCallback?.onAddressSelected(mDefaultProvince, mDefaultCity, mDefaultCounty)
+        mCallback?.onPositive(mDefaultProvince, mDefaultCity, mDefaultCounty)
+    }
+
+    fun onCancelEvent() {
+        mCallback?.onCancel()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        mCallback?.onDismiss()
     }
 
 

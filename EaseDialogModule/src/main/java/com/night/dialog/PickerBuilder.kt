@@ -180,16 +180,25 @@ class PickerBuilder : BaseDialogBuilder() {
         return this
     }
 
+    /**
+     * 设置最小可选择日期
+     */
     fun setMinDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mMinDateTime = entity
         return this
     }
 
+    /**
+     * 设置最大可选择日期
+     */
     fun setMaxDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mMaxDateTime = entity
         return this
     }
 
+    /**
+     * 设置选中日期
+     */
     fun setSelDateTime(entity: EaseDateTimeEntity): PickerBuilder {
         this.mSelDateTime = entity
         return this

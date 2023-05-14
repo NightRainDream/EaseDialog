@@ -1,5 +1,6 @@
 package com.night.dialog.callback
 
+import com.night.dialog.base.EaseBaseCallback
 import com.night.dialog.entity.EaseDateTimeEntity
 
 
@@ -13,10 +14,6 @@ interface IDateTimeChanceListener {
 /**
  * 时间日期选择回调
  */
-interface IDateTimeCallback {
-    fun onSelectDate(result: EaseDateTimeEntity)
-
-    fun onCancel() {}
-
-    fun onDismiss() {}
+interface IDateTimeCallback:EaseBaseCallback {
+    fun onPositive(result: EaseDateTimeEntity)
 }

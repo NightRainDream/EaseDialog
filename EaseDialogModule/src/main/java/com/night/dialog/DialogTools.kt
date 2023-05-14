@@ -9,10 +9,6 @@ import com.night.dialog.tools.ToastHelp
 
 object DialogTools {
 
-
-
-
-
     /**
      * 弹出自定义Toast
      * @param msg 提示内容

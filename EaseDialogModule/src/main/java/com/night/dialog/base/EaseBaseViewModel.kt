@@ -3,11 +3,11 @@ package com.night.dialog.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.night.dialog.R
-import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
 
 open class EaseBaseViewModel : ViewModel() {
+
     /**
      * 默认标题属性
      */
@@ -51,11 +51,6 @@ open class EaseBaseViewModel : ViewModel() {
                 DialogHelp.getString(R.string.define)
             )
         )
-
-    /**
-     * 事件回调
-     */
-    private var mCallback: IDialogActionCallback? = null
 
 
     /**
@@ -106,39 +101,10 @@ open class EaseBaseViewModel : ViewModel() {
         mPositiveTextInfo.value = info
     }
 
-    /**
-     * 设置点击事件回调
-     */
-    fun setCallback(callback: IDialogActionCallback?) {
-        this.mCallback = callback
-    }
-
-    /**
-     * 取消点击事件
-     */
-    open fun onCancelEvent() {
-        mCallback?.onCancel()
-    }
-
-    /**
-     * 确定事件
-     *
-     * @param content 内容
-     * @param index 位置
-     */
-    open fun onPositiveEvent(content: String, index: MutableList<Int>) {
-        mCallback?.onPositive(content, index)
-    }
-
     fun initNumberDisplay(num: Int): String{
         if(num <= 9){
             return "0".plus(num)
         }
         return num.toString()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        mCallback?.onDismiss()
     }
 }

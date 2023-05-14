@@ -1,5 +1,7 @@
 package com.night.dialog.callback
 
+import com.night.dialog.base.EaseBaseCallback
+
 
 /**
  * 颜色选择组件回调
@@ -28,11 +30,7 @@ interface EaseColorSelectListener {
 /**
  * 颜色选择回调
  */
-interface IColorSelectCallback {
+interface IColorSelectCallback:EaseBaseCallback {
 
-    fun onSelected(red: Int, green: Int, blue: Int)
-
-    fun onCancel() {}
-
-    fun onDismiss() {}
+    fun onPositive(red: Int, green: Int, blue: Int)
 }

@@ -1,14 +1,15 @@
 package com.night.dialog.callback
 
 import androidx.annotation.MainThread
+import com.night.dialog.base.EaseBaseCallback
 import com.night.dialog.entity.EaseLocationEntity
 import com.night.dialog.entity.EaseProvinceEntity
 
 /**
  * 地址选择回调
  */
-interface ILocationCallback {
-    fun onAddressSelected(province: EaseLocationEntity, city: EaseLocationEntity, county: EaseLocationEntity)
+interface ILocationCallback:EaseBaseCallback{
+    fun onPositive(province: EaseLocationEntity, city: EaseLocationEntity, county: EaseLocationEntity)
 }
 
 /**

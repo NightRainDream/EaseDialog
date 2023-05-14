@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.night.dialog.R
 import com.night.dialog.adapter.MultipleMenuAdapter
 import com.night.dialog.base.EaseSafeDialogFragment
+import com.night.dialog.callback.IMultipleMenuCallback
+import com.night.dialog.callback.ISingleMenuCallback
 import com.night.dialog.entity.MenuEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.LogcatToos
@@ -28,10 +30,12 @@ class MultipleMenuDialogFragment : EaseSafeDialogFragment<MultipleMenuBaseViewMo
     private lateinit var mContentView: RecyclerView
     private lateinit var mMultipleMenuAdapter: MultipleMenuAdapter
     private val mMenuData = mutableListOf<MenuEntity>()
+    private var mCallback: IMultipleMenuCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.setMenuList(mMenuData)
+        mViewModel.setCallback(mCallback)
     }
 
     override fun initLayout(): Int {
@@ -64,8 +68,7 @@ class MultipleMenuDialogFragment : EaseSafeDialogFragment<MultipleMenuBaseViewMo
 
     override fun initListener(savedInstanceState: Bundle?) {
         mPositiveView.setOnClickListener {
-            LogcatToos.e(mViewModel.getSelectPositions().size.toString())
-            mViewModel.onPositiveEvent("", mViewModel.getSelectPositions())
+            mViewModel.onPositiveEvent()
             dismiss()
         }
         mCancelView.setOnClickListener {
@@ -110,5 +113,14 @@ class MultipleMenuDialogFragment : EaseSafeDialogFragment<MultipleMenuBaseViewMo
             val mEntity = MenuEntity(title, def?.contains(i) ?: false)
             mMenuData.add(mEntity)
         }
+    }
+
+    /**
+     * 设置回调事件
+     *
+     * @param callback IMultipleMenuCallback
+     */
+    fun setCallback(callback: IMultipleMenuCallback?) {
+        this.mCallback = callback
     }
 }

@@ -84,7 +84,7 @@ class DateTimePickerViewModel : EaseBaseViewModel() {
         return mLabel
     }
 
-    override fun onCancelEvent() {
+    fun onCancelEvent() {
         mPickerCallback?.onCancel()
     }
 
@@ -97,7 +97,7 @@ class DateTimePickerViewModel : EaseBaseViewModel() {
             selDateTime!!.minute,
             selDateTime!!.second
         )
-        mPickerCallback?.onSelectDate(mDateTimeEntity)
+        mPickerCallback?.onPositive(mDateTimeEntity)
     }
 
     override fun onCleared() {

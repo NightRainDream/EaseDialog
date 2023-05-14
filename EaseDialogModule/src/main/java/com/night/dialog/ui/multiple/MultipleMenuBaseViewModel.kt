@@ -1,6 +1,7 @@
 package com.night.dialog.ui.multiple
 
 import com.night.dialog.base.EaseBaseViewModel
+import com.night.dialog.callback.IMultipleMenuCallback
 import com.night.dialog.entity.MenuEntity
 
 class MultipleMenuBaseViewModel : EaseBaseViewModel() {
@@ -8,6 +9,22 @@ class MultipleMenuBaseViewModel : EaseBaseViewModel() {
      * 多选菜单数据
      */
     private val mMenuList = mutableListOf<MenuEntity>()
+
+    /**
+     * 回调事件
+     */
+    private var mCallback: IMultipleMenuCallback? = null
+
+
+    /**
+     * 设置回调事件
+     */
+    fun setCallback(callback: IMultipleMenuCallback?) {
+        if (callback == null) {
+            return
+        }
+        this.mCallback = callback
+    }
 
     /**
      * 设置菜单数据
@@ -42,15 +59,30 @@ class MultipleMenuBaseViewModel : EaseBaseViewModel() {
     }
 
     /**
-     * 获取已选中下标
+     * 点击取消按钮事件
      */
-    fun getSelectPositions(): MutableList<Int> {
-        val mList = mutableListOf<Int>()
-        for ((index, item) in mMenuList.withIndex()) {
+    fun onCancelEvent() {
+        mCallback?.onCancel()
+    }
+
+    /**
+     * 点击确定按钮事件
+     */
+    fun onPositiveEvent() {
+        val mIndexList = mutableListOf<Int>()
+        val mTitleList = mutableListOf<String>()
+        for ((i, item) in mMenuList.withIndex()) {
             if (item.isSelect) {
-                mList.add(index)
+                mIndexList.add(i)
+                mTitleList.add(item.title)
             }
         }
-        return mList
+        mCallback?.onPositive(mTitleList, mIndexList)
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        mCallback?.onDismiss()
     }
 }

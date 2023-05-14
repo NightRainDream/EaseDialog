@@ -13,7 +13,6 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.night.dialog.R
-import com.night.dialog.callback.IDialogActionCallback
 import com.night.dialog.entity.TextInfoEntity
 import com.night.dialog.tools.DialogHelp
 import com.night.dialog.tools.LogcatToos
@@ -30,9 +29,6 @@ abstract class EaseSafeDialogFragment<VM : EaseBaseViewModel> : DialogFragment()
 
     //确定按钮属性
     private var mPositiveTextInfo: TextInfoEntity? = null
-
-    //回调事件
-    private var mCallback: IDialogActionCallback? = null
 
     //ViewModel
     protected lateinit var mViewModel: VM
@@ -56,9 +52,6 @@ abstract class EaseSafeDialogFragment<VM : EaseBaseViewModel> : DialogFragment()
         mPositiveTextInfo?.let {
             LogcatToos.w("EaseSafeDialog==> 初始化确定按钮属性")
             mViewModel.setPositiveTextInfo(it)
-        }
-        mCallback?.let {
-            mViewModel.setCallback(it)
         }
     }
 
@@ -185,12 +178,5 @@ abstract class EaseSafeDialogFragment<VM : EaseBaseViewModel> : DialogFragment()
      */
     fun setPositiveTextInfo(positive: TextInfoEntity) {
         this.mPositiveTextInfo = positive
-    }
-
-    /**
-     * 设置监听回调
-     */
-    fun setCallback(callback: IDialogActionCallback?) {
-        this.mCallback = callback
     }
 }

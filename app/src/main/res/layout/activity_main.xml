@@ -38,6 +38,7 @@
                     android:background="#DDDDDD" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_tips_dialog"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
@@ -54,6 +55,7 @@
                     android:background="#DDDDDD" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_warn_dialog"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
@@ -88,6 +90,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
+                    android:id="@+id/btn_single_dialog"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
                     android:onClick="onTipSingleDialog"
@@ -104,6 +107,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
+                    android:id="@+id/btn_multiple_dialog"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
                     android:onClick="onMultipleDialog"
@@ -119,7 +123,7 @@
                     android:background="#DDDDDD" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_pop_menu"
+                    android:id="@+id/btn_single_menu"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
@@ -153,6 +157,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
+                    android:id="@+id/btn_date_time_picker"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
                     android:onClick="onDatePicker"
@@ -170,6 +175,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:id="@+id/btn_address_picker"
                     android:gravity="center_vertical"
                     android:onClick="onAddressPicker"
                     android:paddingHorizontal="16dp"
@@ -186,6 +192,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:id="@+id/btn_color_picker"
                     android:gravity="center_vertical"
                     android:onClick="onColorPicker"
                     android:paddingHorizontal="16dp"
@@ -220,6 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
+                    android:id="@+id/btn_loading"
                     android:onClick="onMenuDialog"
                     android:paddingHorizontal="16dp"
                     android:text="加载框"
@@ -235,6 +243,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:id="@+id/btn_toast"
                     android:gravity="center_vertical"
                     android:onClick="onToast"
                     android:paddingHorizontal="16dp"
