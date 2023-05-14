@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-	implementation 'com.github.NightRainDream:EaseDialog:VERISON'
+	implementation 'com.github.NightRainDream:EaseDialog:VERSION'
 }
 ```
 ## 3.使用说明
