@@ -209,7 +209,7 @@ class DialogBuilder : BaseDialogBuilder() {
         activity: AppCompatActivity,
         msg: String = DialogHelp.getString(R.string.loading),
         callback: ILoadingCallback? = null
-    ) {
+    ): LoadingDialogFragment{
         val mFragmentManage = activity.supportFragmentManager
         val mHistoryDialog = mFragmentManage.findFragmentByTag("LoadingDialog")
         if (mHistoryDialog != null && mHistoryDialog is LoadingDialogFragment) {
@@ -220,6 +220,7 @@ class DialogBuilder : BaseDialogBuilder() {
         mLoadingDialog.setMainTextInfo(mMainTextInfo)
         mLoadingDialog.setCallback(callback)
         mLoadingDialog.showNow(mFragmentManage, "LoadingDialog")
+        return mLoadingDialog
     }
 
     /**

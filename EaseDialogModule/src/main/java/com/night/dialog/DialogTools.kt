@@ -2,10 +2,12 @@ package com.night.dialog
 
 import android.view.Gravity
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.hjq.toast.ToastParams
 import com.hjq.toast.Toaster
 import com.night.dialog.callback.IBindView
 import com.night.dialog.tools.ToastHelp
+import com.night.dialog.ui.loading.LoadingDialogFragment
 
 object DialogTools {
 
@@ -43,8 +45,25 @@ object DialogTools {
             }
         }
     }
+
+    /**
+     * 关闭Toast
+     */
     fun dismissToast() {
         Toaster.cancel()
+    }
+
+    /**
+     * 关闭加载框
+     *
+     * @param activity AppCompatActivity
+     */
+    fun dismissLoadingDialog(activity: AppCompatActivity) {
+        val mFragmentManage = activity.supportFragmentManager
+        val mHistoryDialog = mFragmentManage.findFragmentByTag("LoadingDialog")
+        if (mHistoryDialog != null && mHistoryDialog is LoadingDialogFragment) {
+            mHistoryDialog.dismiss()
+        }
     }
 
     fun getDialogBuilder(): DialogBuilder {
