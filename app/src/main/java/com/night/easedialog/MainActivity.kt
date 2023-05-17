@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity() {
            val mLoading =  DialogTools.getDialogBuilder()
                 .toLoadingDialog(this, "3秒...")
             Handler(Looper.getMainLooper()).postDelayed({
-                mLoading.dismiss()
+                DialogTools.dismissLoadingDialog(this)
             },3000)
 
         }
