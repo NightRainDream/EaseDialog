@@ -46,16 +46,16 @@ data class EaseDateTimeEntity(
     }
 
     fun getDate(): String {
-        return year.toString().plus("年").plus(month).plus("月").plus(day)
+        return year.toString().plus("年").plus(month).plus("月").plus(day).plus("日")
     }
 
     fun getTime(): String {
-        return hour.toString().plus(":").plus(minute).plus(":").plus(second)
+        return hour.toString().plus("时").plus(minute).plus("分").plus(second).plus("秒")
     }
 
     fun getDateTime(): String {
-        return year.toString().plus("年").plus(month).plus("月").plus(day).plus(" ").plus(hour).plus(":").plus(minute)
-            .plus(":")
-            .plus(second)
+        return year.toString().plus("年").plus(month).plus("月").plus(day).plus("日").plus(" ").plus(hour).plus("时").plus(minute)
+            .plus("分")
+            .plus(second).plus("秒")
     }
 }
